@@ -22,6 +22,9 @@ public abstract class Unidad {
     private Atributo base;  //atributos por defecto de la unidad (sin equipo)
     private Atributo actual;//atributos que la unidad acumula  durante el combate
     private ArrayList<Equipable> equipo;
+    private IA IAAsociada;
+    private int posX;
+    private int posY;
 
     public Unidad(String nombre, String imagen, String descripcion, TipoUnidad tipo, Atributo base) {
         this.nombre = nombre;
@@ -73,16 +76,42 @@ public abstract class Unidad {
     public ArrayList<Equipable> getEquipo() {
         return equipo;
     }
+
+    public Atributo getBase() {
+        return base;
+    }
+
+    public IA getIAAsociada() {
+        return IAAsociada;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+    
+    public void MoverA(int posX, int posY){
+        this.posX = posX;
+        this.posY = posY;
+    }
+
+    public void setIAAsociada(IA IAAsociada) {
+        this.IAAsociada = IAAsociada;
+    }
+    
+    
     
     
     public abstract Unidad getCopia();
     
     //TURNO
     public void efectoInicioEnfrentamiento(){}
-    public void efectoInicioTurnoPropio(){}
-    public void efectoInicioTurnoContrario(){}
-    public void efectoFinTurnoPropio(){}
-    public void efectoFinTurnoContrario(){}
+    public void efectoTurnoPropio(){}
+    public void efectoTurnoUnidadAliada(Unidad U){}
+    public void efectoTurnoUnidadEnemiga(Unidad U){}
     
     //ACCIONES
     public void efectoUnidadAliadaMueve(Unidad U, int origenX, int origenY, int destinoX, int destinoY){}
@@ -95,7 +124,7 @@ public abstract class Unidad {
     public void efectoUnidadEnemigaUsaObjeto(Unidad U, int idObj){}//sustituir por Objeto
     public void efectoUnidadAliadaNoHaceNada(Unidad U){}
     public void efectoUnidadEnemigaNoHaceNada(Unidad U){}
-    public void efectoMover(){}
+    public void efectoDesplazarse(){}
     public void efectoAtacar(Unidad objetivo){}
     public void efectoUsarHabilidad(Unidad objetivo, int idHabilidad){} //sustituir por Habilidad
     public void efectoUsarObjeto(Unidad objetivo, int idObj){}//sustituir por Objeto
