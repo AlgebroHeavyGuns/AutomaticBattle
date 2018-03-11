@@ -67,6 +67,7 @@ public class Combate {
                 break;
             case Habilidad:
             case Objeto:
+                throw new UnsupportedOperationException("Not supported yet."); 
             case IDLE:
                 unidad.efectoNoHacerNada();
                 for(Unidad U:aliadas)
