@@ -93,6 +93,14 @@ public abstract class Unidad {
         return posY;
     }
     
+    public int getAlcance(){
+        for(Equipable E : this.equipo)
+            if(E instanceof Arma)
+                if(((Arma)E).getAlcance() > 1)
+                    return ((Arma)E).getAlcance();
+        return 1;
+    }
+    
     public void MoverA(int posX, int posY){
         this.posX = posX;
         this.posY = posY;

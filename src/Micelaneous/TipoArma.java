@@ -10,6 +10,6 @@ package Micelaneous;
  * @author Algebro
  */
 public enum TipoArma {
-    EspadaUnaMano, Daga, HachaUnaMano, BallestaPequena,
+    EspadaUnaMano, Daga, HachaUnaMano,
     EspadaDosManos, Baston, Maza, Hacha, Arco, BallestaGrande;
 }

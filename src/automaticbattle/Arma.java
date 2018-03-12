@@ -21,14 +21,16 @@ public class Arma extends Equipable{
 
     private TipoArma tipoArma;
     private Elemento elementoAtaque;
+    private int alcance;
     private ArrayList<EfectividadTipo> efectividades;
     
     public Arma(String nombre, String imagen, int coste, int nivelRequerido, 
-            Atributo modificador, TipoArma tipo, Elemento elementoAtaque) {
+            Atributo modificador, TipoArma tipo, Elemento elementoAtaque, int alcance) {
         super(nombre, imagen, coste, nivelRequerido, modificador, TipoEquipo.Arma);
-        tipoArma = tipo;
+        this.tipoArma = tipo;
         this.elementoAtaque = elementoAtaque;
-        efectividades = new ArrayList<>();
+        this.efectividades = new ArrayList<>();
+        this.alcance = alcance;
     }
 
     public TipoArma getTipoArma() {
@@ -42,6 +44,12 @@ public class Arma extends Equipable{
     public ArrayList<EfectividadTipo> getEfectividades() {
         return efectividades;
     }
+
+    public int getAlcance() {
+        return alcance;
+    }
+    
+    
     
     public double getCoeficienteEfectividad(TipoUnidad TU){
         for(EfectividadTipo ET : efectividades)

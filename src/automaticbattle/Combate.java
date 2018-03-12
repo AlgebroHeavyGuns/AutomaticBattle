@@ -101,6 +101,7 @@ public class Combate {
                     actor.MoverA(decision.movX, decision.movY);
                 }    
             case Atacar:
+                
             case Habilidad:
             case Objeto:
             case IDLE:
