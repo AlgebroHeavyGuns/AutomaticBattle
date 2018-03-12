@@ -5,6 +5,7 @@
  */
 package automaticbattle;
 
+import Micelaneous.Accion;
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -20,6 +21,14 @@ public class Combate {
     
     private ArrayList<Unidad> aliadas;
     private ArrayList<Unidad> enemigas;
+    private Tablero tablero;
+    
+    public Combate(String nombre, ArrayList<Unidad> uno, ArrayList<Unidad> dos, Tablero tablero){
+        this.nombre = nombre;
+        this.equipoUno = uno;
+        this.equipoDos = dos;
+        this.tablero = tablero;
+    }
     
     public void nextTurn(){
         Unidad unidad = colaTurno.poll();
@@ -82,6 +91,15 @@ public class Combate {
     private void realizarAccion(Unidad actor, IA.Seleccion decision){
         switch(decision.decision){
             case Desplazamiento:
+                if(tablero.ocupada(decision.movX, decision.movY)!=null){
+                    System.err.println("Movimiento invalido : " + actor.getNombre()
+                            + "\nPosicion ocupada." );
+                    decision.decision=Accion.IDLE;
+                    realizarAccion(actor, decision);
+                }else{
+                    tablero.swap(actor, decision.movX, decision.movY);
+                    actor.MoverA(decision.movX, decision.movY);
+                }    
             case Atacar:
             case Habilidad:
             case Objeto:
@@ -90,5 +108,35 @@ public class Combate {
         }
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public ArrayList<Unidad> getEquipoUno() {
+        return equipoUno;
+    }
+
+    public ArrayList<Unidad> getEquipoDos() {
+        return equipoDos;
+    }
+
+    public Queue<Unidad> getColaTurno() {
+        return colaTurno;
+    }
+
+    public ArrayList<Unidad> getAliadas() {
+        return aliadas;
+    }
+
+    public ArrayList<Unidad> getEnemigas() {
+        return enemigas;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    
+    
     
 }
