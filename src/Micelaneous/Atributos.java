@@ -9,7 +9,7 @@ package Micelaneous;
  *
  * @author Algebro
  */
-public class Atributo {
+public class Atributos {
     private int vida;
     private int energia;
     private int fuerza;
@@ -20,20 +20,20 @@ public class Atributo {
     private int agilidad;
     private int visibilidad;
 
-    public Atributo(){
-        setAll(0,0,0,0,0,0,0,0,0);
+    public Atributos(){
+        setAll(0,0,1,1,0,0,1,1,2);
     }
     
-    public Atributo(int vida, int armadura, int blindaje){
-        setAll(vida,0,0,0,armadura,blindaje,0,0,0);
+    public Atributos(int vida, int armadura, int blindaje){
+        setAll(vida,0,1,1,armadura,blindaje,1,1,2);
     }
     
-    public Atributo(int vida, int energia, int fuerza, int intelecto, 
+    public Atributos(int vida, int energia, int fuerza, int intelecto, 
             int armadura, int blindaje, int velocidad, int agilidad, int visibilidad) {
         setAll(vida,energia,fuerza,intelecto,armadura,blindaje,velocidad,agilidad,visibilidad);
     }
 
-    public Atributo suma(Atributo otro){
+    public Atributos suma(Atributos otro){
         this.vida+=otro.getVida();
         this.energia += otro.getEnergia();
         this.fuerza += otro.getFuerza();
@@ -46,7 +46,7 @@ public class Atributo {
         return this;
     }
     
-    public final Atributo setAll(int vida, int energia, int fuerza, int intelecto, 
+    public final Atributos setAll(int vida, int energia, int fuerza, int intelecto, 
             int armadura, int blindaje, int velocidad, int agilidad, int visibilidad) {
         this.vida = vida;
         this.energia = energia;

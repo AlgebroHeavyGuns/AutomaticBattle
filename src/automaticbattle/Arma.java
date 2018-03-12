@@ -5,7 +5,7 @@
  */
 package automaticbattle;
 
-import Micelaneous.Atributo;
+import Micelaneous.Atributos;
 import Micelaneous.EfectividadTipo;
 import Micelaneous.Elemento;
 import Micelaneous.TipoArma;
@@ -25,7 +25,7 @@ public class Arma extends Equipable{
     private ArrayList<EfectividadTipo> efectividades;
     
     public Arma(String nombre, String imagen, int coste, int nivelRequerido, 
-            Atributo modificador, TipoArma tipo, Elemento elementoAtaque, int alcance) {
+            Atributos modificador, TipoArma tipo, Elemento elementoAtaque, int alcance) {
         super(nombre, imagen, coste, nivelRequerido, modificador, TipoEquipo.Arma);
         this.tipoArma = tipo;
         this.elementoAtaque = elementoAtaque;

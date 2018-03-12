@@ -6,6 +6,7 @@
 package database;
 
 import automaticbattle.Equipable;
+import automaticbattle.IA;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
 
@@ -17,21 +18,31 @@ public final class Database {
     
     private ArrayList<Unidad> unidades;
     private ArrayList<Equipable> equipos;
+    private ArrayList<IA> IAs;
+    
     
     private Database() {
+    }
+    
+    public void inicia(){
         iniciaEquipos();
+        iniciaIAs();
         iniciaUnidades();
     }
     
     private void iniciaEquipos(){
-    
+        equipos = new ArrayList<>();
+        
     }
     
     private void iniciaUnidades(){
-    
+        unidades = new ArrayList<>();
+        
     }
     
-    
+    private void iniciaIAs(){
+        IAs = new ArrayList<>();
+    }
     
     
     

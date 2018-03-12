@@ -5,7 +5,7 @@
  */
 package automaticbattle;
 
-import Micelaneous.Atributo;
+import Micelaneous.Atributos;
 import Micelaneous.EfectividadArma;
 import Micelaneous.EfectividadElemento;
 import Micelaneous.Elemento;
@@ -22,12 +22,12 @@ public class Equipable {
     private String imagen;
     private int coste;
     private int nivelRequerido;
-    private Atributo modificador;
+    private Atributos modificador;
     private TipoEquipo tipo;
     private ArrayList<EfectividadElemento> resistenciaElemento;
     private ArrayList<EfectividadArma> resistenciaArma;
 
-    public Equipable(String nombre, String imagen, int coste, int nivelRequerido, Atributo modificador, TipoEquipo tipo) {
+    public Equipable(String nombre, String imagen, int coste, int nivelRequerido, Atributos modificador, TipoEquipo tipo) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.coste = coste;
@@ -54,7 +54,7 @@ public class Equipable {
         return nivelRequerido;
     }
 
-    public Atributo getModificador() {
+    public Atributos getModificador() {
         return modificador;
     }
 

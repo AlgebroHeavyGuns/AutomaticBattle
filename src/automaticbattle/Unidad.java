@@ -5,7 +5,7 @@
  */
 package automaticbattle;
 
-import Micelaneous.Atributo;
+import Micelaneous.Atributos;
 import Micelaneous.TipoUnidad;
 import java.util.ArrayList;
 
@@ -19,14 +19,14 @@ public abstract class Unidad {
     private String descripcion;
     private String detalle;
     private TipoUnidad tipo;
-    private Atributo base;  //atributos por defecto de la unidad (sin equipo)
-    private Atributo actual;//atributos que la unidad acumula  durante el combate
+    private Atributos base;  //atributos por defecto de la unidad (sin equipo)
+    private Atributos actual;//atributos que la unidad acumula  durante el combate
     private ArrayList<Equipable> equipo;
     private IA IAAsociada;
     private int posX;
     private int posY;
 
-    public Unidad(String nombre, String imagen, String descripcion, TipoUnidad tipo, Atributo base) {
+    public Unidad(String nombre, String imagen, String descripcion, TipoUnidad tipo, Atributos base) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.descripcion = descripcion;
@@ -36,8 +36,8 @@ public abstract class Unidad {
         this.actual = null;
     }
     
-    private Atributo sumaAtributosEquipo(){
-        Atributo atributo = new Atributo();
+    private Atributos sumaAtributosEquipo(){
+        Atributos atributo = new Atributos();
         
         for(Equipable E : equipo)
             atributo.suma(E.getModificador());
@@ -69,7 +69,7 @@ public abstract class Unidad {
         return tipo;
     }
 
-    public Atributo getActual() {
+    public Atributos getActual() {
         return actual;
     }
 
@@ -77,7 +77,7 @@ public abstract class Unidad {
         return equipo;
     }
 
-    public Atributo getBase() {
+    public Atributos getBase() {
         return base;
     }
 
