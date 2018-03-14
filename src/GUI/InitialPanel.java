@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import automaticbattle.Controlador;
+
 /**
  *
  * @author Algebro
@@ -73,6 +75,7 @@ public class InitialPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
+        Controlador.getInstance().iniciaCombate();
         vj.setPanel(new CombatePanel(vj));
     }//GEN-LAST:event_jugarButtonActionPerformed
 

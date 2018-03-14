@@ -44,6 +44,20 @@ public class Tablero {
         assertValidas(x,y);
         return unidades[x][y];
     }
+
+    public int getTAM_X() {
+        return TAM_X;
+    }
+
+    public int getTAM_Y() {
+        return TAM_Y;
+    }
+
+    public Unidad[][] getUnidades() {
+        return unidades;
+    }
+    
+    
     
     
     public void swap (Unidad U1, int x1, int y1){

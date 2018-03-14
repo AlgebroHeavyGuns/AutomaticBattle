@@ -5,6 +5,8 @@
  */
 package automaticbattle;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Algebro
@@ -21,7 +23,7 @@ public class Controlador {
     }
     
     public void iniciaCombate(){
-    
+        combateActual = new Combate("Prueba", new ArrayList<>(), new ArrayList<>(), new Tablero(7,7));
     }
     
     

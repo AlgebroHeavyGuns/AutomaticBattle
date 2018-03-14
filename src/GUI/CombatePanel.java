@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import automaticbattle.Controlador;
+
 /**
  *
  * @author Algebro
@@ -21,6 +23,7 @@ public class CombatePanel extends javax.swing.JPanel {
         initComponents();
         this.vj = VJ;
         this.region1.generateZone();
+        this.region1.setMap(Controlador.getInstance().combateActual.getTablero());
     }
 
     /**

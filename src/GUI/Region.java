@@ -7,6 +7,8 @@ package GUI;
 
 //import java.awt.Font;
 
+import automaticbattle.Tablero;
+import automaticbattle.Unidad;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -29,6 +31,7 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
     final int nColumns = 7;
     
     JButton[][] buttons;
+    Tablero mapa;
     
     public Region() {
         initComponents();
@@ -54,12 +57,25 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
                 Panel.add(B);
                 buttons[r][c] = B;
             }
-        drawMap();
         Panel.updateUI();
     }
     
-    public void drawMap(){
+    public void setMap(Tablero tablero){
+        this.mapa = tablero;
+        drawMap();
+    }
     
+    public void drawMap(){
+        Unidad U;
+        for(int i=0;i<nRows;i++)
+            for(int j=0;j<nColumns;j++){
+                U = mapa.ocupada(i, j);
+                if(U==null)
+                    buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/icons/icon70.png")));
+                else    
+                    buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/units/"+ U.getImagen())));
+            }
+                
     }
     
     private void pressed (JButton B){
