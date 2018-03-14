@@ -5,6 +5,7 @@
  */
 package database;
 
+import IAs.deciaBasicIA;
 import Micelaneous.Atributos;
 import Micelaneous.TipoUnidad;
 import automaticbattle.Unidad;
@@ -18,7 +19,7 @@ public class ProductorUnidadesA {
     
     static ArrayList<Unidad> getUnidades(){
         ArrayList<Unidad> lista = new ArrayList<>();
-        
+        lista.add(new JabaliInutil());
         return lista;
     }
     
@@ -26,6 +27,7 @@ public class ProductorUnidadesA {
         public JabaliInutil() {
             super("Jabalí inútil", "jabali.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
                     new Atributos(100,100,10,1,5,3,3,4,4));
+            this.setIAAsociada(new deciaBasicIA());
         }
 
         @Override

@@ -6,9 +6,9 @@
 package database;
 
 import automaticbattle.Equipable;
-import automaticbattle.IA;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
+import Micelaneous.decisionIA;
 
 /**
  *
@@ -18,7 +18,7 @@ public final class Database {
     
     private ArrayList<Unidad> unidades;
     private ArrayList<Equipable> equipos;
-    private ArrayList<IA> IAs;
+    private ArrayList<decisionIA> IAs;
     
     
     private Database() {
@@ -37,6 +37,7 @@ public final class Database {
     
     private void iniciaUnidades(){
         unidades = new ArrayList<>();
+        unidades.addAll(ProductorUnidadesA.getUnidades());
         
     }
     
@@ -44,6 +45,9 @@ public final class Database {
         IAs = new ArrayList<>();
     }
     
+    public Unidad getUnidad(int i){
+        return unidades.get(i).getCopia();
+    }
     
     
     

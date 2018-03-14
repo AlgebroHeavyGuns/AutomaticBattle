@@ -5,6 +5,7 @@
  */
 package automaticbattle;
 
+import Micelaneous.decisionIA;
 import Micelaneous.Atributos;
 import Micelaneous.TipoUnidad;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public abstract class Unidad {
     private Atributos base;  //atributos por defecto de la unidad (sin equipo)
     private Atributos actual;//atributos que la unidad acumula  durante el combate
     private ArrayList<Equipable> equipo;
-    private IA IAAsociada;
+    private decisionIA IAAsociada;
     private int posX;
     private int posY;
 
@@ -35,6 +36,7 @@ public abstract class Unidad {
         this.equipo = new ArrayList<>();
         this.actual = null;
     }
+    
     
     private Atributos sumaAtributosEquipo(){
         Atributos atributo = new Atributos();
@@ -81,7 +83,7 @@ public abstract class Unidad {
         return base;
     }
 
-    public IA getIAAsociada() {
+    public decisionIA getIAAsociada() {
         return IAAsociada;
     }
 
@@ -101,12 +103,16 @@ public abstract class Unidad {
         return 1;
     }
     
+    public int getDistanciaMovimiento(){
+        return 1;
+    }
+    
     public void MoverA(int posX, int posY){
         this.posX = posX;
         this.posY = posY;
     }
 
-    public void setIAAsociada(IA IAAsociada) {
+    public void setIAAsociada(decisionIA IAAsociada) {
         this.IAAsociada = IAAsociada;
     }
     

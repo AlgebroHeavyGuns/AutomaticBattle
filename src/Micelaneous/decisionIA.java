@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package automaticbattle;
+package Micelaneous;
 
 import Micelaneous.Accion;
+import automaticbattle.Unidad;
 
 /**
  *
  * @author Algebro
  */
-public interface IA {
+public interface decisionIA {
     
     
     Seleccion tomarDecision(Unidad U);

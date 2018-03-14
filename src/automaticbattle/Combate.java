@@ -5,19 +5,21 @@
  */
 package automaticbattle;
 
+import Micelaneous.decisionIA;
 import Micelaneous.Accion;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Queue;
 
 /**
  *
  * @author Algebro
  */
-public class Combate {
+public final class Combate {
     private String nombre;
     private ArrayList<Unidad> equipoUno;
     private ArrayList<Unidad> equipoDos;
-    private Queue<Unidad> colaTurno;
+    private ArrayList<Unidad> colaTurno;
     
     private ArrayList<Unidad> aliadas;
     private ArrayList<Unidad> enemigas;
@@ -28,10 +30,21 @@ public class Combate {
         this.equipoUno = uno;
         this.equipoDos = dos;
         this.tablero = tablero;
+        
+        rellenaCola();
+    }
+    
+    public void rellenaCola(){
+        colaTurno = new ArrayList<>();
+        colaTurno.addAll(equipoUno);
+        colaTurno.addAll(equipoDos);
+        Collections.shuffle(colaTurno);
+        
     }
     
     public void nextTurn(){
-        Unidad unidad = colaTurno.poll();
+        Unidad unidad = colaTurno.remove(0);
+        
 
         if(equipoUno.contains(unidad)){
             aliadas=equipoUno;
@@ -48,7 +61,10 @@ public class Combate {
         for(Unidad U:enemigas)
             U.efectoTurnoUnidadEnemiga(unidad);
         
-        IA.Seleccion decision = unidad.getIAAsociada().tomarDecision(unidad);
+        decisionIA.Seleccion decision = unidad.getIAAsociada().tomarDecision(unidad);
+        
+        if(!Controlador.getInstance().comprobarAccion(unidad,decision))
+            decision.decision=Accion.IDLE;
         
         activarEfectosDecision(unidad,decision);
         realizarAccion(unidad, decision);
@@ -56,7 +72,7 @@ public class Combate {
         colaTurno.add(unidad);
     }
     
-    public void activarEfectosDecision(Unidad unidad, IA.Seleccion decision){
+    public void activarEfectosDecision(Unidad unidad, decisionIA.Seleccion decision){
         switch(decision.decision){
             case Desplazamiento:
                 unidad.efectoDesplazarse();
@@ -88,24 +104,18 @@ public class Combate {
     }
     
     
-    private void realizarAccion(Unidad actor, IA.Seleccion decision){
+    private void realizarAccion(Unidad actor, decisionIA.Seleccion decision){
         switch(decision.decision){
             case Desplazamiento:
-                if(tablero.ocupada(decision.movX, decision.movY)!=null){
-                    System.err.println("Movimiento invalido : " + actor.getNombre()
-                            + "\nPosicion ocupada." );
-                    decision.decision=Accion.IDLE;
-                    realizarAccion(actor, decision);
-                }else{
-                    tablero.swap(actor, decision.movX, decision.movY);
-                    actor.MoverA(decision.movX, decision.movY);
-                }    
+                tablero.swap(actor, decision.movX, decision.movY);
+                actor.MoverA(decision.movX, decision.movY);
+                break;
             case Atacar:
                 
             case Habilidad:
             case Objeto:
-            case IDLE:
-               throw new UnsupportedOperationException("Not supported yet."); 
+                throw new UnsupportedOperationException("Not supported yet.");
+            case IDLE: 
         }
     }
 
@@ -121,7 +131,7 @@ public class Combate {
         return equipoDos;
     }
 
-    public Queue<Unidad> getColaTurno() {
+    public ArrayList<Unidad> getColaTurno() {
         return colaTurno;
     }
 

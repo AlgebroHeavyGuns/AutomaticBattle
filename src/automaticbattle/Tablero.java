@@ -26,9 +26,9 @@ public class Tablero {
         unidades[x][y]=U;
     }
     
-   public void assertValidas(int x, int y){
+    private void assertValidas(int x, int y){
         assert coordenadasValidas(x,y) : "Coordenadas inválidas (" + x + "," + y + ")";
-   }
+    }
     
     public final void clear(){
         for(int i=0;i<TAM_X;i++)
@@ -60,13 +60,14 @@ public class Tablero {
     
     
     
-    public void swap (Unidad U1, int x1, int y1){
+    public void swap (Unidad U, int x1, int y1){
         assertValidas(x1,y1);
-        if(U1==null)
+        System.out.println(U.getPosX() + "," + U.getPosY() + " -> " + x1 + "," + y1);
+        if(U==null)
             unidades[x1][y1]=null;
         else{
-            unidades[U1.getPosX()][U1.getPosY()]=null;
-            unidades[x1][y1]=U1;
+            unidades[U.getPosX()][U.getPosY()]=null;
+            unidades[x1][y1]=U;
         }
     }
     
