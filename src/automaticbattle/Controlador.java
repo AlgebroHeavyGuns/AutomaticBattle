@@ -11,7 +11,11 @@ package automaticbattle;
  */
 public class Controlador {
     
+    public static String GAME_NAME = "Automatic Battle";
+    public static String ICON_ADDRES = "/icons/icon180.png";
+    
     public Combate combateActual = null;
+    
     
     private Controlador() {
     }
