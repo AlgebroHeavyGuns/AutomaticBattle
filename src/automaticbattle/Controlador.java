@@ -7,6 +7,8 @@ package automaticbattle;
 
 import Micelaneous.decisionIA;
 import database.Database;
+import database.ProductorCombate;
+import database.ProductorCombate.CombateInfo;
 import java.util.ArrayList;
 
 /**
@@ -24,17 +26,10 @@ public class Controlador {
     private Controlador() {
     }
     
-    public void iniciaCombate(){
-        Tablero T = new Tablero(7,7);
+    public void iniciaCombate(int i){
+        CombateInfo CI = ProductorCombate.getInstance().getCombateNivel(i);
         
-        Unidad U =Database.getInstance().getUnidad(0);
-        ArrayList<Unidad> listaUno = new ArrayList<>();
-        listaUno.add(U);
-        
-        U.MoverA(1, 2);
-        T.insertaUnidad(U, 1, 2);
-        
-        combateActual = new Combate("Prueba", listaUno, new ArrayList<>(), T);
+        combateActual = new Combate(CI.getNombre(), new ArrayList<>(), CI.getEnemigos(), CI.getTablero());
     }
     
     public boolean comprobarAccion(Unidad U, decisionIA.Seleccion decision){

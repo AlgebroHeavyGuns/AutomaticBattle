@@ -9,6 +9,7 @@ import automaticbattle.Equipable;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
 import Micelaneous.decisionIA;
+import java.util.Iterator;
 
 /**
  *
@@ -45,8 +46,18 @@ public final class Database {
         IAs = new ArrayList<>();
     }
     
-    public Unidad getUnidad(int i){
-        return unidades.get(i).getCopia();
+    public Unidad getUnidad(String nombre){
+        Unidad U = null;
+        Iterator<Unidad> it = unidades.iterator();
+        boolean encontrado = false;
+        while(it.hasNext()&& !encontrado){
+            U=it.next();
+            encontrado= U.getNombre().equalsIgnoreCase(nombre);
+        }
+        if(encontrado)
+            return U;
+        else
+            return null;
     }
     
     

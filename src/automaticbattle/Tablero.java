@@ -23,6 +23,7 @@ public class Tablero {
     
     public void insertaUnidad(Unidad U, int x, int y){
         assertValidas(x,y);
+        U.MoverA(x, y);
         unidades[x][y]=U;
     }
     
