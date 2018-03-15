@@ -35,13 +35,13 @@ public class ProductorCombate {
     private static class CombateInicial extends CombateInfo{
     
         public CombateInicial() {
-            super("Primera toma de contacto", 7, 7);
+            super("Primera toma de contacto", 9, 9);
             Unidad U = Database.getInstance().getUnidad("Jabalí inútil");
             enemigos.add(U);
-            T.insertaUnidad(U, 6, 4);
+            T.insertaUnidad(U, 8, 4);
             U = U.getCopia();
             enemigos.add(U);
-            T.insertaUnidad(U, 6, 3);
+            T.insertaUnidad(U, 8, 5);
         }
     
     

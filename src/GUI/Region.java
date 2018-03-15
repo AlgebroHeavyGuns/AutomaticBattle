@@ -27,8 +27,8 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
      * Creates new form PanelPrueba
      */
     
-    final int nRows = 7;
-    final int nColumns = 7;
+    final int nRows = 9;
+    final int nColumns = 9;
     
     JButton[][] buttons;
     Tablero mapa;
@@ -41,7 +41,7 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
     public void generateZone(){
         int nR = nRows;
         int nC = nColumns;
-        int TAM = 80;
+        int TAM = 60;
         
         Panel.removeAll();
         
