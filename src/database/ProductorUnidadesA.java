@@ -25,7 +25,7 @@ public class ProductorUnidadesA {
     
     static class JabaliInutil extends Unidad{
         public JabaliInutil() {
-            super("Jabalí inútil", "jabali.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
+            super("Jabalí inútil", "WildBoar1.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
                     new Atributos(100,100,10,1,5,3,3,4,4));
             this.setIAAsociada(new deciaBasicIA());
         }
