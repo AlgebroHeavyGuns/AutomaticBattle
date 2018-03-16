@@ -78,11 +78,7 @@ public class InitialPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
-        ArrayList<Unidad> aliadas = new ArrayList<>();
-        aliadas.add(Database.getInstance().getUnidadAliada("Patricio Guerrero"));
-        Controlador.getInstance().iniciaCombate(0, aliadas);
-        
-        vj.setPanel(new CombatePanel(vj));
+        vj.setPanel(new SeleccionPanel(this.vj));
     }//GEN-LAST:event_jugarButtonActionPerformed
 
 

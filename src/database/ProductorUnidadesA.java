@@ -20,6 +20,7 @@ public class ProductorUnidadesA {
     static ArrayList<Unidad> getUnidades(){
         ArrayList<Unidad> lista = new ArrayList<>();
         lista.add(new JabaliInutil());
+        lista.add(new EspirituDragon());
         return lista;
     }
     
@@ -36,6 +37,25 @@ public class ProductorUnidadesA {
         }
     
     }
+
+    static class EspirituDragon extends Unidad{
+        public EspirituDragon() {
+            super("Espíritu dragón", "Dragon4.png", "Si lo ves, ya es tarde.", TipoUnidad.Dragon, 
+                    new Atributos(400,400,15,10,6,5,5,3,7));
+            this.setIAAsociada(new deciaBasicIA());
+        }
+
+
+        @Override
+        public int getDistanciaMovimiento() {
+            return 3;
+        }
+        
+        @Override
+        public Unidad getCopia() {
+            return new EspirituDragon();
+        }
     
+    }    
     
 }

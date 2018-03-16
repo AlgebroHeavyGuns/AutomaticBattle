@@ -27,6 +27,14 @@ public class Tablero {
         unidades[x][y]=U;
     }
     
+    public void eliminaUnidad(Unidad U){
+        eliminaUnidad(U.getPosX(), U.getPosY());
+    }
+    
+    public void eliminaUnidad(int x, int y){
+        unidades[x][y]=null;
+    }
+    
     private void assertValidas(int x, int y){
         assert coordenadasValidas(x,y) : "Coordenadas inválidas (" + x + "," + y + ")";
     }

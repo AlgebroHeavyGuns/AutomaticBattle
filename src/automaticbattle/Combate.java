@@ -82,6 +82,7 @@ public final class Combate {
         activarEfectosDecision(unidad,decision);
         realizarAccion(unidad, decision);
         colaTurno.add(unidad);
+        comprobarMuertos();
     }
     
     public void activarEfectosDecision(Unidad unidad, decisionIA.Seleccion decision){
@@ -131,7 +132,9 @@ public final class Combate {
                     danio *= actor.getEfectividadAtaque(decision.U);
                     if(danio > 0){
                         decision.U.efectoUnidadAtacada(actor, tirada, danio);
-                        panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + " realizó " + danio + " puntos de daño.");
+                        decision.U.modVidaActual(-danio);
+                        panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + "\nrealizó " + danio + " de daño."
+                                + "Vida restante : " + decision.U.getVida());
                     }else
                         panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + " pero no le causó daño");
                 }else
@@ -142,6 +145,23 @@ public final class Combate {
                 throw new UnsupportedOperationException("Not supported yet.");
             case IDLE: 
         }
+    }
+    
+    void comprobarMuertos(){
+        ArrayList<Unidad> copia = new ArrayList<>(aliadas);
+        for(Unidad U: copia)
+            if(U.getVida() < 0)
+                eliminarUnidad(U,aliadas);
+        copia = new ArrayList<>(enemigas);
+        for(Unidad U: copia)
+            if(U.getVida() < 0)
+                eliminarUnidad(U,enemigas);  
+    }
+    
+    private void eliminarUnidad(Unidad U, ArrayList<Unidad> lista){
+        lista.remove(U);
+        colaTurno.remove(U);
+        tablero.eliminaUnidad(U);
     }
 
     public String getNombre() {

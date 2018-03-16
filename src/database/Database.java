@@ -58,7 +58,7 @@ public final class Database {
             encontrado= U.getNombre().equalsIgnoreCase(nombre);
         }
         if(encontrado)
-            return U;
+            return U.getCopia();
         else
             return null;
     }
