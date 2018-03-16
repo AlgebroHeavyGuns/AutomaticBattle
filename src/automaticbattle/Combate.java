@@ -5,6 +5,7 @@
  */
 package automaticbattle;
 
+import GUI.CombatePanel;
 import Micelaneous.decisionIA;
 import Micelaneous.Accion;
 import java.util.ArrayList;
@@ -25,13 +26,13 @@ public final class Combate {
     private ArrayList<Unidad> enemigas;
     private Tablero tablero;
     
+    public CombatePanel panel;
+    
     public Combate(String nombre, ArrayList<Unidad> uno, ArrayList<Unidad> dos, Tablero tablero){
         this.nombre = nombre;
         this.equipoUno = uno;
         this.equipoDos = dos;
         this.tablero = tablero;
-        
-        rellenaCola();
     }
     
     public void rellenaCola(){
@@ -40,6 +41,18 @@ public final class Combate {
         colaTurno.addAll(equipoDos);
         Collections.shuffle(colaTurno);
         
+    }
+    
+    public void iniciaCombate(){
+        rellenaCola();
+        for(Unidad U:equipoDos)
+            U.fijaActual();
+        for(Unidad U:equipoUno){
+            U.fijaActual();
+            U.efectoInicioEnfrentamiento();
+        }
+        for(Unidad U:equipoDos)
+            U.efectoInicioEnfrentamiento();
     }
     
     public void nextTurn(){
@@ -68,7 +81,6 @@ public final class Combate {
         
         activarEfectosDecision(unidad,decision);
         realizarAccion(unidad, decision);
-        
         colaTurno.add(unidad);
     }
     
@@ -83,12 +95,11 @@ public final class Combate {
                     U.efectoUnidadEnemigaMueve(U,  unidad.getPosX(), unidad.getPosY(), decision.movX, decision.movY);
                 break;
             case Atacar:
-                unidad.efectoAtacar(decision.U);
                 for(Unidad U:aliadas)
                     if(U != unidad)
                     U.efectoUnidadAliadaAtaca(unidad, decision.U);
                 for(Unidad U:enemigas)
-                    U.efectoUnidadEnemigaAtaca(unidad, decision.U); 
+                    U.efectoUnidadEnemigaAtaca(unidad, decision.U);
                 break;
             case Habilidad:
             case Objeto:
@@ -109,9 +120,23 @@ public final class Combate {
             case Desplazamiento:
                 tablero.swap(actor, decision.movX, decision.movY);
                 actor.MoverA(decision.movX, decision.movY);
+                panel.insertarInfo(actor.getNombre() + " desplazado.");
                 break;
             case Atacar:
-                
+                double probAcierto = 1-0.08*decision.U.getAgilidad();
+                double tirada = Math.random();
+                actor.efectoAtacar(decision.U,tirada,tirada<=probAcierto);
+                if(tirada<=probAcierto){
+                    int danio = 2*actor.getFuerza()-decision.U.getArmadura();
+                    danio *= actor.getEfectividadAtaque(decision.U);
+                    if(danio > 0){
+                        decision.U.efectoUnidadAtacada(actor, tirada, danio);
+                        panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + " realizó " + danio + " puntos de daño.");
+                    }else
+                        panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + " pero no le causó daño");
+                }else
+                    panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + " pero falló");
+                break;     
             case Habilidad:
             case Objeto:
                 throw new UnsupportedOperationException("Not supported yet.");

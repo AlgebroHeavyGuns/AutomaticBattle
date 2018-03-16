@@ -63,7 +63,6 @@ public class Tablero {
     
     public void swap (Unidad U, int x1, int y1){
         assertValidas(x1,y1);
-        System.out.println(U.getPosX() + "," + U.getPosY() + " -> " + x1 + "," + y1);
         if(U==null)
             unidades[x1][y1]=null;
         else{

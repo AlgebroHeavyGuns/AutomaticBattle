@@ -96,5 +96,88 @@ public class Atributos {
         return visibilidad;
     }
     
+    public int modVida(int mod) {
+        vida+=mod;
+        return vida;
+    }
+
+    public int modEnergia(int mod) {
+        energia+=mod;
+        return energia;
+    }
+
+    public int modFuerza(int mod) {
+        fuerza+=mod;
+        return fuerza;
+    }
+
+    public int modIntelecto(int mod) {
+        intelecto+=mod;
+        return intelecto;
+    }
+
+    public int modArmadura(int mod) {
+        armadura+=mod;
+        return armadura;
+    }
+
+    public int modBlindaje(int mod) {
+        blindaje+=mod;
+        return blindaje;
+    }
+
+    public int modVelocidad(int mod) {
+        velocidad+=mod;
+        return velocidad;
+    }
+
+    public int modAgilidad(int mod) {
+        agilidad+=mod;
+        return agilidad;
+    }
+
+    public int modVisibilidad(int mod) {
+        visibilidad+=mod;
+        return visibilidad;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public void setEnergia(int energia) {
+        this.energia = energia;
+    }
+
+    public void setFuerza(int fuerza) {
+        this.fuerza = fuerza;
+    }
+
+    public void setIntelecto(int intelecto) {
+        this.intelecto = intelecto;
+    }
+
+    public void setArmadura(int armadura) {
+        this.armadura = armadura;
+    }
+
+    public void setBlindaje(int blindaje) {
+        this.blindaje = blindaje;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public void setAgilidad(int agilidad) {
+        this.agilidad = agilidad;
+    }
+
+    public void setVisibilidad(int visibilidad) {
+        this.visibilidad = visibilidad;
+    }
+    
+    
+    
     
 }

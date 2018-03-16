@@ -24,8 +24,8 @@ public abstract class Unidad {
     private Atributos actual;//atributos que la unidad acumula  durante el combate
     private ArrayList<Equipable> equipo;
     private decisionIA IAAsociada;
-    private int posX;
-    private int posY;
+    private int posX=-1;
+    private int posY=-1;
 
     public Unidad(String nombre, String imagen, String descripcion, TipoUnidad tipo, Atributos base) {
         this.nombre = nombre;
@@ -45,6 +45,34 @@ public abstract class Unidad {
             atributo.suma(E.getModificador());
         
         return atributo;
+    }
+    
+    public double getEfectividadAtaque(Unidad rival){
+        double efect=99999;
+        boolean arma = false;
+        for(Equipable E: equipo)
+            if(E instanceof Arma){
+                efect= Math.min(((Arma)E).getCoeficienteEfectividad(rival.getTipo()), efect);
+                arma = true;
+            }
+        if(arma)
+            return efect;
+        else
+            return 1;
+    }
+    
+    public double getResistenciaAtaque(Unidad rival){
+        double efect=99999;
+        boolean arma = false;
+        for(Equipable E: equipo)
+            if(E instanceof Arma){
+                efect= Math.min(((Arma)E).getCoeficienteEfectividad(rival.getTipo()), efect);
+                arma = true;
+            }
+        if(arma)
+            return efect;
+        else
+            return 1;
     }
     
     public void fijaActual(){
@@ -117,7 +145,77 @@ public abstract class Unidad {
     }
     
     
+    public int modVidaActual(int mod) {
+         return actual.modVida(mod);
+    }
+
+    public int modEnergia(int mod) {
+        return actual.modEnergia(mod);
+    }
+
+    public int modFuerza(int mod) {
+        return actual.modFuerza(mod);
+    }
+
+    public int modIntelecto(int mod) {
+        return actual.modIntelecto(mod);
+    }
+
+    public int modArmadura(int mod) {
+        return actual.modArmadura(mod);
+    }
+
+    public int modBlindaje(int mod) {
+        return actual.modBlindaje(mod);
+    }
+
+    public int modVelocidad(int mod) {
+        return actual.modVelocidad(mod);
+    }
+
+    public int modAgilidad(int mod) {
+        return actual.modAgilidad(mod);
+    }
+
+    public int modVisibilidad(int mod) {
+        return actual.modVisibilidad(mod);
+    }
     
+    public int getVida() {
+        return actual.getVida();
+    }
+
+    public int getEnergia() {
+        return actual.getEnergia();
+    }
+
+    public int getFuerza() {
+        return actual.getFuerza();
+    }
+
+    public int getIntelecto() {
+        return actual.getIntelecto();
+    }
+
+    public int getArmadura() {
+        return actual.getArmadura();
+    }
+
+    public int getBlindaje() {
+        return actual.getBlindaje();
+    }
+
+    public int getVelocidad() {
+        return actual.getVelocidad();
+    }
+
+    public int getAgilidad() {
+        return actual.getAgilidad();
+    }
+
+    public int getVisibilidad() {
+        return actual.getVisibilidad();
+    }
     
     public abstract Unidad getCopia();
     
@@ -139,7 +237,7 @@ public abstract class Unidad {
     public void efectoUnidadAliadaNoHaceNada(Unidad U){}
     public void efectoUnidadEnemigaNoHaceNada(Unidad U){}
     public void efectoDesplazarse(){}
-    public void efectoAtacar(Unidad objetivo){}
+    public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto){}
     public void efectoUsarHabilidad(Unidad objetivo, int idHabilidad){} //sustituir por Habilidad
     public void efectoUsarObjeto(Unidad objetivo, int idObj){}//sustituir por Objeto
     public void efectoNoHacerNada(){}
@@ -148,6 +246,7 @@ public abstract class Unidad {
     public void efectoUnidadAliadaMuere(Unidad victima, Unidad asesino){}
     public void efectoUnidadEnemigaMuere(Unidad victima, Unidad asesino){}
     public void efectoMatarUnidad(Unidad victima){}
+    public void efectoUnidadAtacada(Unidad atacante, double prob, int danio){}
     
     
     

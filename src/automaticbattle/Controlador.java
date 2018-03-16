@@ -26,10 +26,12 @@ public class Controlador {
     private Controlador() {
     }
     
-    public void iniciaCombate(int i){
+    public void iniciaCombate(int i, ArrayList<Unidad> aliadas){
         CombateInfo CI = ProductorCombate.getInstance().getCombateNivel(i);
-        
-        combateActual = new Combate(CI.getNombre(), new ArrayList<>(), CI.getEnemigos(), CI.getTablero());
+        int col = 1;
+        for(Unidad U: aliadas)
+            CI.getTablero().insertaUnidad(U, 0, col++);
+        combateActual = new Combate(CI.getNombre(), aliadas, CI.getEnemigos(), CI.getTablero());
     }
     
     public boolean comprobarAccion(Unidad U, decisionIA.Seleccion decision){

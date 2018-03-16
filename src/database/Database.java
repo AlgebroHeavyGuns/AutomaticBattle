@@ -17,7 +17,8 @@ import java.util.Iterator;
  */
 public final class Database {
     
-    private ArrayList<Unidad> unidades;
+    private ArrayList<Unidad> unidadesEnemigas;
+    private ArrayList<Unidad> unidadesAliadas;
     private ArrayList<Equipable> equipos;
     private ArrayList<decisionIA> IAs;
     
@@ -37,8 +38,10 @@ public final class Database {
     }
     
     private void iniciaUnidades(){
-        unidades = new ArrayList<>();
-        unidades.addAll(ProductorUnidadesA.getUnidades());
+        unidadesEnemigas = new ArrayList<>();
+        unidadesAliadas = new ArrayList<>();
+        unidadesEnemigas.addAll(ProductorUnidadesA.getUnidades());
+        unidadesAliadas.addAll(ProductorUnidadesB.getUnidades());
         
     }
     
@@ -46,9 +49,9 @@ public final class Database {
         IAs = new ArrayList<>();
     }
     
-    public Unidad getUnidad(String nombre){
+    private Unidad getUnidad(String nombre, ArrayList<Unidad> lista){
         Unidad U = null;
-        Iterator<Unidad> it = unidades.iterator();
+        Iterator<Unidad> it = lista.iterator();
         boolean encontrado = false;
         while(it.hasNext()&& !encontrado){
             U=it.next();
@@ -58,6 +61,14 @@ public final class Database {
             return U;
         else
             return null;
+    }
+    
+    public Unidad getUnidadEnemiga(String nombre){
+        return getUnidad(nombre, unidadesEnemigas);
+    }
+    
+    public Unidad getUnidadAliada(String nombre){
+        return getUnidad(nombre, unidadesAliadas);
     }
     
     

@@ -6,6 +6,7 @@
 package GUI;
 
 import automaticbattle.Controlador;
+import automaticbattle.Unidad;
 
 /**
  *
@@ -24,6 +25,7 @@ public class CombatePanel extends javax.swing.JPanel {
         this.vj = VJ;
         this.region1.generateZone();
         this.region1.setMap(Controlador.getInstance().combateActual.getTablero());
+        iniciaCombate();
     }
 
     /**
@@ -38,14 +40,31 @@ public class CombatePanel extends javax.swing.JPanel {
         backgroundPanel1 = new GUI.BackgroundPanel();
         region1 = new GUI.Region();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        infoPanel = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
 
         region1.setPreferredSize(new java.awt.Dimension(560, 560));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("NEXT TURNO");
+        jButton1.setText("SIGUIENTE TURNO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        infoPanel.setEditable(false);
+        infoPanel.setColumns(20);
+        infoPanel.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        infoPanel.setRows(5);
+        jScrollPane1.setViewportView(infoPanel);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("TURNO MISMA UNIDAD");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -56,17 +75,25 @@ public class CombatePanel extends javax.swing.JPanel {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(region1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(192, 192, 192)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -81,16 +108,35 @@ public class CombatePanel extends javax.swing.JPanel {
             .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Controlador.getInstance().combateActual.nextTurn();
         region1.drawMap();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Unidad actual = Controlador.getInstance().combateActual.getColaTurno().get(0);
+        Controlador.getInstance().combateActual.nextTurn();
+        while(Controlador.getInstance().combateActual.getColaTurno().get(0) != actual)
+            Controlador.getInstance().combateActual.nextTurn();
+        region1.drawMap();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    void iniciaCombate(){
+        Controlador.getInstance().combateActual.panel = this;
+        Controlador.getInstance().combateActual.iniciaCombate();
+    }
+    
+    public void insertarInfo(String info){
+        this.infoPanel.setText(infoPanel.getText()+info+"\n");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.BackgroundPanel backgroundPanel1;
+    private javax.swing.JTextArea infoPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JScrollPane jScrollPane1;
     private GUI.Region region1;
     // End of variables declaration//GEN-END:variables
 }

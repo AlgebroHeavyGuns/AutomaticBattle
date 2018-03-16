@@ -6,6 +6,9 @@
 package GUI;
 
 import automaticbattle.Controlador;
+import automaticbattle.Unidad;
+import database.Database;
+import java.util.ArrayList;
 
 /**
  *
@@ -75,7 +78,10 @@ public class InitialPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
-        Controlador.getInstance().iniciaCombate(0);
+        ArrayList<Unidad> aliadas = new ArrayList<>();
+        aliadas.add(Database.getInstance().getUnidadAliada("Patricio Guerrero"));
+        Controlador.getInstance().iniciaCombate(0, aliadas);
+        
         vj.setPanel(new CombatePanel(vj));
     }//GEN-LAST:event_jugarButtonActionPerformed
 
