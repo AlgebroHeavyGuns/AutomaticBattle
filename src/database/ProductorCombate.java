@@ -36,12 +36,15 @@ public class ProductorCombate {
     
         public CombateInicial() {
             super("Primera toma de contacto", 9, 9);
-            Unidad U = Database.getInstance().getUnidadEnemiga("Espíritu dragón");//("Jabalí inútil");
+            Unidad U = Database.getInstance().getUnidadEnemiga("Espíritu dragón");
             enemigos.add(U);
-            T.insertaUnidad(U, 3, 4);
-            //U = U.getCopia();
-            //enemigos.add(U);
-            //T.insertaUnidad(U, 3, 5);
+            T.insertaUnidad(U, 5, 1);
+            U = Database.getInstance().getUnidadEnemiga("Jabalí inútil");
+            enemigos.add(U);
+            T.insertaUnidad(U, 4, 3);
+            U = U.getCopia();
+            enemigos.add(U);
+            T.insertaUnidad(U, 4, 5);
         }
     
     
