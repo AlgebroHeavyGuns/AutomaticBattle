@@ -13,6 +13,12 @@ public class EfectividadElemento {
     private Elemento elemento;
     private double efectividad;
 
+    public EfectividadElemento(Elemento elemento, double efectividad) {
+        this.elemento = elemento;
+        this.efectividad = efectividad;
+    }
+
+    
     public Elemento getElemento() {
         return elemento;
     }
@@ -20,6 +26,15 @@ public class EfectividadElemento {
     public double getEfectividad() {
         return efectividad;
     }
+
+    public void setElemento(Elemento elemento) {
+        this.elemento = elemento;
+    }
+
+    public void setEfectividad(double efectividad) {
+        this.efectividad = efectividad;
+    }
+    
     
     
 }

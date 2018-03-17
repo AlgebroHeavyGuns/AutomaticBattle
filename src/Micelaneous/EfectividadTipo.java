@@ -13,6 +13,12 @@ public class EfectividadTipo {
     private TipoUnidad unidad;
     private double efectividad;
 
+    public EfectividadTipo(TipoUnidad unidad, double efectividad) {
+        this.unidad = unidad;
+        this.efectividad = efectividad;
+    }
+
+    
     public TipoUnidad getUnidad() {
         return unidad;
     }
@@ -20,6 +26,16 @@ public class EfectividadTipo {
     public double getEfectividad() {
         return efectividad;
     }
+
+    public void setUnidad(TipoUnidad unidad) {
+        this.unidad = unidad;
+    }
+
+    public void setEfectividad(double efectividad) {
+        this.efectividad = efectividad;
+    }
+    
+    
     
     
 }
