@@ -62,16 +62,27 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
     
     public void setMap(Tablero tablero){
         this.mapa = tablero;
-        drawMap();
+        drawMap(0,0);
     }
     
-    public void drawMap(){
+    public void drawMap(int xpiv,int ypiv){
         Unidad U;
+        int varX=0, varY=0;
+        if(xpiv >= nRows/2)
+            if(xpiv >= mapa.getTAM_X()-nRows/2)
+                varX = mapa.getTAM_X()-nRows;
+            else
+                varX = xpiv-4;
+        if(ypiv >= nColumns/2)
+            if(ypiv >= mapa.getTAM_Y()-nColumns/2)
+                varY = mapa.getTAM_Y()-nColumns;
+            else
+                varY = ypiv-4;        
         for(int i=0;i<nRows;i++)
             for(int j=0;j<nColumns;j++){
-                U = mapa.ocupada(i, j);
+                U = mapa.ocupada(i+varX, j+varY);
                 if(U==null)
-                    buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/icons/icon70.png")));
+                    buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/icons/suelo.jpg")));
                 else    
                     buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/units/"+ U.getImagen())));
             }

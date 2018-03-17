@@ -20,7 +20,6 @@ public final class Database {
     private ArrayList<Unidad> unidadesEnemigas;
     private ArrayList<Unidad> unidadesAliadas;
     private ArrayList<Equipable> equipos;
-    private ArrayList<decisionIA> IAs;
     
     
     private Database() {
@@ -28,13 +27,13 @@ public final class Database {
     
     public void inicia(){
         iniciaEquipos();
-        iniciaIAs();
         iniciaUnidades();
     }
     
     private void iniciaEquipos(){
         equipos = new ArrayList<>();
-        
+        equipos.addAll(ProductorEquiposA.getEquipos());
+        equipos.addAll(ProductorEquiposB.getEquipos());
     }
     
     private void iniciaUnidades(){
@@ -43,10 +42,6 @@ public final class Database {
         unidadesEnemigas.addAll(ProductorUnidadesA.getUnidades());
         unidadesAliadas.addAll(ProductorUnidadesB.getUnidades());
         
-    }
-    
-    private void iniciaIAs(){
-        IAs = new ArrayList<>();
     }
     
     private Unidad getUnidad(String nombre, ArrayList<Unidad> lista){
@@ -71,6 +66,19 @@ public final class Database {
         return getUnidad(nombre, unidadesAliadas);
     }
     
+    public Equipable getEquipo(String nombre){
+        Equipable E= null;
+        Iterator<Equipable> it = equipos.iterator();
+        boolean encontrado = false;
+        while(it.hasNext()&& !encontrado){
+            E=it.next();
+            encontrado= E.getNombre().equalsIgnoreCase(nombre);
+        }
+        if(encontrado)
+            return E.getCopia();
+        else
+            return null;
+    }
     
     
     public static Database getInstance() {

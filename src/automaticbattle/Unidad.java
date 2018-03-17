@@ -47,21 +47,8 @@ public abstract class Unidad {
         return atributo;
     }
     
-    public double getEfectividadAtaque(Unidad rival){
-        double efect=99999;
-        boolean arma = false;
-        for(Equipable E: equipo)
-            if(E instanceof Arma){
-                efect= Math.min(((Arma)E).getCoeficienteEfectividad(rival.getTipo()), efect);
-                arma = true;
-            }
-        if(arma)
-            return efect;
-        else
-            return 1;
-    }
     
-    public double getResistenciaAtaque(Unidad rival){
+    public double getEfectividadAtaque(Unidad rival){
         double efect=99999;
         boolean arma = false;
         for(Equipable E: equipo)
@@ -133,6 +120,14 @@ public abstract class Unidad {
     
     public int getDistanciaMovimiento(){
         return 1;
+    }
+    
+    public void renombrar(String nombre){
+        this.nombre = nombre;
+    }
+    
+    public void apellido(String apellido){
+        this.nombre += apellido;
     }
     
     public void MoverA(int posX, int posY){

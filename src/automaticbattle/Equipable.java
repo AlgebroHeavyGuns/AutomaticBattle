@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author Algebro
  */
-public class Equipable {
+public abstract class Equipable {
     private String nombre;
     private String imagen;
     private int coste;
@@ -26,6 +26,7 @@ public class Equipable {
     private TipoEquipo tipo;
     private ArrayList<EfectividadElemento> resistenciaElemento;
     private ArrayList<EfectividadArma> resistenciaArma;
+    
 
     public Equipable(String nombre, String imagen, int coste, int nivelRequerido, Atributos modificador, TipoEquipo tipo) {
         this.nombre = nombre;
@@ -87,7 +88,7 @@ public class Equipable {
     }
     
     
-    
+    public abstract Equipable getCopia();
     
     
     

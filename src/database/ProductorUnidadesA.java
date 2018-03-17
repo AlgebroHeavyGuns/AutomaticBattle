@@ -43,12 +43,13 @@ public class ProductorUnidadesA {
             super("Espíritu dragón", "Dragon4.png", "Si lo ves, ya es tarde.", TipoUnidad.Dragon, 
                     new Atributos(400,400,15,10,6,5,5,3,7));
             this.setIAAsociada(new deciaBasicIA());
+            this.getEquipo().add(Database.getInstance().getEquipo("Alma de dragón"));
         }
 
 
         @Override
         public int getDistanciaMovimiento() {
-            return 3;
+            return 1;
         }
         
         @Override

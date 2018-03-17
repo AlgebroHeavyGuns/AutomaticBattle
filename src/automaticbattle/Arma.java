@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author Algebro
  */
-public class Arma extends Equipable{
+public abstract class Arma extends Equipable{
 
     private TipoArma tipoArma;
     private Elemento elementoAtaque;

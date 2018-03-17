@@ -25,6 +25,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
     public SeleccionPanel(VentanaDeJuego VJ) {
         initComponents();
         this.vj = VJ;
+        backgroundPanel1.setBackground("src/Images/backgrounds/dark1.jpg");
         /*
         this.region1.generateZone();
         this.region1.setMap(Controlador.getInstance().combateActual.getTablero());
@@ -87,8 +88,8 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
                     .addComponent(sel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sel2))
+                    .addComponent(sel2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(615, Short.MAX_VALUE))
         );
         backgroundPanel1Layout.setVerticalGroup(
@@ -100,9 +101,9 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 .addComponent(sel1)
                 .addGap(18, 18, 18)
                 .addComponent(sel2)
-                .addGap(77, 77, 77)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(95, 95, 95)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -28,14 +28,22 @@ public class Controlador {
     
     public void iniciaCombate(int i, ArrayList<Unidad> aliadas){
         CombateInfo CI = ProductorCombate.getInstance().getCombateNivel(i);
-        int col = 1;
+        int col = 0, fil=0;
         int incr;
-        if(aliadas.size()<5)
+        if(aliadas.size()<4){
+            col=4/aliadas.size();
+            incr=3;
+        }else if(aliadas.size()<10){
+            col=1;
             incr=2;
-        else
+        }else
             incr=1;
         for(Unidad U: aliadas){
-            CI.getTablero().insertaUnidad(U, 0, col);
+            if(col>8){
+                col-=9;
+                fil++;
+            }
+            CI.getTablero().insertaUnidad(U, fil, col);
             col+=incr;
         }
         combateActual = new Combate(CI.getNombre(), aliadas, CI.getEnemigos(), CI.getTablero());

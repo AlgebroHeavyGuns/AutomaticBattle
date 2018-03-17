@@ -24,7 +24,8 @@ public class ProductorCombate {
         switch(i){
             case 0:
                 return new CombateInicial();
-            
+            case 99:
+                return new CombateDragon();
         
         }
         
@@ -36,15 +37,28 @@ public class ProductorCombate {
     
         public CombateInicial() {
             super("Primera toma de contacto", 9, 9);
+            Unidad U = Database.getInstance().getUnidadEnemiga("Jabalí inútil");
+            U.apellido("1");
+            enemigos.add(U);
+            T.insertaUnidad(U, 5, 3);
+            U = U.getCopia();
+            U.apellido("2");
+            enemigos.add(U);
+            T.insertaUnidad(U, 5, 5);
+        }
+    
+    
+    
+    }
+    
+    
+    private static class CombateDragon extends CombateInfo{
+    
+        public CombateDragon() {
+            super("Dragon desencadenado", 12, 9);
             Unidad U = Database.getInstance().getUnidadEnemiga("Espíritu dragón");
             enemigos.add(U);
-            T.insertaUnidad(U, 5, 1);
-            U = Database.getInstance().getUnidadEnemiga("Jabalí inútil");
-            enemigos.add(U);
-            T.insertaUnidad(U, 4, 3);
-            U = U.getCopia();
-            enemigos.add(U);
-            T.insertaUnidad(U, 4, 5);
+            T.insertaUnidad(U, 11, 4);
         }
     
     
