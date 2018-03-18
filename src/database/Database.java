@@ -33,14 +33,17 @@ public final class Database {
     private void iniciaEquipos(){
         equipos = new ArrayList<>();
         equipos.addAll(ProductorEquiposA.getEquipos());
-        equipos.addAll(ProductorEquiposB.getEquipos());
+        equipos.addAll(ProductorEquiposD.getEquipos());
+        equipos.addAll(ProductorEquiposG.getEquipos());
+        equipos.addAll(ProductorEquiposI.getEquipos());
     }
     
     private void iniciaUnidades(){
         unidadesEnemigas = new ArrayList<>();
         unidadesAliadas = new ArrayList<>();
         unidadesEnemigas.addAll(ProductorUnidadesA.getUnidades());
-        unidadesAliadas.addAll(ProductorUnidadesB.getUnidades());
+        unidadesAliadas.addAll(ProductorUnidadesD.getUnidades());
+        unidadesAliadas.addAll(ProductorUnidadesE.getUnidades());
         
     }
     
@@ -79,6 +82,21 @@ public final class Database {
         else
             return null;
     }
+
+    public ArrayList<Unidad> getUnidadesAliadas() {
+        return unidadesAliadas;
+    }
+
+    public ArrayList<Equipable> getEquipos(int levelMax) {
+        ArrayList<Equipable> ret = new ArrayList<>();
+        for(Equipable E : equipos)
+            if(E.getNivelRequerido() > -1 && E.getNivelRequerido() <= levelMax)
+                ret.add(E);
+                
+        return ret;
+    }
+    
+    
     
     
     public static Database getInstance() {

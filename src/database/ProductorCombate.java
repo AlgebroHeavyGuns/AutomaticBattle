@@ -32,12 +32,26 @@ public class ProductorCombate {
         return null;
     }
     
+    public int getPresupuestocombateNivel(int i){
+        switch(i){
+            case 0:
+                return CombateInicial.PRESUPUESTO;
+            case 99:
+                return CombateDragon.PRESUPUESTO;
+        
+        }
+        
+        return -1;
+    }
+    
     
     private static class CombateInicial extends CombateInfo{
     
+        static final int PRESUPUESTO= 1100;
+        
         public CombateInicial() {
             super("Primera toma de contacto", 9, 9);
-            Unidad U = Database.getInstance().getUnidadEnemiga("Jabalí inútil");
+            Unidad U = Database.getInstance().getUnidadEnemiga("Jabalí furioso");
             U.apellido("1");
             enemigos.add(U);
             T.insertaUnidad(U, 5, 3);
@@ -54,6 +68,8 @@ public class ProductorCombate {
     
     private static class CombateDragon extends CombateInfo{
     
+        static final int PRESUPUESTO= 6000;
+        
         public CombateDragon() {
             super("Dragon desencadenado", 12, 9);
             Unidad U = Database.getInstance().getUnidadEnemiga("Espíritu dragón");
@@ -65,7 +81,7 @@ public class ProductorCombate {
     
     }
     
-    public static class CombateInfo{
+    public abstract static class CombateInfo{
         public ArrayList<Unidad> enemigos;
         public Tablero T;
         public String nombre;

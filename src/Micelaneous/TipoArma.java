@@ -11,5 +11,5 @@ package Micelaneous;
  */
 public enum TipoArma {
     EspadaUnaMano, Daga, HachaUnaMano,
-    EspadaDosManos, Baston, Maza, Hacha, Arco, BallestaGrande;
+    EspadaDosManos, Baston, Maza, HachaDosManos, Arco, BallestaGrande;
 }

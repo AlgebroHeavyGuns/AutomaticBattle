@@ -26,12 +26,13 @@ public class ProductorEquiposA {
     static ArrayList<Equipable> getEquipos(){
         ArrayList<Equipable> lista = new ArrayList<>();
         lista.add(new AlmaDeDragon());
+        lista.add(new DentaduraFuerte());
         return lista;
     }
     
     static class AlmaDeDragon extends Arma{
         public AlmaDeDragon(){
-            super("Alma de dragón", "Dragon4.png", 0, -1, new Atributos(100,100,5,5,2,2,0,0,0), TipoArma.BallestaGrande, Elemento.Fuego, 3);
+            super("Alma de dragón", "Dragon4.png", 0, -1, new Atributos(150,150,6,5,3,3,0,0,0), TipoArma.BallestaGrande, Elemento.Fuego, 3);
             this.getResistenciaElemento().add(new EfectividadElemento(Elemento.Fuego, 0.5));
             this.getResistenciaElemento().add(new EfectividadElemento(Elemento.Agua, 1.2));
             this.getResistenciaElemento().add(new EfectividadElemento(Elemento.Luz, 1.1));
@@ -45,6 +46,23 @@ public class ProductorEquiposA {
         }
 
         
+    }
+    
+    static class DentaduraFuerte extends Arma{
+
+        public DentaduraFuerte() {
+            super("Dentadura fuerte", "dientes.png", 0, -1, new Atributos(60,10,9,0,0,0,0,0,0), TipoArma.Daga, Elemento.Comun, 1);
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Humano, 1.1));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Elfo, 1.2));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.15));
+        }
+
+        @Override
+        public Equipable getCopia() {
+            return new DentaduraFuerte();
+        }
+    
+    
     }
 
     

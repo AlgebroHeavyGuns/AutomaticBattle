@@ -78,7 +78,7 @@ public class InitialPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
-        vj.setPanel(new SeleccionPanel(this.vj));
+        vj.setPanel(new SeleccionPanel(this.vj, 0));
     }//GEN-LAST:event_jugarButtonActionPerformed
 
 

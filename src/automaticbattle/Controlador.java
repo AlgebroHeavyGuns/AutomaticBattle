@@ -54,6 +54,8 @@ public class Controlador {
         switch(decision.decision){
             case Desplazamiento:
                 can = calculaDistancia(decision.movX,decision.movY,0,0)<= U.getDistanciaMovimiento();
+                if(!can)
+                    System.err.println("Distancia movimiento no permitida");
                 decision.movX += U.getPosX();
                 decision.movY += U.getPosY();
                 can = can && this.combateActual.getTablero().ocupada(decision.movX, decision.movY)==null;
@@ -61,8 +63,11 @@ public class Controlador {
             case Atacar:
                 if(U==decision.U)
                     can = false;
-                else
+                else{
                     can = calculaDistancia(U.getPosX(),U.getPosY(),decision.U.getPosX(), U.getPosY()) <= U.getAlcance();
+                    if(!can)
+                        System.err.println("Distancia ataque no permitida");
+                }
                 break;
             case Habilidad:
             case Objeto:
@@ -78,6 +83,49 @@ public class Controlador {
     }   
     
     
+    public ArrayList<Unidad> getUnidadesEnVision(Unidad U){
+        ArrayList<Unidad> unidades = new ArrayList<>();
+        unidades.addAll(getAliadasEnVision(U));
+        unidades.addAll(getEnemigasEnVision(U));
+        return unidades; 
+    }
+    
+    public ArrayList<Unidad> getAliadasEnVision(Unidad U){
+        ArrayList<Unidad> unidades = new ArrayList<>();
+        
+        int vision = U.getVisibilidad();
+        for(Unidad otra: combateActual.getAliadas(U))
+            if(vision >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
+                unidades.add(otra);
+        
+        return unidades;
+    }
+    
+    public ArrayList<Unidad> getEnemigasEnVision(Unidad U){
+        ArrayList<Unidad> unidades = new ArrayList<>();
+        
+        int vision = U.getVisibilidad();
+        for(Unidad otra: combateActual.getEnemigas(U))
+            if(vision >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
+                unidades.add(otra);
+        
+        
+        return unidades;
+    }
+    
+    public ArrayList<Unidad> getEnemigasEnAlcance(Unidad U){
+        ArrayList<Unidad> unidades = new ArrayList<>();
+        
+        int alcance = U.getAlcance();
+        if(U.getAlcance() > U.getVisibilidad())
+            alcance = U.getVisibilidad();
+        for(Unidad otra: combateActual.getEnemigas(U))
+            if(alcance >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
+                unidades.add(otra);
+        
+        
+        return unidades;
+    }
     
     public static Controlador getInstance() {
         return ControladorHolder.INSTANCE;

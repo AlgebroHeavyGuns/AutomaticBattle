@@ -11,6 +11,7 @@ import Micelaneous.EfectividadElemento;
 import Micelaneous.Elemento;
 import Micelaneous.TipoArma;
 import Micelaneous.TipoEquipo;
+import Micelaneous.TipoUnidad;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,7 @@ public abstract class Equipable {
     private TipoEquipo tipo;
     private ArrayList<EfectividadElemento> resistenciaElemento;
     private ArrayList<EfectividadArma> resistenciaArma;
+    
     
 
     public Equipable(String nombre, String imagen, int coste, int nivelRequerido, Atributos modificador, TipoEquipo tipo) {
@@ -87,6 +89,9 @@ public abstract class Equipable {
         return 1.0;
     }
     
+    public boolean puedeEquiparseA(TipoUnidad TU){
+        return true;
+    }
     
     public abstract Equipable getCopia();
     

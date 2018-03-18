@@ -26,6 +26,14 @@ public interface decisionIA {
         //public Objeto O=null;
         public int movX=0;
         public int movY=0;
+
+        @Override
+        public String toString() {
+            return "Seleccion{" + "decision=" + decision + ", U=" + U + ", movX=" + movX + ", movY=" + movY + '}';
+        }
+        
+        
+
     }
   
 }

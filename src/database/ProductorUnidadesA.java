@@ -5,9 +5,10 @@
  */
 package database;
 
-import IAs.deciaBasicIA;
+import IAs.*;
 import Micelaneous.Atributos;
 import Micelaneous.TipoUnidad;
+import automaticbattle.Controlador;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
 
@@ -26,9 +27,21 @@ public class ProductorUnidadesA {
     
     static class JabaliInutil extends Unidad{
         public JabaliInutil() {
-            super("Jabalí inútil", "WildBoar1.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
-                    new Atributos(100,100,10,1,5,3,3,4,4));
-            this.setIAAsociada(new deciaBasicIA());
+            super("Jabalí furioso", "WildBoar1.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
+                    new Atributos(180,120,6,3,9,3,5,4,5));          
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+            this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
+        }
+        
+        
+
+        @Override
+        public void efectoUnidadAtacada(Unidad atacante, double prob, int danio) {
+            if(this.getVida() < 1){
+                  Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita fuerte y devuelve \n"
+                          + (int)(danio*0.5) + " a " + atacante.getNombre() + " antes de morir");
+                atacante.modVidaActual(-((int)(danio*0.5)));
+            }
         }
 
         @Override
@@ -41,15 +54,15 @@ public class ProductorUnidadesA {
     static class EspirituDragon extends Unidad{
         public EspirituDragon() {
             super("Espíritu dragón", "Dragon4.png", "Si lo ves, ya es tarde.", TipoUnidad.Dragon, 
-                    new Atributos(400,400,15,10,6,5,5,3,7));
-            this.setIAAsociada(new deciaBasicIA());
-            this.getEquipo().add(Database.getInstance().getEquipo("Alma de dragón"));
+                    new Atributos(550,400,20,15,10,10,8,2,8));
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+            this.equipar(Database.getInstance().getEquipo("Alma de dragón"));
         }
 
 
         @Override
         public int getDistanciaMovimiento() {
-            return 1;
+            return 3;
         }
         
         @Override

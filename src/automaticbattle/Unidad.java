@@ -7,6 +7,9 @@ package automaticbattle;
 
 import Micelaneous.decisionIA;
 import Micelaneous.Atributos;
+import Micelaneous.Elemento;
+import Micelaneous.TipoArma;
+import Micelaneous.TipoEquipo;
 import Micelaneous.TipoUnidad;
 import java.util.ArrayList;
 
@@ -59,7 +62,35 @@ public abstract class Unidad {
         if(arma)
             return efect;
         else
-            return 1;
+            return 1.0;
+    }
+    
+    public double getEfectividadArmas(Unidad U){
+        double coef=1.0;
+        for(Equipable Eq: equipo)
+            if(Eq instanceof Arma){
+                if(((Arma)Eq).getTipoArma()==TipoArma.EspadaUnaMano || ((Arma)Eq).getTipoArma()==TipoArma.Daga ||
+                        ((Arma)Eq).getTipoArma()==TipoArma.HachaUnaMano)
+                    coef*= U.getResistenciaelemento(((Arma) Eq).getElementoAtaque()) * U.getResistenciaArma(((Arma) Eq).getTipoArma());
+                else
+                    return U.getResistenciaelemento(((Arma) Eq).getElementoAtaque()) * U.getResistenciaArma(((Arma) Eq).getTipoArma());
+            }
+                
+        return coef;
+    }
+    
+    public double getResistenciaArma(TipoArma TA){
+        double coef=1.0;
+        for(Equipable E: equipo)
+            coef*= E.getCoeficienteResistencia(TA);
+        return coef;
+    }
+    
+    public double getResistenciaelemento(Elemento E){
+        double coef=1.0;
+        for(Equipable Eq: equipo)
+            coef*= Eq.getCoeficienteResistencia(E);
+        return coef;
     }
     
     public void fijaActual(){
@@ -211,6 +242,85 @@ public abstract class Unidad {
     public int getVisibilidad() {
         return actual.getVisibilidad();
     }
+    
+    public Equipable equipar(Equipable E){
+        Equipable ret = puedeEquipar(E);
+        if(ret==null)
+            equipo.add(E);
+        return ret;
+    }
+    
+    public Equipable puedeEquipar(Equipable E){
+        TipoEquipo TE = E.getTipo();
+        Equipable ret;
+        switch(TE){
+            case Escudo:
+                ret = tieneEquipado(TipoEquipo.Escudo);
+                if(ret==null){
+                    ret = tieneEquipadoDosManos();
+                    if(ret==null)
+                        ret = tieneDosArmasUnaMano();   
+                }
+                return ret;
+            case Consumible:
+            case Joyeria:
+                return null;
+            case Arma:
+                switch(((Arma)E).getTipoArma()){
+                    case EspadaUnaMano:
+                    case HachaUnaMano:
+                    case Daga:
+                        ret = tieneEquipado(TipoEquipo.Arma);
+                        if(ret!=null){
+                            ret = tieneEquipadoDosManos();
+                            if(ret==null){
+                                ret = tieneEquipado(TipoEquipo.Escudo);   
+                                if(ret==null)
+                                    ret = tieneDosArmasUnaMano();
+                            }
+                        }
+                        return ret;
+                }
+            default:
+                return tieneEquipado(TE);
+        }
+    }
+    
+    public Equipable tieneEquipado(TipoEquipo TE){
+        for(Equipable E : equipo)
+            if(E.getTipo()==TE)
+                return E;
+        return null;
+    }
+    
+    public Equipable tieneEquipadoDosManos(){
+        for(Equipable equipado: equipo)
+            if(equipado instanceof Arma){
+                 if(((Arma)equipado).getTipoArma()==TipoArma.EspadaUnaMano ||
+                     ((Arma)equipado).getTipoArma()==TipoArma.HachaUnaMano || ((Arma)equipado).getTipoArma()==TipoArma.Daga)
+                     return null;
+                 else
+                     return equipado;
+            }
+                
+        return null;
+    }
+
+    public Equipable tieneDosArmasUnaMano(){
+        Equipable otro = null;
+        for(Equipable equipado: equipo)
+            if(equipado instanceof Arma && (((Arma)equipado).getTipoArma()==TipoArma.EspadaUnaMano ||
+                    ((Arma)equipado).getTipoArma()==TipoArma.HachaUnaMano || ((Arma)equipado).getTipoArma()==TipoArma.Daga)){
+                if(otro==null)
+                    otro=equipado;
+                else
+                    return equipado;
+            }
+        return null;
+    }
+    
+    
+    
     
     public abstract Unidad getCopia();
     

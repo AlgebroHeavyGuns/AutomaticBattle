@@ -76,8 +76,10 @@ public final class Combate {
         
         decisionIA.Seleccion decision = unidad.getIAAsociada().tomarDecision(unidad);
         
-        if(!Controlador.getInstance().comprobarAccion(unidad,decision))
+        if(!Controlador.getInstance().comprobarAccion(unidad,decision)){
+            System.err.println("Accion no permitida " + unidad.getNombre() + " " + decision.toString());
             decision.decision=Accion.IDLE;
+        }
         
         activarEfectosDecision(unidad,decision);
         realizarAccion(unidad, decision);
@@ -124,17 +126,24 @@ public final class Combate {
                 panel.insertarInfo(actor.getNombre() + " desplazado.");
                 break;
             case Atacar:
-                double probAcierto = 1-0.08*decision.U.getAgilidad();
+                /*
+                    2  ->  0.92     
+                    4  ->  0.74     
+                    6  ->  0.56     
+                    8  ->  0.38     
+                    10 ->  0.2  
+                */
+                double probAcierto = 1.1-0.09*decision.U.getAgilidad();
                 double tirada = Math.random();
                 actor.efectoAtacar(decision.U,tirada,tirada<=probAcierto);
                 if(tirada<=probAcierto){
-                    int danio = 2*actor.getFuerza()-decision.U.getArmadura();
-                    danio *= actor.getEfectividadAtaque(decision.U);
+                    int danio = (int)((5*actor.getFuerza()-3*decision.U.getArmadura())/2);
+                    danio *= actor.getEfectividadAtaque(decision.U) * actor.getEfectividadArmas(decision.U);
                     if(danio > 0){
-                        decision.U.efectoUnidadAtacada(actor, tirada, danio);
                         decision.U.modVidaActual(-danio);
                         panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + "\nrealizó " + danio + " de daño."
                                 + "Vida restante : " + decision.U.getVida());
+                        decision.U.efectoUnidadAtacada(actor, tirada, danio);
                     }else
                         panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + " pero no le causó daño");
                 }else
@@ -144,17 +153,18 @@ public final class Combate {
             case Objeto:
                 throw new UnsupportedOperationException("Not supported yet.");
             case IDLE: 
+                System.err.println("IDLE!" + actor.getNombre());
         }
     }
     
     void comprobarMuertos(){
         ArrayList<Unidad> copia = new ArrayList<>(aliadas);
         for(Unidad U: copia)
-            if(U.getVida() < 0)
+            if(U.getVida() < 1)
                 eliminarUnidad(U,aliadas);
         copia = new ArrayList<>(enemigas);
         for(Unidad U: copia)
-            if(U.getVida() < 0)
+            if(U.getVida() < 1)
                 eliminarUnidad(U,enemigas);  
     }
     
@@ -186,6 +196,20 @@ public final class Combate {
 
     public ArrayList<Unidad> getEnemigas() {
         return enemigas;
+    }
+    
+    public ArrayList<Unidad> getAliadas(Unidad U) {
+        if(aliadas.contains(U))
+            return aliadas;
+        else
+            return enemigas;
+    }
+
+    public ArrayList<Unidad> getEnemigas(Unidad U) {
+        if(enemigas.contains(U))
+            return aliadas;
+        else
+            return enemigas;
     }
 
     public Tablero getTablero() {

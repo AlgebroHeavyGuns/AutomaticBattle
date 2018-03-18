@@ -7,6 +7,9 @@ package GUI;
 
 import automaticbattle.Controlador;
 import automaticbattle.Unidad;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.text.DefaultCaret;
 
 /**
  *
@@ -19,13 +22,18 @@ public class CombatePanel extends javax.swing.JPanel {
      */
     
     VentanaDeJuego vj;
+    Timer T = new Timer();
     
     public CombatePanel(VentanaDeJuego VJ) {
         initComponents();
         this.vj = VJ;
         this.region1.generateZone();
         this.region1.setMap(Controlador.getInstance().combateActual.getTablero());
+        backgroundPanel1.setBackground("src/Images/backgrounds/dark1.jpg");
+        DefaultCaret caret = (DefaultCaret)infoPanel.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         iniciaCombate();
+
     }
 
     /**
@@ -39,41 +47,63 @@ public class CombatePanel extends javax.swing.JPanel {
 
         backgroundPanel1 = new GUI.BackgroundPanel();
         region1 = new GUI.Region();
-        jButton1 = new javax.swing.JButton();
+        nextTurnButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         infoPanel = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        nextUnidadButton = new javax.swing.JButton();
+        turn25Button = new javax.swing.JButton();
+        automaticButton = new javax.swing.JButton();
+        turn10Button = new javax.swing.JButton();
 
         region1.setPreferredSize(new java.awt.Dimension(560, 560));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("SIGUIENTE TURNO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nextTurnButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nextTurnButton.setText("SIGUIENTE TURNO");
+        nextTurnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nextTurnButtonActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setViewportView(infoPanel);
+        jScrollPane1.setAutoscrolls(true);
 
         infoPanel.setEditable(false);
         infoPanel.setColumns(20);
-        infoPanel.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        infoPanel.setFont(new java.awt.Font("Monospaced", 1, 11)); // NOI18N
         infoPanel.setRows(5);
+        infoPanel.setDoubleBuffered(true);
         jScrollPane1.setViewportView(infoPanel);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("TURNO MISMA UNIDAD");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        nextUnidadButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nextUnidadButton.setText("TURNO MISMA UNIDAD");
+        nextUnidadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                nextUnidadButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("x50 TURNOS");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        turn25Button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        turn25Button.setText("x25 TURNOS");
+        turn25Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                turn25ButtonActionPerformed(evt);
+            }
+        });
+
+        automaticButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        automaticButton.setText("AUTOMÁTICO");
+        automaticButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                automaticButtonActionPerformed(evt);
+            }
+        });
+
+        turn10Button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        turn10Button.setText("x10 TURNOS");
+        turn10Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                turn10ButtonActionPerformed(evt);
             }
         });
 
@@ -82,31 +112,42 @@ public class CombatePanel extends javax.swing.JPanel {
         backgroundPanel1Layout.setHorizontalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nextTurnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(turn25Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nextUnidadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(automaticButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(turn10Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(region1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(155, 155, 155)
-                        .addComponent(jButton3)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(automaticButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(turn10Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(turn25Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextUnidadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextTurnButton)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -122,26 +163,48 @@ public class CombatePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void nextTurnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTurnButtonActionPerformed
         Controlador.getInstance().combateActual.nextTurn();
-        region1.drawMap(Controlador.getInstance().combateActual.getColaTurno().get(0).getPosX(),
-                Controlador.getInstance().combateActual.getColaTurno().get(0).getPosY());
-    }//GEN-LAST:event_jButton1ActionPerformed
+        drawMap();
+    }//GEN-LAST:event_nextTurnButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void nextUnidadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextUnidadButtonActionPerformed
         Unidad actual = Controlador.getInstance().combateActual.getColaTurno().get(0);
         Controlador.getInstance().combateActual.nextTurn();
         while(Controlador.getInstance().combateActual.getColaTurno().get(0) != actual)
             Controlador.getInstance().combateActual.nextTurn();
         drawMap();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_nextUnidadButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        for(int i=0;i<50;i++)
+    private void turn25ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turn25ButtonActionPerformed
+        for(int i=0;i<25;i++)
             Controlador.getInstance().combateActual.nextTurn();
         
         drawMap();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_turn25ButtonActionPerformed
+
+    private void automaticButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticButtonActionPerformed
+        T.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run() {
+                Controlador.getInstance().combateActual.nextTurn();
+                drawMap();
+            }
+        }
+                , 0, 1330);
+        automaticButton.setEnabled(false);
+        turn25Button.setEnabled(false);
+        turn10Button.setEnabled(false);
+        nextUnidadButton.setEnabled(false);
+        nextTurnButton.setEnabled(false);
+    }//GEN-LAST:event_automaticButtonActionPerformed
+
+    private void turn10ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turn10ButtonActionPerformed
+        for(int i=0;i<10;i++)
+            Controlador.getInstance().combateActual.nextTurn();
+        
+        drawMap();
+    }//GEN-LAST:event_turn10ButtonActionPerformed
 
     void iniciaCombate(){
         Controlador.getInstance().combateActual.panel = this;
@@ -159,12 +222,14 @@ public class CombatePanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton automaticButton;
     private GUI.BackgroundPanel backgroundPanel1;
     private javax.swing.JTextArea infoPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton nextTurnButton;
+    private javax.swing.JButton nextUnidadButton;
     private GUI.Region region1;
+    private javax.swing.JButton turn10Button;
+    private javax.swing.JButton turn25Button;
     // End of variables declaration//GEN-END:variables
 }
