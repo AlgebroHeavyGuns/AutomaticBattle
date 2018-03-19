@@ -10,6 +10,7 @@ import automaticbattle.Controlador;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
 import java.util.Comparator;
+import javafx.util.Pair;
 
 /**
  *
@@ -34,6 +35,37 @@ public class searchAndDestroyBasicIA extends BasicIA{
         return eleccion;
     }
 
+    /*
+    ABIERTOS := [INICIAL] //inicialización 
+CERRADOS := [] 
+f'(INICIAL) := h'(INICIAL) 
+repetir 
+si ABIERTOS = [] entonces FALLO 
+si no // quedan nodos 
+extraer MEJORNODO de ABIERTOS con f' mí­nima 
+// cola de prioridad 
+mover MEJORNODO de ABIERTOS a CERRADOS 
+si MEJORNODO contiene estado_objetivo entonces 
+SOLUCION_ENCONTRADA := TRUE 
+si no 
+generar SUCESORES de MEJORNODO 
+para cada SUCESOR hacer TRATAR_SUCESOR 
+hasta SOLUCION_ENCONTRADA o FALLO
+    */
+    
+    
+    Seleccion calcularMovimiento(Unidad U) {
+        Seleccion accion = new Seleccion();
+        accion.decision = Accion.Desplazamiento;
+
+        ArrayList<Pair<Integer,Integer> > ruta = new ArrayList<>();
+        
+        
+        return accion;  
+    }
+    
+    
+ /*   
     @Override
     Seleccion calcularMovimiento(Unidad U) {
         Seleccion eleccion = new Seleccion();
@@ -116,7 +148,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
         eleccion.movY=vY;
         return eleccion;    
     }
-    
+*/    
     
     static class PrimeroMasCercano implements Comparator<Unidad>{
         
