@@ -83,6 +83,10 @@ public class Controlador {
     }   
     
     
+    public boolean posicionValidaNoOcupada(int x, int y){
+        return combateActual.getTablero().coordenadasValidas(x, y) && combateActual.getTablero().ocupada(x, y)==null;
+    }
+    
     public ArrayList<Unidad> getUnidadesEnVision(Unidad U){
         ArrayList<Unidad> unidades = new ArrayList<>();
         unidades.addAll(getAliadasEnVision(U));

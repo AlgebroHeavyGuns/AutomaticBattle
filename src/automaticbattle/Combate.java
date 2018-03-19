@@ -10,6 +10,7 @@ import Micelaneous.decisionIA;
 import Micelaneous.Accion;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Queue;
 
 /**
@@ -39,12 +40,16 @@ public final class Combate {
         colaTurno = new ArrayList<>();
         colaTurno.addAll(equipoUno);
         colaTurno.addAll(equipoDos);
-        Collections.shuffle(colaTurno);
+        colaTurno.sort(new Comparator<Unidad>() {
+            @Override
+            public int compare(Unidad o1, Unidad o2) {
+                return o2.getVelocidad() - o1.getVelocidad();
+            }
+        });
         
     }
     
     public void iniciaCombate(){
-        rellenaCola();
         for(Unidad U:equipoDos)
             U.fijaActual();
         for(Unidad U:equipoUno){
@@ -53,6 +58,7 @@ public final class Combate {
         }
         for(Unidad U:equipoDos)
             U.efectoInicioEnfrentamiento();
+        rellenaCola();
     }
     
     public void nextTurn(){

@@ -10,6 +10,7 @@ import automaticbattle.Controlador;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 import javafx.util.Pair;
 
 /**
@@ -36,24 +37,37 @@ public class searchAndDestroyBasicIA extends BasicIA{
     }
 
     
-    
+    /*
     Seleccion calcularMovimiento(Unidad U) {
         Seleccion accion = new Seleccion();
         accion.decision = Accion.Desplazamiento;
 
         
         
-        int vX=0,vY=0, indice=0;
+        int vX=0,vY=0;
         
         ArrayList<Unidad> enemigas = Controlador.getInstance().getEnemigasEnVision(U); 
         if(enemigas.isEmpty()){
+            accion.decision = Accion.IDLE;
             System.out.println("No hay enemigos en rango (" + U.getNombre() + ")");
         }else{
-            Unidad enemigo = enemigas.get(indice);
-            ArrayList<Pair<Integer,Integer> > ruta = calculaRuta(U, enemigo.getPosX(), enemigo.getPosY());
-            if(ruta.isEmpty())
+            primeroMasCercano.ref = U;
+            enemigas.sort(primeroMasCercano);
+            Unidad enemigo = enemigas.get(0);
+            ArrayList<Pair<Integer,Integer> > ruta = calculaRuta(U, U.getDistanciaMovimiento()+1, enemigo.getPosX(), enemigo.getPosY());
+            if(ruta.isEmpty()){
                 System.out.println("No puedes llegar de " + U.getPosX() + "," + U.getPosY() +
                         " a " + enemigo.getPosX() + "," + enemigo.getPosY());
+                accion.decision = Accion.IDLE;
+            }else{
+                Pair<Integer,Integer> variacion;
+                for(int i=0;i<U.getDistanciaMovimiento();i++){
+                    variacion = ruta.get(i);
+                    vX += variacion.getKey()-U.getPosX();
+                    vY += variacion.getValue()-U.getPosY();
+                }
+            }
+            
         }
         
         accion.movX=vX;
@@ -62,37 +76,54 @@ public class searchAndDestroyBasicIA extends BasicIA{
         return accion;  
     }
 
-
-    /*
-    ABIERTOS := [INICIAL] //inicialización 
-CERRADOS := [] 
-f'(INICIAL) := h'(INICIAL) 
-repetir 
-si ABIERTOS = [] entonces FALLO 
-si no // quedan nodos 
-extraer MEJORNODO de ABIERTOS con f' mí­nima 
-// cola de prioridad 
-mover MEJORNODO de ABIERTOS a CERRADOS 
-si MEJORNODO contiene estado_objetivo entonces 
-SOLUCION_ENCONTRADA := TRUE 
-si no 
-generar SUCESORES de MEJORNODO 
-para cada SUCESOR hacer TRATAR_SUCESOR 
-hasta SOLUCION_ENCONTRADA o FALLO
-    */    
     
-    private ArrayList<Pair<Integer, Integer> > calculaRuta(Unidad usuario, int objX, int objY){
+    private ArrayList<Pair<Integer, Integer> > calculaRuta(Unidad usuario, int pasos, int objX, int objY){
         ArrayList<Pair<Integer,Integer> > ruta = new ArrayList<>();
-        ArrayList<Pair<Integer,Integer> > abiertos = new ArrayList<>();
-        abiertos.add(new Pair<>(usuario.getPosX(), usuario.getPosY()));
+        ArrayList<Pair<Integer,Integer> > opciones = new ArrayList<>();
+        opciones.add(new Pair<>(1,0));  opciones.add(new Pair<>(-1,0));
+        opciones.add(new Pair<>(0,1));  opciones.add(new Pair<>(0,-1));
+
         
+        return ruta;
+    }
+    
+    
+    private ArrayList<Pair<Integer, Integer> > calculaRutaN(Unidad usuario, int pasos, int objX, int objY){
+        ArrayList<Pair<Integer,Integer> > ruta = new ArrayList<>();
+        Comparator C = new Comparator<Pair<Integer,Integer> > () {
+            Pair<Integer,Integer> ref = new Pair<>(objX,objY);
+            @Override
+            public int compare(Pair<Integer, Integer> o1, Pair<Integer, Integer> o2) {
+                return Controlador.getInstance().calculaDistancia(ref.getKey(), ref.getValue(), o1.getKey(), o1.getValue()) -
+                        Controlador.getInstance().calculaDistancia(ref.getKey(), ref.getValue(), o2.getKey(), o2.getValue());
+            }
+        };
+        
+        PriorityQueue<Pair<Integer,Integer> > abiertos = new PriorityQueue<>(C);
+        abiertos.add(new Pair<>(usuario.getPosX(), usuario.getPosY()));
+        Pair<Integer, Integer> nodo;
+        while(!abiertos.isEmpty() && ruta.size()<pasos){
+            nodo = abiertos.poll();
+            if(Controlador.getInstance().calculaDistancia(nodo.getKey(), nodo.getValue(), objX, objY)==1){
+                ruta.add(nodo);
+                abiertos.clear();
+            }
+            else{
+                for(int i=-1;i<=1;i++)
+                    for(int j=-1;j<=1;j++)
+                        if(Math.abs(i)!=Math.abs(j) && Controlador.getInstance().posicionValidaNoOcupada(nodo.getKey()+i, nodo.getValue()+j))
+                            abiertos.add(new Pair<>(nodo.getKey()+i,nodo.getValue()+j));
+                if(nodo.getKey()!= usuario.getPosX() || nodo.getValue() != usuario.getPosY())
+                    ruta.add(nodo);
+            }
+        }
         
         
         return ruta;
     }
     
     
- /*   
+*/  
     @Override
     Seleccion calcularMovimiento(Unidad U) {
         Seleccion eleccion = new Seleccion();
@@ -175,7 +206,7 @@ hasta SOLUCION_ENCONTRADA o FALLO
         eleccion.movY=vY;
         return eleccion;    
     }
-*/    
+/**/    
     
     static class PrimeroMasCercano implements Comparator<Unidad>{
         
