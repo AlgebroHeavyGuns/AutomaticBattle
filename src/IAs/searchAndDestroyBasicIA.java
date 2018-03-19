@@ -35,6 +35,34 @@ public class searchAndDestroyBasicIA extends BasicIA{
         return eleccion;
     }
 
+    
+    
+    Seleccion calcularMovimiento(Unidad U) {
+        Seleccion accion = new Seleccion();
+        accion.decision = Accion.Desplazamiento;
+
+        
+        
+        int vX=0,vY=0, indice=0;
+        
+        ArrayList<Unidad> enemigas = Controlador.getInstance().getEnemigasEnVision(U); 
+        if(enemigas.isEmpty()){
+            System.out.println("No hay enemigos en rango (" + U.getNombre() + ")");
+        }else{
+            Unidad enemigo = enemigas.get(indice);
+            ArrayList<Pair<Integer,Integer> > ruta = calculaRuta(U, enemigo.getPosX(), enemigo.getPosY());
+            if(ruta.isEmpty())
+                System.out.println("No puedes llegar de " + U.getPosX() + "," + U.getPosY() +
+                        " a " + enemigo.getPosX() + "," + enemigo.getPosY());
+        }
+        
+        accion.movX=vX;
+        accion.movY=vY;
+        
+        return accion;  
+    }
+
+
     /*
     ABIERTOS := [INICIAL] //inicialización 
 CERRADOS := [] 
@@ -51,17 +79,16 @@ si no
 generar SUCESORES de MEJORNODO 
 para cada SUCESOR hacer TRATAR_SUCESOR 
 hasta SOLUCION_ENCONTRADA o FALLO
-    */
+    */    
     
-    
-    Seleccion calcularMovimiento(Unidad U) {
-        Seleccion accion = new Seleccion();
-        accion.decision = Accion.Desplazamiento;
-
+    private ArrayList<Pair<Integer, Integer> > calculaRuta(Unidad usuario, int objX, int objY){
         ArrayList<Pair<Integer,Integer> > ruta = new ArrayList<>();
+        ArrayList<Pair<Integer,Integer> > abiertos = new ArrayList<>();
+        abiertos.add(new Pair<>(usuario.getPosX(), usuario.getPosY()));
         
         
-        return accion;  
+        
+        return ruta;
     }
     
     
