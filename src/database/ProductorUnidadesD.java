@@ -40,7 +40,7 @@ public class ProductorUnidadesD {
         
         public PatricioGuerrero() {
             super("Patricio Guerrero", "CharacterHumanMale.png", "Todo o nada.", TipoUnidad.Humano, 
-                    new Atributos(180,90,11,5,6,5,4,3,6));
+                    new Atributos(170,90,11,5,6,5,4,3,6));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -79,7 +79,7 @@ public class ProductorUnidadesD {
         
         public JoaquinPaladin() {
             super("Joaquín Paladín", "CharacterBloodElfMale.png", "No sin mi equipo.", TipoUnidad.Humano, 
-                    new Atributos(210,120,9,6,5,5,5,3,7));
+                    new Atributos(200,120,9,6,5,5,5,3,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -120,7 +120,7 @@ public class ProductorUnidadesD {
         
         public TeodoraCazadora() {
             super("Teodora Cazadora", "CharacterNightElfFemale.png", "Un susurro, una lágrima, un cadaver.", TipoUnidad.Elfo, 
-                    new Atributos(100,110,10,4,3,3,6,4,7));
+                    new Atributos(110,110,10,4,3,3,6,4,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -151,7 +151,7 @@ public class ProductorUnidadesD {
         
         public AuroraLuchadora() {
             super("Aurora luchadora", "CharacterDwarfFemale.png", "Un susurro, una lágrima, un cadaver.", TipoUnidad.Humano, 
-                    new Atributos(230,80,6,4,9,8,4,3,5));
+                    new Atributos(220,80,6,4,9,8,4,3,5));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
