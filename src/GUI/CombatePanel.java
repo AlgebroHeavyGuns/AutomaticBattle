@@ -32,6 +32,7 @@ public class CombatePanel extends javax.swing.JPanel {
         backgroundPanel1.setBackground("src/Images/backgrounds/dark1.jpg");
         DefaultCaret caret = (DefaultCaret)infoPanel.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        this.estadisticas.setVisible(false);
         iniciaCombate();
 
     }
@@ -54,6 +55,7 @@ public class CombatePanel extends javax.swing.JPanel {
         turn25Button = new javax.swing.JButton();
         automaticButton = new javax.swing.JButton();
         turn10Button = new javax.swing.JButton();
+        estadisticas = new javax.swing.JButton();
 
         region1.setPreferredSize(new java.awt.Dimension(560, 560));
 
@@ -107,6 +109,14 @@ public class CombatePanel extends javax.swing.JPanel {
             }
         });
 
+        estadisticas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        estadisticas.setText("VER ESTADÍSTICAS");
+        estadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadisticasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
         backgroundPanel1Layout.setHorizontalGroup(
@@ -123,7 +133,8 @@ public class CombatePanel extends javax.swing.JPanel {
                                 .addComponent(turn25Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(nextUnidadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(automaticButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(turn10Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(turn10Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(estadisticas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -138,7 +149,9 @@ public class CombatePanel extends javax.swing.JPanel {
                     .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
+                        .addGap(19, 19, 19)
+                        .addComponent(estadisticas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(automaticButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(turn10Button)
@@ -178,7 +191,8 @@ public class CombatePanel extends javax.swing.JPanel {
 
     private void turn25ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turn25ButtonActionPerformed
         for(int i=0;i<25;i++)
-            Controlador.getInstance().combateActual.nextTurn();
+            if(Controlador.getInstance().combateActual.combateEnEjecuccion())
+                            Controlador.getInstance().combateActual.nextTurn();
         
         drawMap();
     }//GEN-LAST:event_turn25ButtonActionPerformed
@@ -192,24 +206,43 @@ public class CombatePanel extends javax.swing.JPanel {
             }
         }
                 , 0, 1330);
-        automaticButton.setEnabled(false);
-        turn25Button.setEnabled(false);
-        turn10Button.setEnabled(false);
-        nextUnidadButton.setEnabled(false);
-        nextTurnButton.setEnabled(false);
+        setAllButtons(false);
     }//GEN-LAST:event_automaticButtonActionPerformed
 
     private void turn10ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turn10ButtonActionPerformed
         for(int i=0;i<10;i++)
-            Controlador.getInstance().combateActual.nextTurn();
+            if(Controlador.getInstance().combateActual.combateEnEjecuccion())
+                Controlador.getInstance().combateActual.nextTurn();
         
         drawMap();
     }//GEN-LAST:event_turn10ButtonActionPerformed
 
+    private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
+        vj.setPanel(new EstadisticasPanel(this.vj));
+    }//GEN-LAST:event_estadisticasActionPerformed
+
+    public void setAllButtons(boolean bool){
+        automaticButton.setEnabled(bool);
+        turn25Button.setEnabled(bool);
+        turn10Button.setEnabled(bool);
+        nextUnidadButton.setEnabled(bool);
+        nextTurnButton.setEnabled(bool);
+    }
+    
+    public void cancelarTimmer(){
+        T.cancel();
+    }
+    
     void iniciaCombate(){
         Controlador.getInstance().combateActual.panel = this;
         Controlador.getInstance().combateActual.iniciaCombate();
         drawMap();
+    }
+    
+    public void activarEstadisticas(){
+        setAllButtons(false);
+        this.estadisticas.setVisible(true);
+        this.estadisticas.setEnabled(true);
     }
     
     public void insertarInfo(String info){
@@ -224,6 +257,7 @@ public class CombatePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton automaticButton;
     private GUI.BackgroundPanel backgroundPanel1;
+    private javax.swing.JButton estadisticas;
     private javax.swing.JTextArea infoPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton nextTurnButton;

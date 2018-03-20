@@ -40,8 +40,7 @@ public class ProductorUnidadesA {
             if(this.getVida() < 1){
                   Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita fuerte y devuelve \n"
                           + (int)(danio*0.5) + " a " + atacante.getNombre() + " antes de morir");
-                atacante.modVidaActual(-((int)(danio*0.5)));
-            }
+                Controlador.getInstance().apHerirUnidad(this, atacante, ((int)(danio*0.5)));            }
         }
 
         @Override

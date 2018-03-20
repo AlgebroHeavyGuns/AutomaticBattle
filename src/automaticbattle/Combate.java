@@ -28,6 +28,7 @@ public final class Combate {
     private Tablero tablero;
     
     public CombatePanel panel;
+    public Estadisticas estadisticas;
     
     public Combate(String nombre, ArrayList<Unidad> uno, ArrayList<Unidad> dos, Tablero tablero){
         this.nombre = nombre;
@@ -52,18 +53,19 @@ public final class Combate {
     public void iniciaCombate(){
         for(Unidad U:equipoDos)
             U.fijaActual();
-        for(Unidad U:equipoUno){
+        for(Unidad U:equipoUno)
             U.fijaActual();
+        this.estadisticas = new Estadisticas(equipoUno, equipoDos);
+        for(Unidad U:equipoUno)
             U.efectoInicioEnfrentamiento();
-        }
         for(Unidad U:equipoDos)
             U.efectoInicioEnfrentamiento();
         rellenaCola();
     }
     
-    public void nextTurn(){
+public void nextTurn(){
         Unidad unidad = colaTurno.remove(0);
-        
+
 
         if(equipoUno.contains(unidad)){
             aliadas=equipoUno;
@@ -72,27 +74,35 @@ public final class Combate {
             aliadas=equipoDos;
             enemigas=equipoUno;
         }
-        
+
         unidad.efectoTurnoPropio();
         for(Unidad U:aliadas)
             if(U != unidad)
                 U.efectoTurnoUnidadAliada(unidad);
         for(Unidad U:enemigas)
             U.efectoTurnoUnidadEnemiga(unidad);
-        
+
         decisionIA.Seleccion decision = unidad.getIAAsociada().tomarDecision(unidad);
-        
+
         if(!Controlador.getInstance().comprobarAccion(unidad,decision)){
             System.err.println("Accion no permitida " + unidad.getNombre() + " " + decision.toString());
             decision.decision=Accion.IDLE;
         }
-        
+
         activarEfectosDecision(unidad,decision);
         realizarAccion(unidad, decision);
         colaTurno.add(unidad);
         comprobarMuertos();
+        if(!combateEnEjecuccion()){
+            this.panel.cancelarTimmer();
+            this.panel.activarEstadisticas();
+        }
     }
     
+    public boolean combateEnEjecuccion(){
+        return !(equipoUno.isEmpty() || equipoDos.isEmpty());
+    }
+
     public void activarEfectosDecision(Unidad unidad, decisionIA.Seleccion decision){
         switch(decision.decision){
             case Desplazamiento:
@@ -146,7 +156,7 @@ public final class Combate {
                     int danio = (int)((5*actor.getFuerza()-3*decision.U.getArmadura())/2);
                     danio *= actor.getEfectividadAtaque(decision.U) * actor.getEfectividadArmas(decision.U);
                     if(danio > 0){
-                        decision.U.modVidaActual(-danio);
+                        Controlador.getInstance().apHerirUnidad(actor, decision.U, danio);
                         panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + "\nrealizó " + danio + " de daño."
                                 + "Vida restante : " + decision.U.getVida());
                         decision.U.efectoUnidadAtacada(actor, tirada, danio);

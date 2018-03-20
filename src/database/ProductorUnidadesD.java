@@ -52,7 +52,7 @@ public class ProductorUnidadesD {
             heal *= 0.125;
             if(heal > 0){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + heal + " puntos de salud.");
-                this.modVidaActual(heal);
+                Controlador.getInstance().apCurarUnidad(this, heal);
             }
         }
 
@@ -90,7 +90,7 @@ public class ProductorUnidadesD {
                 int vida = (int)(this.getFuerza()*(Math.random()*0.31+0.25));
                 Controlador.getInstance().combateActual.panel.insertarInfo(
                         this.getNombre() + " curó  a " + U.getNombre() + " " + vida + " puntos de salud.");
-                U.modVidaActual(vida);
+                Controlador.getInstance().apCurarUnidad(U, vida);
             }
         }
         
@@ -103,7 +103,7 @@ public class ProductorUnidadesD {
                 vida = (int)((this.getArmadura()+this.getBlindaje())*0.67);
             if(vida > 0){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + vida + " de salud.");
-                this.modVidaActual(vida);
+                Controlador.getInstance().apCurarUnidad(this, vida);
             }
         }
         
@@ -131,7 +131,7 @@ public class ProductorUnidadesD {
                 int dano = (int)(objetivo.getVida()*0.1 + 0.5*(this.getFuerza()+this.getIntelecto()));
                 if(tirada<0.25){
                     Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
-                    objetivo.modVidaActual(-dano);
+                    Controlador.getInstance().apHerirUnidad(this, objetivo, dano);
                 }
             }else if(tirada < 0.3){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " bajó la armadura de " + objetivo.getNombre()

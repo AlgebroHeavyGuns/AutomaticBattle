@@ -131,6 +131,17 @@ public class Controlador {
         return unidades;
     }
     
+    
+    public void apHerirUnidad(Unidad actor, Unidad victima, int dano){
+        victima.modVidaActual(-dano);
+        combateActual.estadisticas.haHeridoUnidad(actor, victima, dano);
+    }
+    
+    public void apCurarUnidad(Unidad actor, int cura){
+        actor.modVidaActual(cura);
+        combateActual.estadisticas.curadoUnidad(actor, cura);
+    }
+    
     public static Controlador getInstance() {
         return ControladorHolder.INSTANCE;
     }
