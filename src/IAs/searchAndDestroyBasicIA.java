@@ -37,7 +37,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
     }
 
     
-    /*
+    
     Seleccion calcularMovimiento(Unidad U) {
         Seleccion accion = new Seleccion();
         accion.decision = Accion.Desplazamiento;
@@ -54,7 +54,8 @@ public class searchAndDestroyBasicIA extends BasicIA{
             primeroMasCercano.ref = U;
             enemigas.sort(primeroMasCercano);
             Unidad enemigo = enemigas.get(0);
-            ArrayList<Pair<Integer,Integer> > ruta = calculaRuta(U, U.getDistanciaMovimiento()+1, enemigo.getPosX(), enemigo.getPosY());
+            ArrayList<Pair<Integer,Integer> > ruta = calculaRuta(U, enemigo.getPosX(), enemigo.getPosY(),
+                    U.getVisibilidad());
             if(ruta.isEmpty()){
                 System.out.println("No puedes llegar de " + U.getPosX() + "," + U.getPosY() +
                         " a " + enemigo.getPosX() + "," + enemigo.getPosY());
@@ -76,18 +77,53 @@ public class searchAndDestroyBasicIA extends BasicIA{
         return accion;  
     }
 
+   
     
-    private ArrayList<Pair<Integer, Integer> > calculaRuta(Unidad usuario, int pasos, int objX, int objY){
-        ArrayList<Pair<Integer,Integer> > ruta = new ArrayList<>();
-        ArrayList<Pair<Integer,Integer> > opciones = new ArrayList<>();
-        opciones.add(new Pair<>(1,0));  opciones.add(new Pair<>(-1,0));
-        opciones.add(new Pair<>(0,1));  opciones.add(new Pair<>(0,-1));
-
-        
+   private ArrayList<Pair<Integer, Integer> > calculaRuta(Unidad usuario, int objX, int objY, int maximaDistancia){
+        ArrayList<Pair<Integer, Integer> > ruta = new ArrayList<>();
+        ArrayList<Pair<Integer, Integer> > camino = new ArrayList<>();
+        int posX = usuario.getPosX(), posY= usuario.getPosY();
+        siguienteNodo(posX-1,posY, camino, ruta, objX, objY, maximaDistancia);
+        siguienteNodo(posX+1,posY, camino, ruta, objX, objY, maximaDistancia);
+        siguienteNodo(posX,posY-1, camino, ruta, objX, objY, maximaDistancia);
+        siguienteNodo(posX,posY+1, camino, ruta, objX, objY, maximaDistancia);
         return ruta;
+   } 
+    
+    
+    private boolean siguienteNodo(int posX, int posY, ArrayList<Pair<Integer,Integer> > camino,
+            ArrayList<Pair<Integer,Integer> > solucion, int objX, int objY, int maximo){
+        if(!Controlador.getInstance().posicionValidaNoOcupada(posX, posY))
+            return false;
+        if(camino.size() > maximo || (!solucion.isEmpty() && camino.size()>solucion.size()))
+            return false;
+        
+        camino.add(new Pair<>(posX,posY));
+        if(Controlador.getInstance().calculaDistancia(posX, posY, objX, objY)==1){
+            if(solucion.isEmpty() || camino.size()<solucion.size()){
+                solucion.clear();
+                solucion.addAll(camino);
+                camino.remove(camino.size()-1);
+                return true;
+            }
+            camino.remove(camino.size()-1);
+            return false;
+        }
+        //System.out.println("Arriba");
+        siguienteNodo(posX-1,posY, camino, solucion, objX, objY, maximo);
+        //System.out.println("Abajo");
+        siguienteNodo(posX+1,posY, camino, solucion, objX, objY, maximo);
+        //System.out.println("Izquierda");
+        siguienteNodo(posX,posY-1, camino, solucion, objX, objY, maximo);
+        //System.out.println("Derecha");
+        siguienteNodo(posX,posY+1, camino, solucion, objX, objY, maximo);
+        
+
+        camino.remove(camino.size()-1);
+        return false;
     }
     
-    
+ /*   
     private ArrayList<Pair<Integer, Integer> > calculaRutaN(Unidad usuario, int pasos, int objX, int objY){
         ArrayList<Pair<Integer,Integer> > ruta = new ArrayList<>();
         Comparator C = new Comparator<Pair<Integer,Integer> > () {
@@ -123,7 +159,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
     }
     
     
-*/  
+*//*  
     @Override
     Seleccion calcularMovimiento(Unidad U) {
         Seleccion eleccion = new Seleccion();
