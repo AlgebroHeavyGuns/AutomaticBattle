@@ -28,7 +28,7 @@ public class ProductorUnidadesA {
     static class JabaliInutil extends Unidad{
         public JabaliInutil() {
             super("Jabalí furioso", "WildBoar1.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
-                    new Atributos(210,120,5,3,9,3,5,4,5));          
+                    new Atributos(200,120,5,3,8,3,5,4,5));          
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -36,10 +36,11 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            int cura = (int)(tirada*this.getFuerza()*(0.5+tirada));
-            Controlador.getInstance().apCurarUnidad(objetivo, cura);
-            Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + cura + " de salud.");
-            
+            int cura = (int)(this.getFuerza()*tirada);
+            if(cura>0){
+                Controlador.getInstance().apCurarUnidad(this, cura);
+                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + cura + " de salud.");
+            }
         }
         
 
@@ -47,8 +48,8 @@ public class ProductorUnidadesA {
         public void efectoUnidadAtacada(Unidad atacante, double prob, int danio) {
             if(this.getVida() < 1){
                   Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita fuerte y devuelve \n"
-                          + (int)(danio*0.6) + " a " + atacante.getNombre() + " antes de morir");
-                Controlador.getInstance().apHerirUnidad(this, atacante, ((int)(danio*0.6)));            }
+                          + (int)(danio*0.65) + " a " + atacante.getNombre() + " antes de morir");
+                Controlador.getInstance().apHerirUnidad(this, atacante, ((int)(danio*0.65)));            }
         }
 
         @Override

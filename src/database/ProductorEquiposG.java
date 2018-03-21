@@ -35,7 +35,7 @@ public class ProductorEquiposG {
     static class HachaGranLeñador extends Arma{
 
         public HachaGranLeñador() {
-            super("Hacha de Gran leñador", "axe.png", 450, 1, new Atributos(45,15,8,0,1,0,-1,0,1), TipoArma.HachaDosManos, Elemento.Comun, 1);
+            super("Hacha de Gran leñador", "axe.png", 425, 1, new Atributos(20,10,9,0,1,0,-1,0,1), TipoArma.HachaDosManos, Elemento.Comun, 1);
         }
         
         @Override
@@ -53,7 +53,7 @@ public class ProductorEquiposG {
     static class HachaDeBatalla extends Arma{
 
         public HachaDeBatalla() {
-            super("Hacha de batalla", "axe2.png", 250, 3, new Atributos(30,15,5,0,0,0,0,0,0), TipoArma.HachaUnaMano, Elemento.Comun, 1);
+            super("Hacha de batalla", "axe2.png", 250, 3, new Atributos(15,10,6,0,0,0,0,0,0), TipoArma.HachaUnaMano, Elemento.Comun, 1);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaDosManos,0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.HachaDosManos,0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Maza,0.9));
@@ -77,10 +77,10 @@ public class ProductorEquiposG {
     static class ArcoMediano extends Arma{
 
         public ArcoMediano() {
-            super("Arco mediano", "arco2.png", 475, 1, new Atributos(25,20,6,1,1,0,2,0,1), TipoArma.Arco, Elemento.Comun, 6);
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.2));
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Aberracion, 1.25));
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Gigante, 1.4));
+            super("Arco mediano", "arco2.png", 450, 1, new Atributos(15,25,7,1,1,0,2,0,1), TipoArma.Arco, Elemento.Comun, 6);
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.25));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Aberracion, 1.3));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Gigante, 1.5));
             this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Dragon, 0.9));
         }
         

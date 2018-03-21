@@ -24,7 +24,7 @@ public class ProductorCombate {
         switch(i){
             case 0:
                 return new CombateInicial();
-            case 99:
+            case 11:
                 return new CombateDragon();
         
         }
@@ -36,7 +36,7 @@ public class ProductorCombate {
         switch(i){
             case 0:
                 return CombateInicial.PRESUPUESTO;
-            case 99:
+            case 11:
                 return CombateDragon.PRESUPUESTO;
         
         }

@@ -32,7 +32,7 @@ public class ProductorEquiposI {
     static class CorazaDeHierroParaBestias extends Equipable{
 
         public CorazaDeHierroParaBestias() {
-            super("Cor. de hierro para Bestias", "chest3.png", 550, 0, new Atributos(100,0,1,0,5,3,0,0,0), TipoEquipo.Coraza);
+            super("Cor. de hierro para Bestias", "chest3.png", 600, 0, new Atributos(120,0,1,0,6,3,0,0,0), TipoEquipo.Coraza);
             this.getResistenciaElemento().add(new EfectividadElemento(Elemento.Comun, 0.95));
         }
 
