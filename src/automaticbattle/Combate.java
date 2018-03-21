@@ -63,7 +63,7 @@ public final class Combate {
         rellenaCola();
     }
     
-public void nextTurn(){
+    public void nextTurn(){
         Unidad unidad = colaTurno.remove(0);
 
 
@@ -75,24 +75,29 @@ public void nextTurn(){
             enemigas=equipoUno;
         }
 
-        unidad.efectoTurnoPropio();
-        for(Unidad U:aliadas)
-            if(U != unidad)
-                U.efectoTurnoUnidadAliada(unidad);
-        for(Unidad U:enemigas)
-            U.efectoTurnoUnidadEnemiga(unidad);
-
-        decisionIA.Seleccion decision = unidad.getIAAsociada().tomarDecision(unidad);
-
-        if(!Controlador.getInstance().comprobarAccion(unidad,decision)){
-            System.err.println("Accion no permitida " + unidad.getNombre() + " " + decision.toString());
-            decision.decision=Accion.IDLE;
-        }
-
-        activarEfectosDecision(unidad,decision);
-        realizarAccion(unidad, decision);
-        colaTurno.add(unidad);
         comprobarMuertos();
+        if(unidad.getVida() > 0){
+            unidad.efectoTurnoPropio();
+            for(Unidad U:aliadas)
+                if(U != unidad)
+                    U.efectoTurnoUnidadAliada(unidad);
+            for(Unidad U:enemigas)
+                U.efectoTurnoUnidadEnemiga(unidad);
+
+            decisionIA.Seleccion decision = unidad.getIAAsociada().tomarDecision(unidad);
+
+            if(!Controlador.getInstance().comprobarAccion(unidad,decision)){
+                System.err.println("Accion no permitida " + unidad.getNombre() + " " + decision.toString());
+                decision.decision=Accion.IDLE;
+            }
+
+            activarEfectosDecision(unidad,decision);
+            realizarAccion(unidad, decision);
+            colaTurno.add(unidad);
+            comprobarMuertos();
+        }
+        
+
         if(!combateEnEjecuccion()){
             this.panel.cancelarTimmer();
             this.panel.activarEstadisticas();
@@ -142,18 +147,11 @@ public void nextTurn(){
                 panel.insertarInfo(actor.getNombre() + " desplazado.");
                 break;
             case Atacar:
-                /*
-                    2  ->  0.92     
-                    4  ->  0.74     
-                    6  ->  0.56     
-                    8  ->  0.38     
-                    10 ->  0.2  
-                */
-                double probAcierto = 1.1-0.09*decision.U.getAgilidad();
+                double probAcierto = 0.075*decision.U.getAgilidad()-0.05;
                 double tirada = Math.random();
                 actor.efectoAtacar(decision.U,tirada,tirada<=probAcierto);
-                if(tirada<=probAcierto){
-                    int danio = (int)((5*actor.getFuerza()-3*decision.U.getArmadura())/2);
+                if(tirada>=probAcierto){
+                    int danio = (int)((3*actor.getFuerza()-2*decision.U.getArmadura()));
                     danio *= actor.getEfectividadAtaque(decision.U) * actor.getEfectividadArmas(decision.U);
                     if(danio > 0){
                         Controlador.getInstance().apHerirUnidad(actor, decision.U, danio);

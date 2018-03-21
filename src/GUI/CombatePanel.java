@@ -184,7 +184,8 @@ public class CombatePanel extends javax.swing.JPanel {
     private void nextUnidadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextUnidadButtonActionPerformed
         Unidad actual = Controlador.getInstance().combateActual.getColaTurno().get(0);
         Controlador.getInstance().combateActual.nextTurn();
-        while(Controlador.getInstance().combateActual.getColaTurno().get(0) != actual)
+        while(Controlador.getInstance().combateActual.getColaTurno().get(0) != actual &&
+                Controlador.getInstance().combateActual.combateEnEjecuccion())
             Controlador.getInstance().combateActual.nextTurn();
         drawMap();
     }//GEN-LAST:event_nextUnidadButtonActionPerformed

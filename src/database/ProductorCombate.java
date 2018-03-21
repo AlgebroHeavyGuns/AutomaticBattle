@@ -24,6 +24,8 @@ public class ProductorCombate {
         switch(i){
             case 0:
                 return new CombateInicial();
+            case 1:
+                return new CombateInicial2();
             case 11:
                 return new CombateDragon();
         
@@ -36,6 +38,8 @@ public class ProductorCombate {
         switch(i){
             case 0:
                 return CombateInicial.PRESUPUESTO;
+            case 1:
+                return CombateInicial2.PRESUPUESTO;
             case 11:
                 return CombateDragon.PRESUPUESTO;
         
@@ -44,21 +48,37 @@ public class ProductorCombate {
         return -1;
     }
     
+    public int getPersonajesMaximosNivel(int i){
+        switch(i){
+            case 0:
+                return CombateInicial.PERSONAJES;
+            case 1:
+                return CombateInicial2.PERSONAJES;
+            case 11:
+                return CombateDragon.PERSONAJES;
+        
+        }
+        
+        return -1;
+    }
+    
+    
     
     private static class CombateInicial extends CombateInfo{
     
-        static final int PRESUPUESTO= 1100;
+        static final int PRESUPUESTO= 1200;
+        static final int PERSONAJES = 2;
         
         public CombateInicial() {
             super("Primera toma de contacto", 9, 9);
             Unidad U = Database.getInstance().getUnidadEnemiga("Jabalí furioso");
             U.apellido("1");
             enemigos.add(U);
-            T.insertaUnidad(U, 5, 3);
+            T.insertaUnidad(U, 6, 2);
             U = U.getCopia();
             U.apellido("2");
             enemigos.add(U);
-            T.insertaUnidad(U, 5, 5);
+            T.insertaUnidad(U, 6, 6);
         }
     
     
@@ -66,9 +86,26 @@ public class ProductorCombate {
     }
     
     
+    private static class CombateInicial2 extends CombateInfo{
+    
+        static final int PRESUPUESTO= 1000;
+        static final int PERSONAJES = 2;
+        
+        public CombateInicial2() {
+            super("Segunda toma de contacto", 9, 9);
+            Unidad U = Database.getInstance().getUnidadEnemiga("Oso rabioso");
+            enemigos.add(U);
+            T.insertaUnidad(U, 7, 4);
+        }
+    
+    
+    
+    }
+    
     private static class CombateDragon extends CombateInfo{
     
         static final int PRESUPUESTO= 6000;
+        static final int PERSONAJES = 5;
         
         public CombateDragon() {
             super("Dragon desencadenado", 12, 9);
@@ -115,8 +152,8 @@ public class ProductorCombate {
         public void setNombre(String nombre) {
             this.nombre = nombre;
         }
-        
-        
+
+          
     }
     
     public static ProductorCombate getInstance() {

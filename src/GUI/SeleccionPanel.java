@@ -26,6 +26,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
     VentanaDeJuego vj;
     int combateNivel;
     int maxPresupuesto;
+    int maxPersonajes;
     int gastoActual=0;
     int indiceEquipo=0;
     int indicePersonaje=0;
@@ -35,14 +36,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         this.vj = VJ;
         combateNivel = Controlador.getInstance().indiceCombate;
         maxPresupuesto = ProductorCombate.getInstance().getPresupuestocombateNivel(combateNivel);
+        maxPersonajes = ProductorCombate.getInstance().getPersonajesMaximosNivel(combateNivel);
         backgroundPanel1.setBackground("src/Images/backgrounds/dark1.jpg");
         DefaultCaret caret = (DefaultCaret)infoPanel.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         setBotones();
-        /*
-        this.region1.generateZone();
-        this.region1.setMap(Controlador.getInstance().combateActual.getTablero());
-        */
     }
 
     ArrayList<Unidad> aliadas = new ArrayList<>();
@@ -501,8 +499,14 @@ public class SeleccionPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_menosPersonajesActionPerformed
     
     private void seleccionarPersonaje(String S){
-        aliadas.add(Database.getInstance().getUnidadAliada(S));
-        insertarInfo("Seleccionado " + S + "\nTotal unidades : " + aliadas.size());
+        if(aliadas.size() < this.maxPersonajes){
+            aliadas.add(Database.getInstance().getUnidadAliada(S));
+            insertarInfo("Seleccionado " + S + 
+                    //"\nTotal unidades : " + aliadas.size() +
+                    "\nAhora puedes seleccionar su equipamiento.");
+        }
+        else
+            insertarInfo("No pueden participar más personajes.");
     }
 
     

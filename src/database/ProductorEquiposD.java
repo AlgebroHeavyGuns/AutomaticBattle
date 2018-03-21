@@ -36,7 +36,7 @@ public class ProductorEquiposD {
     static class CorazaDeBatalla extends Equipable{
 
         public CorazaDeBatalla() {
-            super("Coraza de batalla", "chest.png", 275, 0, new Atributos(65,0,0,0,5,3,0,0,0), TipoEquipo.Coraza);
+            super("Coraza de batalla", "chest.png", 325, 0, new Atributos(75,0,0,0,6,3,0,0,0), TipoEquipo.Coraza);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaUnaMano, 0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaDosManos, 0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Daga, 0.9));
@@ -58,7 +58,7 @@ public class ProductorEquiposD {
     static class CorazaDeGuerra extends Equipable{
 
         public CorazaDeGuerra() {
-            super("Coraza de guerra", "chest2.png", 550, 1, new Atributos(125,0,1,0,7,4,-1,0,0), TipoEquipo.Coraza);
+            super("Coraza de guerra", "chest2.png", 550, 1, new Atributos(140,0,1,0,9,5,-1,0,0), TipoEquipo.Coraza);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaUnaMano, 0.85));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaDosManos, 0.85));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Daga, 0.85));
@@ -82,7 +82,7 @@ public class ProductorEquiposD {
     static class CascoDeBatalla extends Equipable{
 
         public CascoDeBatalla() {
-            super("Casco de batalla", "casco.png", 200, 0, new Atributos(40,0,0,0,2,1,0,0,1), TipoEquipo.Casco);
+            super("Casco de batalla", "casco.png", 200, 0, new Atributos(40,0,0,0,3,2,0,0,1), TipoEquipo.Casco);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Arco, 0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.BallestaGrande, 0.95));
         }
@@ -103,7 +103,7 @@ public class ProductorEquiposD {
     static class GuantesDeBatalla extends Equipable{
 
         public GuantesDeBatalla() {
-            super("Guantes de batalla", "guante.png", 125, 0, new Atributos(20,10,1,0,1,1,0,0,0), TipoEquipo.Guantes);
+            super("Guantes de batalla", "guante.png", 150, 0, new Atributos(30,10,1,0,2,1,0,0,0), TipoEquipo.Guantes);
         }
         
         @Override

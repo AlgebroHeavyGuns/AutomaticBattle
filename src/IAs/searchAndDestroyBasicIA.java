@@ -46,28 +46,35 @@ public class searchAndDestroyBasicIA extends BasicIA{
         
         int vX=0,vY=0;
         
-        ArrayList<Unidad> enemigas = Controlador.getInstance().getEnemigasEnVision(U); 
+        ArrayList<Unidad> enemigas = Controlador.getInstance().getEnemigasEnVision(U);
+        ArrayList<Pair<Integer,Integer> > ruta = new ArrayList<>();
         if(enemigas.isEmpty()){
-            accion.decision = Accion.IDLE;
             System.out.println("No hay enemigos en rango (" + U.getNombre() + ")");
+            ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2,
+                    Controlador.getInstance().combateActual.getTablero().getTAM_Y()/2);
+            if(ruta.isEmpty()){
+                ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2+1,
+                                    Controlador.getInstance().combateActual.getTablero().getTAM_Y()/2);
+            }
         }else{
             primeroMasCercano.ref = U;
             enemigas.sort(primeroMasCercano);
-            Unidad enemigo = enemigas.get(0);
-            ArrayList<Pair<Integer,Integer> > ruta = calculaRuta(U, enemigo.getPosX(), enemigo.getPosY());
-            if(ruta.isEmpty()){
-                System.out.println("No puedes llegar de " + U.getPosX() + "," + U.getPosY() +
-                        " a " + enemigo.getPosX() + "," + enemigo.getPosY());
-                accion.decision = Accion.IDLE;
-            }else{
-                Pair<Integer,Integer> variacion;
-                int mov = Math.min(U.getDistanciaMovimiento(), ruta.size());
-                variacion = ruta.get(mov-1);
-                vX += variacion.getKey()-U.getPosX();
-                vY += variacion.getValue()-U.getPosY();
-                
+            Unidad enemigo;
+            for(int i=0;i<enemigas.size() && ruta.isEmpty();i++){
+                enemigo = enemigas.get(i);
+                ruta = calculaRuta(U, enemigo.getPosX(), enemigo.getPosY());
             }
-            
+        }
+        if(ruta.isEmpty()){
+            System.out.println("No hay ruta");
+            accion.decision = Accion.IDLE;
+        }else{
+            Pair<Integer,Integer> variacion;
+            int mov = Math.min(U.getDistanciaMovimiento(), ruta.size());
+            variacion = ruta.get(mov-1);
+            vX += variacion.getKey()-U.getPosX();
+            vY += variacion.getValue()-U.getPosY();
+                
         }
         
         accion.movX=vX;

@@ -41,11 +41,27 @@ public class EstadisticasPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         subPanel2 = new GUI.subPanelEstadisticas();
         subPanel1 = new GUI.subPanelEstadisticas();
+        jugarButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("ESTADÍSTICAS");
+
+        jugarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letters/jugar100.png"))); // NOI18N
+        jugarButton.setBorderPainted(false);
+        jugarButton.setContentAreaFilled(false);
+        jugarButton.setFocusPainted(false);
+        jugarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jugarButtonActionPerformed(evt);
+            }
+        });
+        jugarButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jugarButtonKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -54,23 +70,29 @@ public class EstadisticasPanel extends javax.swing.JPanel {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jugarButton))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addComponent(subPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94)
-                        .addComponent(subPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(196, Short.MAX_VALUE))
+                        .addGap(144, 144, 144)
+                        .addComponent(subPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 136, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(135, 135, 135)
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jugarButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(subPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(subPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addGap(145, 145, 145))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -85,6 +107,19 @@ public class EstadisticasPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
+        Controlador.getInstance().indiceCombate++;
+        vj.setPanel(new SeleccionPanel(this.vj));
+    }//GEN-LAST:event_jugarButtonActionPerformed
+
+    private void jugarButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jugarButtonKeyPressed
+        char c = evt.getKeyChar();
+        if(c >= '0' && c <= '9')
+            Controlador.getInstance().setIndiceCombate(c-'0');
+        else if(c=='k' ||c=='K')
+            Controlador.getInstance().setIndiceCombate(Controlador.getInstance().indiceCombate+10);
+    }//GEN-LAST:event_jugarButtonKeyPressed
+
     
     private void fijarInformacion(){
         subPanel1.setEstadisticas(E,1);
@@ -94,6 +129,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.BackgroundPanel backgroundPanel1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jugarButton;
     private GUI.subPanelEstadisticas subPanel1;
     private GUI.subPanelEstadisticas subPanel2;
     // End of variables declaration//GEN-END:variables

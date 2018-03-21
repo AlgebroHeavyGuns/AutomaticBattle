@@ -64,7 +64,7 @@ public class ProductorUnidadesD {
                         + "Y aumentó su fuerza un 20% (" + this.getFuerza() + " a " + this.modFuerza((int)(this.getFuerza()*0.2)) + ")");
             else
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se concentra,y aumenta \n"
-                        + "en 1 su visibilidad (" + this.getVisibilidad() + " a " + this.modVisibilidad(1) + ")");
+                        + "en 1 su velocidad (" + this.getVelocidad() + " a " + this.modVelocidad(1) + ")");
             
         }
         
