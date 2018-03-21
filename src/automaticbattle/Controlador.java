@@ -21,13 +21,18 @@ public class Controlador {
     public static String ICON_ADDRES = "/icons/icon180.png";
     
     public Combate combateActual = null;
+    public int indiceCombate = 0;
     
     
     private Controlador() {
     }
     
-    public void iniciaCombate(int i, ArrayList<Unidad> aliadas){
-        CombateInfo CI = ProductorCombate.getInstance().getCombateNivel(i);
+    public void setIndiceCombate(int ic){
+            indiceCombate = ic;
+    }
+    
+    public void iniciaCombate(ArrayList<Unidad> aliadas){
+        CombateInfo CI = ProductorCombate.getInstance().getCombateNivel(indiceCombate);
         int col = 0, fil=0;
         int incr;
         if(aliadas.size()<4){

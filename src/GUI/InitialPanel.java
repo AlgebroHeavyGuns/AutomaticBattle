@@ -47,6 +47,11 @@ public class InitialPanel extends javax.swing.JPanel {
                 jugarButtonActionPerformed(evt);
             }
         });
+        jugarButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jugarButtonKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -78,8 +83,16 @@ public class InitialPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
-        vj.setPanel(new SeleccionPanel(this.vj, 0));
+        vj.setPanel(new SeleccionPanel(this.vj));
     }//GEN-LAST:event_jugarButtonActionPerformed
+
+    private void jugarButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jugarButtonKeyPressed
+        char c = evt.getKeyChar();
+        if(c >= '0' && c <= '9')
+            Controlador.getInstance().setIndiceCombate(c-'0');
+        else if(c=='k' ||c=='K')
+            Controlador.getInstance().setIndiceCombate(Controlador.getInstance().indiceCombate+10);
+    }//GEN-LAST:event_jugarButtonKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

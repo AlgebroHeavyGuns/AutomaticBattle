@@ -30,11 +30,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
     int indiceEquipo=0;
     int indicePersonaje=0;
     
-    public SeleccionPanel(VentanaDeJuego VJ, int nivel) {
+    public SeleccionPanel(VentanaDeJuego VJ) {
         initComponents();
         this.vj = VJ;
-        combateNivel = nivel;
-        maxPresupuesto = ProductorCombate.getInstance().getPresupuestocombateNivel(nivel);
+        combateNivel = Controlador.getInstance().indiceCombate;
+        maxPresupuesto = ProductorCombate.getInstance().getPresupuestocombateNivel(combateNivel);
         backgroundPanel1.setBackground("src/Images/backgrounds/dark1.jpg");
         DefaultCaret caret = (DefaultCaret)infoPanel.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -436,7 +436,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(!aliadas.isEmpty()){
-            Controlador.getInstance().iniciaCombate(combateNivel, aliadas);
+            Controlador.getInstance().iniciaCombate(aliadas);
 
             vj.setPanel(new CombatePanel(vj));
         }else
