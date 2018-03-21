@@ -41,8 +41,8 @@ public class searchAndDestroyBasicIA extends BasicIA{
     Seleccion calcularMovimiento(Unidad U) {
         Seleccion accion = new Seleccion();
         accion.decision = Accion.Desplazamiento;
-
-        
+        if(U.getDistanciaMovimiento()==0)
+            return null;
         
         int vX=0,vY=0;
         
