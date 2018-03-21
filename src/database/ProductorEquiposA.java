@@ -32,7 +32,7 @@ public class ProductorEquiposA {
     
     static class AlmaDeDragon extends Arma{
         public AlmaDeDragon(){
-            super("Alma de dragón", "Dragon4.png", 0, -1, new Atributos(200,150,8,5,4,4,0,0,0), TipoArma.BallestaGrande, Elemento.Fuego, 3);
+            super("Alma de dragón", "Dragon4.png", 0, -1, new Atributos(200,150,8,5,3,3,0,0,0), TipoArma.BallestaGrande, Elemento.Fuego, 4);
             this.getResistenciaElemento().add(new EfectividadElemento(Elemento.Fuego, 0.5));
             this.getResistenciaElemento().add(new EfectividadElemento(Elemento.Agua, 1.2));
             this.getResistenciaElemento().add(new EfectividadElemento(Elemento.Luz, 1.1));
