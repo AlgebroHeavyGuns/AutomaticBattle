@@ -120,7 +120,7 @@ public class ProductorUnidadesD {
         
         public TeodoraCazadora() {
             super("Teodora Cazadora", "CharacterNightElfFemale.png", "Un susurro, una lágrima, un cadaver.", TipoUnidad.Elfo, 
-                    new Atributos(110,110,10,4,3,3,6,4,7));
+                    new Atributos(120,120,9,4,3,3,7,4,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -150,8 +150,8 @@ public class ProductorUnidadesD {
     static class AuroraLuchadora extends Unidad{
         
         public AuroraLuchadora() {
-            super("Aurora luchadora", "CharacterDwarfFemale.png", "Un susurro, una lágrima, un cadaver.", TipoUnidad.Humano, 
-                    new Atributos(220,80,6,4,9,8,4,3,5));
+            super("Aurora Luchadora", "CharacterDwarfFemale.png", "Quiero ver al que dijo que la guerra\nes cosa de hombres.", TipoUnidad.Humano, 
+                    new Atributos(230,80,6,4,9,8,4,3,5));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 

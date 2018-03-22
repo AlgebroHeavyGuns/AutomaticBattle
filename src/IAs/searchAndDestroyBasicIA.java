@@ -25,20 +25,22 @@ public class searchAndDestroyBasicIA extends BasicIA{
     
     @Override
     Seleccion calcularAtaque(Unidad U) {
+        primeroMasCercano.ref = U;
+        return priorizaCalcularAtaque(U, primeroMasCercano);
+    }
+
+    Seleccion priorizaCalcularAtaque(Unidad U, Comparator C){
         Seleccion eleccion = new Seleccion();
         eleccion.decision = Accion.Atacar;
         ArrayList<Unidad> enemigas = Controlador.getInstance().getEnemigasEnAlcance(U);
         if(!enemigas.isEmpty()){
-            primeroMasCercano.ref = U;
-            enemigas.sort(primeroMasDebilitado);
+            enemigas.sort(C);
             eleccion.U = enemigas.get(0);
         }
         else
             return null;
         return eleccion;
     }
-
-    
     
     Seleccion calcularMovimiento(Unidad U) {
         Seleccion accion = new Seleccion();

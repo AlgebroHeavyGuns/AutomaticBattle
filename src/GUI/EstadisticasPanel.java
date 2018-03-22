@@ -7,6 +7,7 @@ package GUI;
 
 import automaticbattle.Controlador;
 import automaticbattle.Estadisticas;
+import automaticbattle.Unidad;
 
 /**
  *
@@ -42,6 +43,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
         subPanel2 = new GUI.subPanelEstadisticas();
         subPanel1 = new GUI.subPanelEstadisticas();
         jugarButton = new javax.swing.JButton();
+        consejo = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 255));
@@ -63,6 +65,11 @@ public class EstadisticasPanel extends javax.swing.JPanel {
             }
         });
 
+        consejo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        consejo.setForeground(new java.awt.Color(255, 153, 153));
+        consejo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        consejo.setText("MENSAJE DE CONSEJO -");
+
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
         backgroundPanel1Layout.setHorizontalGroup(
@@ -71,8 +78,12 @@ public class EstadisticasPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(consejo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addComponent(jugarButton))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addComponent(subPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,7 +97,10 @@ public class EstadisticasPanel extends javax.swing.JPanel {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(37, 37, 37)
+                        .addComponent(consejo))
                     .addComponent(jugarButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -124,10 +138,28 @@ public class EstadisticasPanel extends javax.swing.JPanel {
     private void fijarInformacion(){
         subPanel1.setEstadisticas(E,1);
         subPanel2.setEstadisticas(E,2);
+        this.consejo.setText(getConsejo());
     }
 
+    
+    private String getConsejo(){
+        if(E.getDanoEfectuadoUno() < E.getDanoEfectuadoDos())
+            return "Equiparte un arma puede aumentar el daño que inflinges.";
+        for(Unidad U : Controlador.getInstance().combateActual.getEquipoUno())
+            if(U.getArmadura() < 6+Controlador.getInstance().indiceCombate && U.getVida() < 100)
+                return "Usar equipamiento defensivo dará más aguante a tus unidades.";
+        int alcance=1;
+        for(Unidad U : Controlador.getInstance().combateActual.getEquipoUno())
+            alcance = Math.max(alcance, U.getAlcance());
+        if(alcance < 2)
+            return "El uso de armas de largo alcance te permite atacar a distancia.";
+        if(E.getCuracionUno() < 1)
+            return "Personajes como el paladín, aportan curación a tus unidades.";
+        return "Intenta equilibrar a tus personajes para obtener un mejor resultado.";
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.BackgroundPanel backgroundPanel1;
+    private javax.swing.JLabel consejo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jugarButton;
     private GUI.subPanelEstadisticas subPanel1;
