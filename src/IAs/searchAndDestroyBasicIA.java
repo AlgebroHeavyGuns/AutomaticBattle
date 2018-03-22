@@ -20,6 +20,8 @@ import javafx.util.Pair;
 public class searchAndDestroyBasicIA extends BasicIA{
 
     static PrimeroMasCercano primeroMasCercano = new PrimeroMasCercano();
+    static PrimeroMasDebil primeroMasDebil = new PrimeroMasDebil();
+    static PrimeroMasDebilitado primeroMasDebilitado = new PrimeroMasDebilitado();
     
     @Override
     Seleccion calcularAtaque(Unidad U) {
@@ -28,7 +30,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
         ArrayList<Unidad> enemigas = Controlador.getInstance().getEnemigasEnAlcance(U);
         if(!enemigas.isEmpty()){
             primeroMasCercano.ref = U;
-            enemigas.sort(primeroMasCercano);
+            enemigas.sort(primeroMasDebilitado);
             eleccion.U = enemigas.get(0);
         }
         else
@@ -58,7 +60,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
             }
         }else{
             primeroMasCercano.ref = U;
-            enemigas.sort(primeroMasCercano);
+            enemigas.sort(primeroMasDebil);
             Unidad enemigo;
             for(int i=0;i<enemigas.size() && ruta.isEmpty();i++){
                 enemigo = enemigas.get(i);
@@ -278,7 +280,32 @@ public class searchAndDestroyBasicIA extends BasicIA{
             return Controlador.getInstance().calculaDistancia(o1.getPosX(), o1.getPosY(), ref.getPosX(), ref.getPosY()) 
                     - Controlador.getInstance().calculaDistancia(o2.getPosX(), o2.getPosY(), ref.getPosX(), ref.getPosY());
         }
+    }
 
-}
+    static class PrimeroMasDebilitado implements Comparator<Unidad>{
+        
+        public Unidad ref=null;
+        
+        ///NEGATIVO SI EL PRIMER ARGUMENTO ES MENOR QUE EL SEGUNDO 
+        @Override
+        public int compare(Unidad o1, Unidad o2) {
+            return o1.getVida() - o2.getVida();
+        }
+    }
+    
+    static class PrimeroMasDebil implements Comparator<Unidad>{
+        
+        public Unidad ref=null;
+        
+        ///NEGATIVO SI EL PRIMER ARGUMENTO ES MENOR QUE EL SEGUNDO 
+        @Override
+        public int compare(Unidad o1, Unidad o2) {
+            return f(o1) - f(o2);
+        }
+        
+        public int f(Unidad U){
+            return U.getVida()+U.getArmadura()*5+U.getBlindaje()*2+U.getFuerza()*15;
+        }
+    }
     
 }

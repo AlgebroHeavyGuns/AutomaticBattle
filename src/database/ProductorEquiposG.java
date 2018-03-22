@@ -27,6 +27,7 @@ public class ProductorEquiposG {
         ArrayList<Equipable> lista = new ArrayList<>();
         lista.add(new HachaGranLeñador());
         lista.add(new HachaDeBatalla());
+        lista.add(new EspadaLigera());
         lista.add(new ArcoMediano());
         return lista;
     }
@@ -73,6 +74,26 @@ public class ProductorEquiposG {
     
     }
     
+    static class EspadaLigera extends Arma{
+
+        public EspadaLigera() {
+            super("Espada ligera", "espada2.png", 225, 3, new Atributos(40,20,5,0,0,0,1,0,0), TipoArma.EspadaUnaMano, Elemento.Comun, 1);
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia,1.1));
+        }
+
+        @Override
+        public boolean puedeEquiparseA(TipoUnidad TU) {
+            return TU!=TipoUnidad.Bestia;
+        }
+
+        
+        
+        @Override
+        public Equipable getCopia() {
+            return new EspadaLigera();
+        }
+    
+    }
     
     static class ArcoMediano extends Arma{
 

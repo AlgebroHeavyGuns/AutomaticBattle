@@ -7,15 +7,16 @@ package GUI;
 
 //import java.awt.Font;
 
+import Micelaneous.Accion;
 import automaticbattle.Tablero;
 import automaticbattle.Unidad;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.Border;
 
 /**
  *
@@ -81,12 +82,24 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
         for(int i=0;i<nRows;i++)
             for(int j=0;j<nColumns;j++){
                 U = mapa.ocupada(i+varX, j+varY);
-                if(U==null)
+                if(U==null){
                     buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/icons/suelo.jpg")));
-                else    
+                    buttons[i][j].setBorder(null);
+                }else{    
                     buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/units/"+ U.getImagen())));
+                    buttons[i][j].setBorder(getBorderUnidad(U.getSidoAtacada()));
+                }
             }
                 
+    }
+    
+    
+    private Border getBorderUnidad(boolean atacada){
+        
+        if(atacada)
+            return new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 2, true);
+        
+        return null;
     }
     
     private void pressed (JButton B){

@@ -434,9 +434,13 @@ public class SeleccionPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(!aliadas.isEmpty()){
-            Controlador.getInstance().iniciaCombate(aliadas);
+            if(aliadas.size() >=  ProductorCombate.getInstance().getPersonajesMinimosNivel(this.combateNivel)){
 
-            vj.setPanel(new CombatePanel(vj));
+                Controlador.getInstance().iniciaCombate(aliadas);
+                vj.setPanel(new CombatePanel(vj));
+            }else
+                this.insertarInfo("Se requieren al menos " + 
+                        ProductorCombate.getInstance().getPersonajesMinimosNivel(this.combateNivel) + " personajes");  
         }else
             this.insertarInfo("No dispones de ninguna unidad");
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -554,7 +558,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
         personaje4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/" + personajes.get(indicePersonaje+3).getImagen())));
         ArrayList<Equipable> equipos = Database.getInstance().getEquipos(999);
         int tam = equipos.size();
-        if(indiceEquipo > tam-4)
+        if(indiceEquipo > tam-5)
             indiceEquipo=tam-5;
         if(indiceEquipo < 0)
             indiceEquipo=0;

@@ -40,7 +40,7 @@ public class ProductorUnidadesD {
         
         public PatricioGuerrero() {
             super("Patricio Guerrero", "CharacterHumanMale.png", "Todo o nada.", TipoUnidad.Humano, 
-                    new Atributos(170,90,11,5,6,5,4,3,6));
+                    new Atributos(165,90,10,5,6,5,4,3,6));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -49,7 +49,7 @@ public class ProductorUnidadesD {
         @Override
         public void efectoTurnoPropio(){
             int heal = vidaInicial - this.getVida();
-            heal *= 0.125;
+            heal *= 0.15;
             if(heal > 0){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + heal + " puntos de salud.");
                 Controlador.getInstance().apCurarUnidad(this, heal);
@@ -61,10 +61,10 @@ public class ProductorUnidadesD {
             vidaInicial=this.getVida();
             if(Math.random()>0.4)
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita : " + "\"¡Todo o nada!\"\n"
-                        + "Y aumentó su fuerza un 20% (" + this.getFuerza() + " a " + this.modFuerza((int)(this.getFuerza()*0.2)) + ")");
+                        + "Y aumentó su fuerza un 15% (" + this.getFuerza() + " a " + this.modFuerza((int)(this.getFuerza()*0.15)) + ")");
             else
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se concentra,y aumenta \n"
-                        + "en 1 su velocidad (" + this.getVelocidad() + " a " + this.modVelocidad(1) + ")");
+                        + "en 2 su velocidad (" + this.getVelocidad() + " a " + this.modVelocidad(2) + ")");
             
         }
         
@@ -79,7 +79,7 @@ public class ProductorUnidadesD {
         
         public JoaquinPaladin() {
             super("Joaquín Paladín", "CharacterBloodElfMale.png", "No sin mi equipo.", TipoUnidad.Humano, 
-                    new Atributos(200,120,9,6,5,5,5,3,7));
+                    new Atributos(200,120,8,6,5,5,5,3,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -87,7 +87,7 @@ public class ProductorUnidadesD {
         @Override
         public void efectoTurnoUnidadAliada(Unidad U) {
             if(U!=this){
-                int vida = (int)(this.getFuerza()*(Math.random()*0.31+0.25));
+                int vida = (int)(this.getFuerza()*(Math.random()*0.21+0.4));
                 Controlador.getInstance().combateActual.panel.insertarInfo(
                         this.getNombre() + " curó  a " + U.getNombre() + " " + vida + " puntos de salud.");
                 Controlador.getInstance().apCurarUnidad(U, vida);
@@ -97,10 +97,10 @@ public class ProductorUnidadesD {
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             int vida = 0;
-            if(acierto && tirada<0.25)
-                vida = (int)((objetivo.getVida()*0.125));
+            if(tirada>0.85)
+                vida = (int)((objetivo.getVida()*0.1));
             else if(!acierto)
-                vida = (int)((this.getArmadura()+this.getBlindaje())*0.67);
+                vida = (int)((this.getArmadura()+this.getBlindaje())*0.6);
             if(vida > 0){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + vida + " de salud.");
                 Controlador.getInstance().apCurarUnidad(this, vida);

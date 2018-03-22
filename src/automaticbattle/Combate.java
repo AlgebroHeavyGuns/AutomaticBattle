@@ -140,6 +140,7 @@ public final class Combate {
     
     
     private void realizarAccion(Unidad actor, decisionIA.Seleccion decision){
+        actor.setAtacada(false);
         switch(decision.decision){
             case Desplazamiento:
                 tablero.swap(actor, decision.movX, decision.movY);
@@ -150,6 +151,7 @@ public final class Combate {
                 double probAcierto = 0.075*decision.U.getAgilidad()-0.05;
                 double tirada = Math.random();
                 actor.efectoAtacar(decision.U,tirada,tirada<=probAcierto);
+                decision.U.setAtacada(true);
                 if(tirada>=probAcierto){
                     int danio = (int)((3*actor.getFuerza()-2*decision.U.getArmadura()));
                     danio *= actor.getEfectividadAtaque(decision.U) * actor.getEfectividadArmas(decision.U);

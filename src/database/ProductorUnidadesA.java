@@ -22,6 +22,8 @@ public class ProductorUnidadesA {
         ArrayList<Unidad> lista = new ArrayList<>();
         lista.add(new JabaliFurioso());
         lista.add(new OsoRabioso());
+        lista.add(new SaurioAstado());
+        lista.add(new SaurioCrestado());
         lista.add(new EspirituDragon());
         return lista;
     }
@@ -29,7 +31,7 @@ public class ProductorUnidadesA {
     static class JabaliFurioso extends Unidad{
         public JabaliFurioso() {
             super("Jabalí furioso", "WildBoar1.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
-                    new Atributos(170,120,5,3,7,3,5,4,5));          
+                    new Atributos(150,120,5,3,7,3,5,4,5));          
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -68,7 +70,7 @@ public class ProductorUnidadesA {
         
         public OsoRabioso() {
             super("Oso rabioso", "Beast4.png", "Es hermoso.", TipoUnidad.Bestia, 
-                    new Atributos(400,120,8,4,10,7,4,4,7));             
+                    new Atributos(360,130,8,4,9,6,4,4,7));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -76,10 +78,10 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            if(rabia<30)    
-                rabia+= (int)(tirada*5);
+            if(rabia<24)    
+                rabia+= (int)(tirada*7);
             else
-                rabia=30;
+                rabia=24;
             Controlador.getInstance().apHerirUnidad(this, objetivo, rabia);
             Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " hace " + rabia + " de daño adicional a " + objetivo.getNombre());
         }
@@ -94,7 +96,7 @@ public class ProductorUnidadesA {
     static class EspirituDragon extends Unidad{
         public EspirituDragon() {
             super("Espíritu dragón", "Dragon4.png", "Si lo ves, ya es tarde.", TipoUnidad.Dragon, 
-                    new Atributos(550,400,20,15,10,10,8,2,8));
+                    new Atributos(650,400,25,15,15,15,8,2,9));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Alma de dragón"));
         }
@@ -110,6 +112,42 @@ public class ProductorUnidadesA {
             return new EspirituDragon();
         }
     
+    }
+
+    static class SaurioAstado extends Unidad{
+
+        
+        public SaurioAstado() {
+            super("Saurio astado", "dino3.png", "Que no asado...", TipoUnidad.Reptil, 
+                    new Atributos(380,100,9,7,9,6,6,4,5));             
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+            this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
+        }
+        
+
+        @Override
+        public Unidad getCopia() {
+            return new SaurioAstado();
+        }
+    
     }    
     
+    static class SaurioCrestado extends Unidad{
+
+        
+        public SaurioCrestado() {
+            super("Saurio crestado", "dino4.png", "Que no asado...", TipoUnidad.Reptil, 
+                    new Atributos(320,120,8,7,8,6,6,4,6));             
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+            this.equipar(Database.getInstance().getEquipo("Glándula venenosa"));
+            this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
+        }
+        
+
+        @Override
+        public Unidad getCopia() {
+            return new SaurioCrestado();
+        }
+    
+    }    
 }

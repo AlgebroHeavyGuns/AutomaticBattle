@@ -6,12 +6,10 @@
 package database;
 
 import Micelaneous.Atributos;
-import Micelaneous.EfectividadArma;
 import Micelaneous.EfectividadElemento;
 import Micelaneous.EfectividadTipo;
 import Micelaneous.Elemento;
 import Micelaneous.TipoArma;
-import Micelaneous.TipoEquipo;
 import Micelaneous.TipoUnidad;
 import automaticbattle.Arma;
 import automaticbattle.Equipable;
@@ -27,6 +25,7 @@ public class ProductorEquiposA {
         ArrayList<Equipable> lista = new ArrayList<>();
         lista.add(new AlmaDeDragon());
         lista.add(new DentaduraFuerte());
+        lista.add(new GlandulaVenenosa());
         return lista;
     }
     
@@ -51,7 +50,7 @@ public class ProductorEquiposA {
     static class DentaduraFuerte extends Arma{
 
         public DentaduraFuerte() {
-            super("Dentadura fuerte", "dientes.png", 0, -1, new Atributos(50,10,9,0,0,0,0,0,0), TipoArma.Daga, Elemento.Comun, 1);
+            super("Dentadura fuerte", "dientes.png", 0, -1, new Atributos(50,10,6,0,0,0,0,0,0), TipoArma.Daga, Elemento.Comun, 1);
             this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Humano, 1.15));
             this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Elfo, 1.2));
             this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.2));
@@ -62,8 +61,24 @@ public class ProductorEquiposA {
             return new DentaduraFuerte();
         }
     
-    
     }
 
     
+    
+        static class GlandulaVenenosa extends Arma{
+
+        public GlandulaVenenosa() {
+            super("Glándula venenosa", "glandulavenenosa.png", 0, -1, new Atributos(20,10,3,0,1,1,1,0,0), TipoArma.Daga, Elemento.Comun, 3);
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Humano, 1.1));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Elfo, 1.1));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.1));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Gigante, 1.1));
+        }
+
+        @Override
+        public Equipable getCopia() {
+            return new GlandulaVenenosa();
+        }
+    
+    }
 }

@@ -5,6 +5,7 @@
  */
 package automaticbattle;
 
+import Micelaneous.Accion;
 import Micelaneous.decisionIA;
 import Micelaneous.Atributos;
 import Micelaneous.Elemento;
@@ -29,6 +30,7 @@ public abstract class Unidad {
     private decisionIA IAAsociada;
     private int posX=-1;
     private int posY=-1;
+    private boolean atacada = false;
 
     public Unidad(String nombre, String imagen, String descripcion, TipoUnidad tipo, Atributos base) {
         this.nombre = nombre;
@@ -152,6 +154,16 @@ public abstract class Unidad {
     public int getDistanciaMovimiento(){
         return 1;
     }
+
+    public boolean getSidoAtacada() {
+        return atacada;
+    }
+
+    public void setAtacada(boolean atacada) {
+        this.atacada = atacada;
+    }
+    
+    
     
     public void renombrar(String nombre){
         this.nombre = nombre;
@@ -297,7 +309,8 @@ public abstract class Unidad {
         for(Equipable equipado: equipo)
             if(equipado instanceof Arma){
                  if(((Arma)equipado).getTipoArma()==TipoArma.EspadaUnaMano ||
-                     ((Arma)equipado).getTipoArma()==TipoArma.HachaUnaMano || ((Arma)equipado).getTipoArma()==TipoArma.Daga)
+                     ((Arma)equipado).getTipoArma()==TipoArma.HachaUnaMano || 
+                     ((Arma)equipado).getTipoArma()==TipoArma.Daga)
                      return null;
                  else
                      return equipado;
