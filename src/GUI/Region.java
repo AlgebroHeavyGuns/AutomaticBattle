@@ -8,6 +8,7 @@ package GUI;
 //import java.awt.Font;
 
 import Micelaneous.Accion;
+import automaticbattle.Controlador;
 import automaticbattle.Tablero;
 import automaticbattle.Unidad;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
     
     final int nRows = 9;
     final int nColumns = 9;
+    int varX=0, varY=0;
     
     JButton[][] buttons;
     Tablero mapa;
@@ -68,7 +70,7 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
     
     public void drawMap(int xpiv,int ypiv){
         Unidad U;
-        int varX=0, varY=0;
+
         if(xpiv >= nRows/2)
             if(xpiv >= mapa.getTAM_X()-nRows/2)
                 varX = mapa.getTAM_X()-nRows;
@@ -87,24 +89,35 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
                     buttons[i][j].setBorder(null);
                 }else{    
                     buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/units/"+ U.getImagen())));
-                    buttons[i][j].setBorder(getBorderUnidad(U.getSidoAtacada()));
+                    buttons[i][j].setBorder(getBorderUnidad(U));
                 }
             }
                 
     }
     
     
-    private Border getBorderUnidad(boolean atacada){
-        
-        if(atacada)
-            return new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 2, true);
-        
-        return null;
+    private Border getBorderUnidad(Unidad U){
+        boolean atacada = U.getSidoAtacada();
+        if(atacada){
+            if(U.getVida()<100)
+                return new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 2, true);
+            else if(U.getVida() < 250)
+                return new javax.swing.border.LineBorder(new java.awt.Color(200, 120, 120), 2, true);
+            else
+                return new javax.swing.border.LineBorder(new java.awt.Color(80, 220, 80), 2, true);
+        }else
+            return null;
     }
     
     private void pressed (JButton B){
         int num = Integer.parseInt(B.getName() );
-        /*System.out.println("\nPressed : " + num);
+        Unidad U = U = mapa.ocupada(num/nColumns+varX,  num%nColumns+varY);
+        
+        if(U!=null)
+            Controlador.getInstance().combateActual.panel.insertarInfo(U.getNombre()+ " (" + U.getVida() + ")");
+        else
+            Controlador.getInstance().combateActual.panel.insertarInfo("Casilla vacía.");
+        /*
         System.out.println("Coordenadas : [" + num/nColumnas + "][" + num%nColumnas + "]"););
         *//*
         int r = num/nColumns, c = num%nColumns;
