@@ -91,7 +91,7 @@ public class ProductorCombate {
         static final int MINPERSONAJES = 2;
         
         public CombateInicial() {
-            super("Primera toma de contacto", 9, 9);
+            super("Primera toma de contacto", "mapa.png",  9, 9);
             Unidad U = Database.getInstance().getUnidadEnemiga("Jabalí furioso");
             U.apellido("1");
             enemigos.add(U);
@@ -112,7 +112,7 @@ public class ProductorCombate {
         static final int MINPERSONAJES = 2;
         
         public CombateInicial2() {
-            super("Segunda toma de contacto", 9, 9);
+            super("Segunda toma de contacto", "mapa.png",  9, 9);
             Unidad U = Database.getInstance().getUnidadEnemiga("Oso rabioso");
             enemigos.add(U);
             T.insertaUnidad(U, 7, 4);
@@ -127,7 +127,7 @@ public class ProductorCombate {
         static final int MINPERSONAJES = 2;
         
         public IncursionSelva1() {
-            super("Incursión en la Selva 1", 9, 9);
+            super("Incursión en la Selva 1", "selva1.png", 9, 9);
             Unidad U = Database.getInstance().getUnidadEnemiga("Saurio astado");
             enemigos.add(U);
             T.insertaUnidad(U, 8, 3);
@@ -145,7 +145,7 @@ public class ProductorCombate {
         static final int MINPERSONAJES = 3;
         
         public CombateDragon() {
-            super("Dragon desencadenado", 12, 9);
+            super("Dragon desencadenado", "libro.png", 12, 9);
             Unidad U = Database.getInstance().getUnidadEnemiga("Espíritu dragón");
             enemigos.add(U);
             T.insertaUnidad(U, 11, 4);
@@ -159,10 +159,12 @@ public class ProductorCombate {
         public ArrayList<Unidad> enemigos;
         public Tablero T;
         public String nombre;
+        public String imagen;
         
-        public CombateInfo(String nombre, int tamx, int tamy){
+        public CombateInfo(String nombre, String imagen, int tamx, int tamy){
             T=new Tablero(tamx, tamy);
             this.nombre = nombre;
+            this.imagen = imagen;
             this.enemigos = new ArrayList<>();
         }
 
@@ -188,6 +190,14 @@ public class ProductorCombate {
 
         public void setNombre(String nombre) {
             this.nombre = nombre;
+        }
+
+        public String getImagen() {
+            return imagen;
+        }
+
+        public void setImagen(String imagen) {
+            this.imagen = imagen;
         }
 
           

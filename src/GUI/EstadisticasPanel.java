@@ -124,7 +124,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
 
     private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
         
-        vj.setPanel(new SeleccionPanel(this.vj));
+        vj.setPanel(new CampanaPanel(this.vj));
     }//GEN-LAST:event_jugarButtonActionPerformed
 
     private void jugarButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jugarButtonKeyPressed

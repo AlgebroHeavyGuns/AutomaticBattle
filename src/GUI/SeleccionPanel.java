@@ -31,7 +31,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
     int indiceEquipo=0;
     int indicePersonaje=0;
     
-    public SeleccionPanel(VentanaDeJuego VJ) {
+    public SeleccionPanel(VentanaDeJuego VJ, String nombre) {
         initComponents();
         this.vj = VJ;
         combateNivel = Controlador.getInstance().indiceCombate;
@@ -42,7 +42,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         setBotones();
         
-        vj.setTitle(Controlador.GAME_NAME + " - Selección de equipo");
+        vj.setTitle(Controlador.GAME_NAME + " - " + nombre);
     }
 
     ArrayList<Unidad> aliadas = new ArrayList<>();
