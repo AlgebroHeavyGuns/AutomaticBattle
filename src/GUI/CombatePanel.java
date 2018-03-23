@@ -22,7 +22,8 @@ public class CombatePanel extends javax.swing.JPanel {
      */
     
     VentanaDeJuego vj;
-    Timer T = new Timer();
+    Timer T;
+    boolean automatic=false;
     
     public CombatePanel(VentanaDeJuego VJ) {
         initComponents();
@@ -34,7 +35,7 @@ public class CombatePanel extends javax.swing.JPanel {
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         this.estadisticas.setVisible(false);
         iniciaCombate();
-
+        vj.setTitle(Controlador.GAME_NAME + " - " + Controlador.getInstance().combateActual.getNombre());
     }
 
     /**
@@ -56,6 +57,8 @@ public class CombatePanel extends javax.swing.JPanel {
         automaticButton = new javax.swing.JButton();
         turn10Button = new javax.swing.JButton();
         estadisticas = new javax.swing.JButton();
+        time = new javax.swing.JTextField();
+        salud = new javax.swing.JButton();
 
         region1.setPreferredSize(new java.awt.Dimension(560, 560));
 
@@ -117,6 +120,20 @@ public class CombatePanel extends javax.swing.JPanel {
             }
         });
 
+        time.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        time.setForeground(new java.awt.Color(51, 255, 204));
+        time.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        time.setText("1500");
+
+        salud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons/corazon (2).png"))); // NOI18N
+        salud.setBorderPainted(false);
+        salud.setContentAreaFilled(false);
+        salud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saludActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
         backgroundPanel1Layout.setHorizontalGroup(
@@ -124,44 +141,54 @@ public class CombatePanel extends javax.swing.JPanel {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
+                        .addGap(5, 5, 5)
                         .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(nextTurnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(turn25Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nextUnidadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(automaticButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(turn10Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(estadisticas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(20, Short.MAX_VALUE))
-                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(salud, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(turn25Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nextUnidadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(automaticButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(turn10Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(estadisticas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 42, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
                         .addComponent(estadisticas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(automaticButton)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(automaticButton)
+                            .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(turn10Button)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(turn10Button)
+                            .addComponent(salud, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(turn25Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(nextUnidadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nextTurnButton)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(11, 11, 11)
+                        .addComponent(nextTurnButton))
+                    .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -199,15 +226,33 @@ public class CombatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_turn25ButtonActionPerformed
 
     private void automaticButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticButtonActionPerformed
-        T.scheduleAtFixedRate(new TimerTask(){
-            @Override
-            public void run() {
-                Controlador.getInstance().combateActual.nextTurn();
-                drawMap();
+
+        if(automatic){
+            T.cancel();
+        }else{  
+            T = new Timer();
+            int clock;
+            try{
+                clock = Integer.parseInt(time.getText());
+                if(clock < 10)
+                    clock=10;
+                else if(clock > 5000)
+                    clock=5000;
+            }catch(NumberFormatException E){
+                clock=1000;
             }
+            time.setText("" + clock);
+            T.scheduleAtFixedRate(new TimerTask(){
+                @Override
+                public void run() {
+                    Controlador.getInstance().combateActual.nextTurn();
+                    drawMap();
+                }
+            }
+                    , 0, clock);
         }
-                , 0, 1330);
-        setAllButtons(false);
+        automatic=!automatic;
+        setAllButtons(!automatic, true);
     }//GEN-LAST:event_automaticButtonActionPerformed
 
     private void turn10ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turn10ButtonActionPerformed
@@ -222,8 +267,18 @@ public class CombatePanel extends javax.swing.JPanel {
         vj.setPanel(new EstadisticasPanel(this.vj));
     }//GEN-LAST:event_estadisticasActionPerformed
 
-    public void setAllButtons(boolean bool){
-        automaticButton.setEnabled(bool);
+    private void saludActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saludActionPerformed
+        String S = "";
+        for(Unidad U: Controlador.getInstance().combateActual.getEquipoUno())
+            S += U.getNombre()+ " (" + U.getVida() + ")\n";
+        for(Unidad U: Controlador.getInstance().combateActual.getEquipoDos())
+            S += U.getNombre()+ " (" + U.getVida() + ")\n";
+        this.insertarInfo(S);
+    }//GEN-LAST:event_saludActionPerformed
+
+    public void setAllButtons(boolean bool, boolean autom){
+        automaticButton.setEnabled(autom);
+        time.setEnabled(bool);
         turn25Button.setEnabled(bool);
         turn10Button.setEnabled(bool);
         nextUnidadButton.setEnabled(bool);
@@ -231,7 +286,8 @@ public class CombatePanel extends javax.swing.JPanel {
     }
     
     public void cancelarTimmer(){
-        T.cancel();
+        if(T!=null)
+            T.cancel();
     }
     
     void iniciaCombate(){
@@ -241,12 +297,12 @@ public class CombatePanel extends javax.swing.JPanel {
     }
     
     public void activarEstadisticas(){
-        setAllButtons(false);
+        setAllButtons(false, false);
         this.estadisticas.setVisible(true);
         this.estadisticas.setEnabled(true);
     }
     
-    public void insertarInfo(String info){
+    public synchronized void insertarInfo(String info){
         this.infoPanel.setText(infoPanel.getText()+info+"\n");
     }
     
@@ -264,6 +320,8 @@ public class CombatePanel extends javax.swing.JPanel {
     private javax.swing.JButton nextTurnButton;
     private javax.swing.JButton nextUnidadButton;
     private GUI.Region region1;
+    private javax.swing.JButton salud;
+    private javax.swing.JTextField time;
     private javax.swing.JButton turn10Button;
     private javax.swing.JButton turn25Button;
     // End of variables declaration//GEN-END:variables

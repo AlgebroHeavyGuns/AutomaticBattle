@@ -26,6 +26,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
         vj = VJ;
         E= Controlador.getInstance().combateActual.estadisticas;
                 backgroundPanel1.setBackground("src/Images/backgrounds/dark1.jpg");
+        Controlador.getInstance().indiceCombate++;
         fijarInformacion();
     }
 
@@ -65,7 +66,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
             }
         });
 
-        consejo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        consejo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         consejo.setForeground(new java.awt.Color(255, 153, 153));
         consejo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         consejo.setText("MENSAJE DE CONSEJO -");
@@ -122,7 +123,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarButtonActionPerformed
-        Controlador.getInstance().indiceCombate++;
+        
         vj.setPanel(new SeleccionPanel(this.vj));
     }//GEN-LAST:event_jugarButtonActionPerformed
 
@@ -146,7 +147,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
         if(E.getDanoEfectuadoUno() < E.getDanoEfectuadoDos())
             return "Equiparte un arma puede aumentar el daño que inflinges.";
         for(Unidad U : Controlador.getInstance().combateActual.getEquipoUno())
-            if(U.getArmadura() < 6+Controlador.getInstance().indiceCombate && U.getVida() < 100)
+            if(U.getArmadura() < 6+Controlador.getInstance().indiceCombate && U.getVida() < 150)
                 return "Usar equipamiento defensivo dará más aguante a tus unidades.";
         int alcance=1;
         for(Unidad U : Controlador.getInstance().combateActual.getEquipoUno())

@@ -41,6 +41,8 @@ public class SeleccionPanel extends javax.swing.JPanel {
         DefaultCaret caret = (DefaultCaret)infoPanel.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         setBotones();
+        
+        vj.setTitle(Controlador.GAME_NAME + " - Selección de equipo");
     }
 
     ArrayList<Unidad> aliadas = new ArrayList<>();
@@ -504,7 +506,18 @@ public class SeleccionPanel extends javax.swing.JPanel {
     
     private void seleccionarPersonaje(String S){
         if(aliadas.size() < this.maxPersonajes){
-            aliadas.add(Database.getInstance().getUnidadAliada(S));
+            int i=0;
+            for(Unidad U : aliadas){
+                if(U.getNombre().contains(S)){
+                    i++;
+                    if(U.getNombre().equals(S))
+                        U.apellido(""+i);
+                }
+            }
+            Unidad pers = Database.getInstance().getUnidadAliada(S);
+            if(i>0)
+                pers.apellido(""+(i+1));
+            aliadas.add(pers);
             insertarInfo("Seleccionado " + S + 
                     //"\nTotal unidades : " + aliadas.size() +
                     "\nAhora puedes seleccionar su equipamiento.");
