@@ -7,8 +7,8 @@ package GUI;
 
 //import java.awt.Font;
 
-import Micelaneous.Accion;
 import automaticbattle.Controlador;
+import automaticbattle.Escenografia;
 import automaticbattle.Tablero;
 import automaticbattle.Unidad;
 import java.awt.event.ActionEvent;
@@ -87,9 +87,14 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
                 if(U==null){
                     buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/icons/suelo.jpg")));
                     buttons[i][j].setBorder(null);
-                }else{    
-                    buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/units/"+ U.getImagen())));
-                    buttons[i][j].setBorder(getBorderUnidad(U));
+                }else{
+                    if(U instanceof Escenografia){
+                        buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/escenas/"+ U.getImagen())));
+                        buttons[i][j].setBorder(null);
+                    }else{
+                        buttons[i][j].setIcon(new ImageIcon(getClass().getResource("/Images/units/"+ U.getImagen())));
+                        buttons[i][j].setBorder(getBorderUnidad(U));
+                    }
                 }
             }
                 
@@ -113,9 +118,13 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
         int num = Integer.parseInt(B.getName() );
         Unidad U = U = mapa.ocupada(num/nColumns+varX,  num%nColumns+varY);
         
-        if(U!=null)
-            Controlador.getInstance().combateActual.panel.insertarInfo(U.getNombre()+ " (" + U.getVida() + ")");
-        else
+        if(U!=null){
+            if(U instanceof Escenografia)
+                Controlador.getInstance().combateActual.panel.insertarInfo("Obstáculo " + U.getNombre());
+            else
+                Controlador.getInstance().combateActual.panel.insertarInfo(U.getNombre()+ " (" + U.getVida() + "  " +
+                        U.getFuerza() + "|" + U.getArmadura() + " )");
+        }else
             Controlador.getInstance().combateActual.panel.insertarInfo("Casilla vacía.");
         /*
         System.out.println("Coordenadas : [" + num/nColumnas + "][" + num%nColumnas + "]"););

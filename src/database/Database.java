@@ -9,6 +9,7 @@ import automaticbattle.Equipable;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
 import Micelaneous.decisionIA;
+import automaticbattle.Escenografia;
 import java.util.Iterator;
 
 /**
@@ -20,14 +21,22 @@ public final class Database {
     private ArrayList<Unidad> unidadesEnemigas;
     private ArrayList<Unidad> unidadesAliadas;
     private ArrayList<Equipable> equipos;
+    private ArrayList<Escenografia> escenografias;
     
     
     private Database() {
     }
     
     public void inicia(){
+        iniciaEscenografias();
         iniciaEquipos();
         iniciaUnidades();
+        
+    }
+    
+    private void iniciaEscenografias(){
+        escenografias = new ArrayList<>();
+        escenografias.addAll(ProductorEscenografias.getEscenografias());
     }
     
     private void iniciaEquipos(){
@@ -69,6 +78,8 @@ public final class Database {
         return getUnidad(nombre, unidadesAliadas);
     }
     
+    
+    
     public Equipable getEquipo(String nombre){
         Equipable E= null;
         Iterator<Equipable> it = equipos.iterator();
@@ -79,6 +90,20 @@ public final class Database {
         }
         if(encontrado)
             return E.getCopia();
+        else
+            return null;
+    }
+    
+    public Escenografia getEscenografia(String nombre){
+        Escenografia E= null;
+        Iterator<Escenografia> it = escenografias.iterator();
+        boolean encontrado = false;
+        while(it.hasNext()&& !encontrado){
+            E=it.next();
+            encontrado= E.getNombre().equalsIgnoreCase(nombre);
+        }
+        if(encontrado)
+            return (Escenografia)E.getCopia();
         else
             return null;
     }

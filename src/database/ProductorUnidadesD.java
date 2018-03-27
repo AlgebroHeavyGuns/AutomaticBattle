@@ -20,8 +20,8 @@ public class ProductorUnidadesD {
     
     static ArrayList<Unidad> getUnidades(){
         ArrayList<Unidad> lista = new ArrayList<>();
-        lista.add(new PatricioGuerrero());
-        lista.add(new JoaquinPaladin());
+        lista.add(new JeroGuerrero());
+        lista.add(new MartinPaladin());
         lista.add(new TeodoraCazadora());
         lista.add(new AuroraLuchadora());
         return lista;
@@ -35,12 +35,12 @@ public class ProductorUnidadesD {
     
     
             
-    static class PatricioGuerrero extends Unidad{
+    static class JeroGuerrero extends Unidad{
         private int vidaInicial;
         
-        public PatricioGuerrero() {
-            super("Patricio Guerrero", "CharacterHumanMale.png", "Todo o nada.", TipoUnidad.Humano, 
-                    new Atributos(165,90,10,5,6,5,4,3,6));
+        public JeroGuerrero() {
+            super("Jero Guerrero", "CharacterHumanMale.png", "Todo o nada.", TipoUnidad.Humano, 
+                    new Atributos(175,90,9,5,5,5,4,3,6));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -49,7 +49,7 @@ public class ProductorUnidadesD {
         @Override
         public void efectoTurnoPropio(){
             int heal = vidaInicial - this.getVida();
-            heal *= 0.15;
+            heal *= 0.2;
             if(heal > 0){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + heal + " puntos de salud.");
                 Controlador.getInstance().apCurarUnidad(this, heal);
@@ -61,7 +61,7 @@ public class ProductorUnidadesD {
             vidaInicial=this.getVida();
             if(Math.random()>0.4)
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita : " + "\"¡Todo o nada!\"\n"
-                        + "Y aumentó su fuerza un 15% (" + this.getFuerza() + " a " + this.modFuerza((int)(this.getFuerza()*0.15)) + ")");
+                        + "Y aumentó su fuerza un 18% (" + this.getFuerza() + " a " + this.modFuerza((int)(this.getFuerza()*0.18)) + ")");
             else
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se concentra,y aumenta \n"
                         + "en 2 su velocidad (" + this.getVelocidad() + " a " + this.modVelocidad(2) + ")");
@@ -70,16 +70,16 @@ public class ProductorUnidadesD {
         
         @Override
         public Unidad getCopia() {
-            return new PatricioGuerrero();
+            return new JeroGuerrero();
         }
     
     }
     
-    static class JoaquinPaladin extends Unidad{
+    static class MartinPaladin extends Unidad{
         
-        public JoaquinPaladin() {
-            super("Joaquín Paladín", "CharacterBloodElfMale.png", "No sin mi equipo.", TipoUnidad.Humano, 
-                    new Atributos(200,120,8,6,5,5,5,3,7));
+        public MartinPaladin() {
+            super("Martín Paladín", "CharacterBloodElfMale.png", "No sin mi equipo.", TipoUnidad.Humano, 
+                    new Atributos(190,120,7,6,5,5,5,3,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -87,7 +87,7 @@ public class ProductorUnidadesD {
         @Override
         public void efectoTurnoUnidadAliada(Unidad U) {
             if(U!=this){
-                int vida = (int)(this.getFuerza()*(Math.random()*0.21+0.4));
+                int vida = (int)(this.getFuerza()*(Math.random()*0.11+0.25));
                 Controlador.getInstance().combateActual.panel.insertarInfo(
                         this.getNombre() + " curó  a " + U.getNombre() + " " + vida + " puntos de salud.");
                 Controlador.getInstance().apCurarUnidad(U, vida);
@@ -97,10 +97,10 @@ public class ProductorUnidadesD {
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             int vida = 0;
-            if(tirada>0.85)
-                vida = (int)((objetivo.getVida()*0.1));
+            if(tirada>0.8)
+                vida = (int)((objetivo.getVida()*0.05));
             else if(!acierto)
-                vida = (int)((this.getArmadura()+this.getBlindaje())*0.6);
+                vida = (int)((this.getArmadura()+this.getBlindaje())*0.35);
             if(vida > 0){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + vida + " de salud.");
                 Controlador.getInstance().apCurarUnidad(this, vida);
@@ -109,7 +109,7 @@ public class ProductorUnidadesD {
         
         @Override
         public Unidad getCopia() {
-            return new JoaquinPaladin();
+            return new MartinPaladin();
         }
     
     }
@@ -120,7 +120,7 @@ public class ProductorUnidadesD {
         
         public TeodoraCazadora() {
             super("Teodora Cazadora", "CharacterNightElfFemale.png", "Un susurro, una lágrima, un cadaver.", TipoUnidad.Elfo, 
-                    new Atributos(120,120,9,4,3,3,7,4,7));
+                    new Atributos(115,120,9,4,3,3,7,4,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -128,8 +128,8 @@ public class ProductorUnidadesD {
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             if(this.getAlcance()>1){
-                int dano = (int)(objetivo.getVida()*0.1 + 0.5*(this.getFuerza()+this.getIntelecto()));
-                if(tirada<0.25){
+                int dano = (int)(objetivo.getVida()*0.1 + 0.2*(this.getFuerza()+this.getIntelecto()));
+                if(tirada<0.35){
                     Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
                     Controlador.getInstance().apHerirUnidad(this, objetivo, dano);
                 }
@@ -151,11 +151,19 @@ public class ProductorUnidadesD {
         
         public AuroraLuchadora() {
             super("Aurora Luchadora", "CharacterDwarfFemale.png", "Quiero ver al que dijo que la guerra\nes cosa de hombres.", TipoUnidad.Humano, 
-                    new Atributos(230,80,6,4,9,8,4,3,5));
+                    new Atributos(240,80,5,4,8,7,4,3,5));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
-        
+
+        @Override
+        public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
+            int dano = (int)(this.getArmadura()*0.5);
+            if(dano > 0){
+                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
+                Controlador.getInstance().apHerirUnidad(this, objetivo, dano);
+            }
+        }
         
         @Override
         public Unidad getCopia() {

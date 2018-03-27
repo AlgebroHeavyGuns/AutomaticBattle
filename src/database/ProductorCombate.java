@@ -6,6 +6,7 @@
 package database;
 
 import automaticbattle.Combate;
+import automaticbattle.Escenografia;
 import automaticbattle.Tablero;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
@@ -28,6 +29,10 @@ public class ProductorCombate {
                 return new CombateInicial2();
             case 2:
                 return new IncursionSelva1();
+            case 3:
+                return new IncursionSelva2();
+            case 4:
+                return new IncursionSelva3();
             case 11:
                 return new CombateDragon();
         
@@ -44,6 +49,10 @@ public class ProductorCombate {
                 return CombateInicial2.PRESUPUESTO;
             case 2:
                 return IncursionSelva1.PRESUPUESTO;
+            case 3:
+                return IncursionSelva2.PRESUPUESTO;
+            case 4:
+                return IncursionSelva3.PRESUPUESTO;
             case 11:
                 return CombateDragon.PRESUPUESTO;
         
@@ -60,6 +69,10 @@ public class ProductorCombate {
                 return CombateInicial2.MAXPERSONAJES;
             case 2:
                 return IncursionSelva1.MAXPERSONAJES;
+            case 3:
+                return IncursionSelva2.MAXPERSONAJES;
+            case 4:
+                return IncursionSelva3.MAXPERSONAJES;
             case 11:
                 return CombateDragon.MAXPERSONAJES;
         
@@ -76,6 +89,10 @@ public class ProductorCombate {
                 return CombateInicial2.MINPERSONAJES;
             case 2:
                 return IncursionSelva1.MINPERSONAJES;
+            case 3:
+                return IncursionSelva2.MINPERSONAJES;
+            case 4:
+                return IncursionSelva3.MINPERSONAJES;                
             case 11:
                 return CombateDragon.MINPERSONAJES;
         
@@ -86,7 +103,7 @@ public class ProductorCombate {
     
     private static class CombateInicial extends CombateInfo{
     
-        static final int PRESUPUESTO= 1300;
+        static final int PRESUPUESTO= 1200;
         static final int MAXPERSONAJES = 2;
         static final int MINPERSONAJES = 2;
         
@@ -100,6 +117,13 @@ public class ProductorCombate {
             U.apellido("2");
             enemigos.add(U);
             T.insertaUnidad(U, 6, 6);
+            U = Database.getInstance().getEscenografia("Árbol simple");
+            T.insertaUnidad(U, 5, 3);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 1);            
+            U = U.getCopia();   T.insertaUnidad(U, 4, 6);
+            U = Database.getInstance().getEscenografia("Roca mediana");
+            T.insertaUnidad(U, 5, 2);
         }
 
     }
@@ -107,7 +131,7 @@ public class ProductorCombate {
     
     private static class CombateInicial2 extends CombateInfo{
     
-        static final int PRESUPUESTO= 1100;
+        static final int PRESUPUESTO= 1000;
         static final int MAXPERSONAJES = 2;
         static final int MINPERSONAJES = 2;
         
@@ -116,6 +140,13 @@ public class ProductorCombate {
             Unidad U = Database.getInstance().getUnidadEnemiga("Oso rabioso");
             enemigos.add(U);
             T.insertaUnidad(U, 7, 4);
+            U = Database.getInstance().getEscenografia("Árbol simple");
+            T.insertaUnidad(U, 5, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 6);
+            U = U.getCopia();   T.insertaUnidad(U, 3, 1);            
+            U = U.getCopia();   T.insertaUnidad(U, 4, 5);
+            U = Database.getInstance().getEscenografia("Roca mediana");
+            T.insertaUnidad(U, 5, 3);
         }
     
     }
@@ -134,6 +165,92 @@ public class ProductorCombate {
             U = Database.getInstance().getUnidadEnemiga("Saurio crestado");
             enemigos.add(U);
             T.insertaUnidad(U, 7, 6);
+            U = Database.getInstance().getEscenografia("Árbol selvático");
+            T.insertaUnidad(U, 2, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 0, 0);
+            U = U.getCopia();   T.insertaUnidad(U, 1, 8);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 3);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 6);
+            U = U.getCopia();   T.insertaUnidad(U, 3, 8);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 1);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 3);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 4);
+            U = U.getCopia();   T.insertaUnidad(U, 5, 6);
+            U = U.getCopia();   T.insertaUnidad(U, 5, 7);
+            U = U.getCopia();   T.insertaUnidad(U, 6, 1);
+            U = U.getCopia();   T.insertaUnidad(U, 6, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 6, 4);
+            U = U.getCopia();   T.insertaUnidad(U, 6, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 7, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 8, 5); 
+            U = U.getCopia();   T.insertaUnidad(U, 8, 7);  
+        }
+    }
+        
+    private static class IncursionSelva2 extends CombateInfo{
+    
+        static final int PRESUPUESTO= 2400;
+        static final int MAXPERSONAJES = 3;
+        static final int MINPERSONAJES = 2;
+        
+        public IncursionSelva2() {
+            super("Incursión en la Selva 2", "selva1.png", 9, 9);
+            Unidad U = Database.getInstance().getUnidadEnemiga("Saurio astado");
+            enemigos.add(U);
+            T.insertaUnidad(U, 8, 3);
+            U = U.getCopia();
+            enemigos.add(U);
+            T.insertaUnidad(U, 7, 4);
+            U = Database.getInstance().getUnidadEnemiga("Saurio crestado");
+            enemigos.add(U);
+            T.insertaUnidad(U, 6, 7);
+            U = U.getCopia();
+            enemigos.add(U);
+            T.insertaUnidad(U, 7, 1);
+            U = Database.getInstance().getEscenografia("Árbol selvático");
+            T.insertaUnidad(U, 2, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 8, 8);
+            U = U.getCopia();   T.insertaUnidad(U, 1, 0);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 1);
+            U = U.getCopia();   T.insertaUnidad(U, 3, 0);
+            U = U.getCopia();   T.insertaUnidad(U, 3, 6);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 3);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 4);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 6, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 7, 3);
+
+        }
+    
+    }
+    
+    
+    private static class IncursionSelva3 extends CombateInfo{
+    
+        static final int PRESUPUESTO= 3200;
+        static final int MAXPERSONAJES = 3;
+        static final int MINPERSONAJES = 3;
+        
+        public IncursionSelva3() {
+            super("Incursión en la Selva 3", "selva1.png", 9, 9);
+            Unidad U = Database.getInstance().getUnidadEnemiga("Saurio gigante");
+            enemigos.add(U);
+            T.insertaUnidad(U, 8, 4);
+            U = Database.getInstance().getUnidadEnemiga("Saurio crestado");
+            enemigos.add(U);
+            T.insertaUnidad(U, 7, 2);
+            U = U.getCopia();
+            enemigos.add(U);
+            T.insertaUnidad(U, 6, 5);
+            U = Database.getInstance().getEscenografia("Árbol selvático");
+            T.insertaUnidad(U, 1, 0);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 1);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 7);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 5, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 6, 4);
+            U = U.getCopia();   T.insertaUnidad(U, 8, 5);
         }
     
     }

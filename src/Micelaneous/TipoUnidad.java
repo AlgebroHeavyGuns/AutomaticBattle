@@ -13,5 +13,6 @@ public enum TipoUnidad {
     Aberracion, Aracnido, Bestia,
     Demonio, Dragon, Elfo,
     Espiritu, Gigante, Humano,
-    Maquina, NoMuerto, Reptil;
+    Maquina, NoMuerto, Reptil,
+    Escenografia;
 }

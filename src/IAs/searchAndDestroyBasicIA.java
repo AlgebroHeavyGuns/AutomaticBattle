@@ -25,8 +25,8 @@ public class searchAndDestroyBasicIA extends BasicIA{
     
     @Override
     Seleccion calcularAtaque(Unidad U) {
-        primeroMasCercano.ref = U;
-        return priorizaCalcularAtaque(U, primeroMasCercano);
+        primeroMasDebil.ref = U;
+        return priorizaCalcularAtaque(U, primeroMasDebil);
     }
 
     Seleccion priorizaCalcularAtaque(Unidad U, Comparator C){
@@ -56,13 +56,14 @@ public class searchAndDestroyBasicIA extends BasicIA{
             System.out.println("No hay enemigos en rango (" + U.getNombre() + ")");
             ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2,
                     Controlador.getInstance().combateActual.getTablero().getTAM_Y()/2);
-            if(ruta.isEmpty()){
+            if(ruta.isEmpty())
                 ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2+1,
                                     Controlador.getInstance().combateActual.getTablero().getTAM_Y()/2);
-            }
+            if(ruta.isEmpty())
+                System.out.println("No se puede ir al centro.");
         }else{
             primeroMasCercano.ref = U;
-            enemigas.sort(primeroMasDebil);
+            enemigas.sort(primeroMasCercano);
             Unidad enemigo;
             for(int i=0;i<enemigas.size() && ruta.isEmpty();i++){
                 enemigo = enemigas.get(i);
@@ -93,7 +94,11 @@ public class searchAndDestroyBasicIA extends BasicIA{
         ArrayList<Pair<Integer, Integer> > ruta = new ArrayList<>();
         ArrayList<Pair<Integer, Integer> > camino = new ArrayList<>();
         int posX = usuario.getPosX(), posY= usuario.getPosY();
-        int maximaDistancia = usuario.getVisibilidad();
+        int maximaDistancia;
+        //maximaDistancia = usuario.getVisibilidad()+usuario.getAlcance();
+        maximaDistancia = Controlador.getInstance().calculaDistancia(usuario.getPosX(), usuario.getPosY(),
+                objX, objY)*2;
+        maximaDistancia = Math.max(maximaDistancia, usuario.getVisibilidad());
         siguienteNodo(posX-1,posY, camino, ruta, objX, objY, maximaDistancia);
         siguienteNodo(posX+1,posY, camino, ruta, objX, objY, maximaDistancia);
         siguienteNodo(posX,posY-1, camino, ruta, objX, objY, maximaDistancia);
@@ -106,7 +111,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
             ArrayList<Pair<Integer,Integer> > solucion, int objX, int objY, int maximo){
         if(!Controlador.getInstance().posicionValidaNoOcupada(posX, posY))
             return false;
-        if(camino.size() > maximo || (!solucion.isEmpty() && camino.size()>solucion.size()))
+        if(camino.size() >= maximo || (!solucion.isEmpty() && camino.size()>=solucion.size()))
             return false;
         
         camino.add(new Pair<>(posX,posY));
@@ -120,10 +125,17 @@ public class searchAndDestroyBasicIA extends BasicIA{
             camino.remove(camino.size()-1);
             return false;
         }
-        //System.out.println("Arriba");
-        siguienteNodo(posX-1,posY, camino, solucion, objX, objY, maximo);
-        //System.out.println("Abajo");
-        siguienteNodo(posX+1,posY, camino, solucion, objX, objY, maximo);
+        if(Math.random()>0.5){
+            //System.out.println("Arriba");
+            siguienteNodo(posX-1,posY, camino, solucion, objX, objY, maximo);
+            //System.out.println("Abajo");
+            siguienteNodo(posX+1,posY, camino, solucion, objX, objY, maximo);
+        }else{
+            //System.out.println("Abajo");
+            siguienteNodo(posX+1,posY, camino, solucion, objX, objY, maximo);
+            //System.out.println("Arriba");
+            siguienteNodo(posX-1,posY, camino, solucion, objX, objY, maximo);
+        }
         //System.out.println("Izquierda");
         siguienteNodo(posX,posY-1, camino, solucion, objX, objY, maximo);
         //System.out.println("Derecha");

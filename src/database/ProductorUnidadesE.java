@@ -29,7 +29,7 @@ public class ProductorUnidadesE {
         
         public LeonAlado() {
             super("León alado", "felino1.png", "Es un pájaro, es un avión; es un león.", TipoUnidad.Bestia, 
-                    new Atributos(110,120,8,4,4,2,5,5,6));
+                    new Atributos(100,120,7,4,4,2,5,5,6));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(new ProductorEquiposA.DentaduraFuerte());
         }

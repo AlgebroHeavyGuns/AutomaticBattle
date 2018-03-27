@@ -24,6 +24,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
      */
     
     VentanaDeJuego vj;
+    Unidad escogido = null;
     int combateNivel;
     int maxPresupuesto;
     int maxPersonajes;
@@ -43,6 +44,9 @@ public class SeleccionPanel extends javax.swing.JPanel {
         setBotones();
         
         vj.setTitle(Controlador.GAME_NAME + " - " + nombre);
+        this.insertarInfo("Misión " + nombre);
+        this.insertarInfo("Número de personajes : " + ProductorCombate.getInstance().getPersonajesMinimosNivel(combateNivel)+
+                "-" + ProductorCombate.getInstance().getPersonajesMaximosNivel(combateNivel));
     }
 
     ArrayList<Unidad> aliadas = new ArrayList<>();
@@ -91,6 +95,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         personaje1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         personaje1.setForeground(new java.awt.Color(204, 204, 255));
@@ -104,9 +113,19 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 personaje1ActionPerformed(evt);
             }
         });
+        personaje1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setOpaque(false);
+        jScrollPane2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         infoPanel.setEditable(false);
         infoPanel.setBackground(new java.awt.Color(102, 102, 102));
@@ -131,6 +150,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 personaje2ActionPerformed(evt);
             }
         });
+        personaje2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         equipo2.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         equipo2.setForeground(new java.awt.Color(204, 204, 255));
@@ -142,6 +166,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         equipo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 equipo2ActionPerformed(evt);
+            }
+        });
+        equipo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
             }
         });
 
@@ -157,6 +186,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 equipo1ActionPerformed(evt);
             }
         });
+        equipo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         equipo3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         equipo3.setForeground(new java.awt.Color(204, 204, 255));
@@ -170,10 +204,20 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 equipo3ActionPerformed(evt);
             }
         });
+        equipo3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         presupuestoRestante.setFont(new java.awt.Font("Urdu Typesetting", 1, 18)); // NOI18N
         presupuestoRestante.setForeground(new java.awt.Color(153, 255, 153));
         presupuestoRestante.setText("PRESUPUESTO RESTANTE : ");
+        presupuestoRestante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         coste1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         coste1.setForeground(new java.awt.Color(153, 255, 204));
@@ -183,6 +227,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         coste1.setFocusPainted(false);
         coste1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         coste1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        coste1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         coste2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         coste2.setForeground(new java.awt.Color(153, 255, 204));
@@ -192,6 +241,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         coste2.setFocusPainted(false);
         coste2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         coste2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        coste2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         coste3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         coste3.setForeground(new java.awt.Color(153, 255, 204));
@@ -201,6 +255,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         coste3.setFocusPainted(false);
         coste3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         coste3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        coste3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         equipo5.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         equipo5.setForeground(new java.awt.Color(204, 204, 255));
@@ -214,6 +273,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 equipo5ActionPerformed(evt);
             }
         });
+        equipo5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         coste5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         coste5.setForeground(new java.awt.Color(153, 255, 204));
@@ -223,6 +287,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         coste5.setFocusPainted(false);
         coste5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         coste5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        coste5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         personaje3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         personaje3.setForeground(new java.awt.Color(204, 204, 255));
@@ -234,6 +303,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         personaje3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 personaje3ActionPerformed(evt);
+            }
+        });
+        personaje3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
             }
         });
 
@@ -248,6 +322,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 masEquiposActionPerformed(evt);
             }
         });
+        masEquipos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         masPersonajes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         masPersonajes.setForeground(new java.awt.Color(153, 153, 255));
@@ -258,6 +337,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         masPersonajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 masPersonajesActionPerformed(evt);
+            }
+        });
+        masPersonajes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
             }
         });
 
@@ -273,6 +357,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 personaje4ActionPerformed(evt);
             }
         });
+        personaje4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         coste4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         coste4.setForeground(new java.awt.Color(153, 255, 204));
@@ -282,6 +371,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         coste4.setFocusPainted(false);
         coste4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         coste4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        coste4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         equipo4.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         equipo4.setForeground(new java.awt.Color(204, 204, 255));
@@ -293,6 +387,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         equipo4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 equipo4ActionPerformed(evt);
+            }
+        });
+        equipo4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
             }
         });
 
@@ -307,6 +406,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 menosEquipos1ActionPerformed(evt);
             }
         });
+        menosEquipos1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
 
         menosPersonajes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         menosPersonajes.setForeground(new java.awt.Color(153, 153, 255));
@@ -317,6 +421,11 @@ public class SeleccionPanel extends javax.swing.JPanel {
         menosPersonajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menosPersonajesActionPerformed(evt);
+            }
+        });
+        menosPersonajes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
             }
         });
 
@@ -503,6 +612,18 @@ public class SeleccionPanel extends javax.swing.JPanel {
         indicePersonaje-=4;
         setBotones();
     }//GEN-LAST:event_menosPersonajesActionPerformed
+
+    private void presionada(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_presionada
+        char c = evt.getKeyChar();
+        if(c>='0' && c<='9'){
+            int n = c-='0';
+            if(aliadas.size()>n)
+                this.escoger(aliadas.get(n));
+            else
+                insertarInfo("No dispones de " + (n+1) + " personajes.");
+        }
+            
+    }//GEN-LAST:event_presionada
     
     private void seleccionarPersonaje(String S){
         if(aliadas.size() < this.maxPersonajes){
@@ -518,27 +639,28 @@ public class SeleccionPanel extends javax.swing.JPanel {
             if(i>0)
                 pers.apellido(""+(i+1));
             aliadas.add(pers);
-            insertarInfo("Seleccionado " + S + 
-                    //"\nTotal unidades : " + aliadas.size() +
-                    "\nAhora puedes seleccionar su equipamiento.");
+            escoger(pers);
         }
         else
             insertarInfo("No pueden participar más personajes.");
     }
 
+    private void escoger(Unidad U){
+        escogido = U;
+        insertarInfo("Seleccionado " + escogido.getNombre() + 
+                "\nAhora puedes seleccionar su equipamiento.");
+    }
     
     private void equipar(Equipable E){
-        Unidad U;
-        if(!aliadas.isEmpty()){
-            U=aliadas.get(aliadas.size()-1);
-            if(!E.puedeEquiparseA(U.getTipo()))
-                this.insertarInfo(E.getNombre() + " no se puede equipar a " + U.getTipo().name() + "s.");
+        if(escogido != null){
+            if(!E.puedeEquiparseA(escogido.getTipo()))
+                this.insertarInfo(E.getNombre() + " no se puede equipar a " + escogido.getTipo().name() + "s.");
             else if(gastoActual+E.getCoste() > maxPresupuesto)
                 this.insertarInfo("Fondos insuficientes...");
             else{
-                Equipable otro = U.equipar(E);
+                Equipable otro = escogido.equipar(E);
                 if(otro==null){
-                    this.insertarInfo(U.getNombre() + " equipado con " + E.getNombre());
+                    this.insertarInfo(escogido.getNombre() + " equipado con " + E.getNombre());
                     gastoActual+=E.getCoste();
                     this.presupuestoRestante.setText("Presupuesto restante : "+(maxPresupuesto-gastoActual));
                 }else
@@ -601,7 +723,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 equipo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/equipos/" + equipos.get(indiceEquipo).getImagen())));              
         }
 
-        this.presupuestoRestante.setText("Presupuesto  restante   :  "+(maxPresupuesto-gastoActual));
+        this.presupuestoRestante.setText("Presupuesto restante   :  "+(maxPresupuesto-gastoActual));
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
