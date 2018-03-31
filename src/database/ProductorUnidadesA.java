@@ -40,7 +40,9 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            int cura = (int)(this.getFuerza()*(0.2+tirada));
+            int cura = (int)(this.getFuerza()*(0.2+tirada*1.2));
+            if(this.getVidaInicial()-this.getVida() < cura)
+                cura = this.getVidaInicial()-this.getVida();
             if(cura>0){
                 Controlador.getInstance().apCurarUnidad(this, cura);
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + cura + " de salud.");
@@ -50,7 +52,7 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoUnidadAtacada(Unidad atacante, double prob, int danio) {
-            final double COE = 0.7;
+            final double COE = 0.65;
             if(this.getVida() < 1 && Controlador.getInstance().calculaDistancia(this.getPosX(), this.getPosY(),
                     atacante.getPosX(), atacante.getPosY()) == 1){
                   Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita fuerte y devuelve \n"
@@ -72,7 +74,7 @@ public class ProductorUnidadesA {
         
         public OsoRabioso() {
             super("Oso rabioso", "Beast4.png", "Es hermoso.", TipoUnidad.Bestia, 
-                    new Atributos(330,130,6,4,8,6,4,4,7));             
+                    new Atributos(340,130,5,4,8,6,4,4,7));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -80,10 +82,10 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            if(rabia<26)    
-                rabia+= (int)(tirada*8);
+            if(rabia<30)    
+                rabia+= (int)(tirada*6);
             else
-                rabia=26;
+                rabia=30;
             Controlador.getInstance().apHerirUnidad(this, objetivo, rabia);
             Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " hace " + rabia + " de daño adicional a " + objetivo.getNombre());
         }
@@ -121,7 +123,7 @@ public class ProductorUnidadesA {
         
         public SaurioAstado() {
             super("Saurio astado", "dino3.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(375,100,8,7,9,6,6,4,5));             
+                    new Atributos(390,100,7,7,9,6,6,4,5));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -139,12 +141,22 @@ public class ProductorUnidadesA {
         
         public SaurioCrestado() {
             super("Saurio crestado", "dino4.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(300,120,8,7,8,6,6,4,6));             
+                    new Atributos(270,120,8,7,8,6,6,4,6));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Glándula venenosa"));
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
-        
+
+        @Override
+        public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
+            int cura = (int)(8*(tirada+0.3));
+            if(this.getVidaInicial()-this.getVida() > cura)
+                cura*=1.6;
+            if(cura > 0){
+                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + cura + " de salud.");
+                Controlador.getInstance().apCurarUnidad(this, cura);
+            }
+        }
 
         @Override
         public Unidad getCopia() {
@@ -159,7 +171,7 @@ public class ProductorUnidadesA {
         
         public SaurioGigante() {
             super("Saurio gigante", "dino2.png", ".", TipoUnidad.Reptil, 
-                    new Atributos(1300,200,18,10,14,10,8,3,8));             
+                    new Atributos(1300,200,18,10,13,10,8,3,8));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }

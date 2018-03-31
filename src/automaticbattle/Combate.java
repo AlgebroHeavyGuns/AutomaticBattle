@@ -150,7 +150,7 @@ public final class Combate {
             case Atacar:
                 double probAcierto = 0.075*decision.U.getAgilidad()-0.05;
                 double tirada = Math.random();
-                actor.efectoAtacar(decision.U,tirada,tirada<=probAcierto);
+                actor.efectoAtacar(decision.U,tirada,tirada>=probAcierto);
                 decision.U.setAtacada(true);
                 if(tirada>=probAcierto){
                     int danio = (int)((3*actor.getFuerza()-2*decision.U.getArmadura()));

@@ -24,6 +24,7 @@ public abstract class Unidad {
     private String descripcion;
     private String detalle;
     private TipoUnidad tipo;
+    private int vidaInicial;
     private Atributos base;  //atributos por defecto de la unidad (sin equipo)
     private Atributos actual;//atributos que la unidad acumula  durante el combate
     private ArrayList<Equipable> equipo;
@@ -97,6 +98,7 @@ public abstract class Unidad {
     
     public void fijaActual(){
         actual = sumaAtributosEquipo().suma(base);
+        vidaInicial = actual.getVida();
     }
 
     public String getNombre() {
@@ -142,6 +144,12 @@ public abstract class Unidad {
     public int getPosY() {
         return posY;
     }
+
+    public int getVidaInicial() {
+        return vidaInicial;
+    }
+    
+    
     
     public int getAlcance(){
         for(Equipable E : this.equipo)

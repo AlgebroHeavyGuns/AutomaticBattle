@@ -96,8 +96,8 @@ public class searchAndDestroyBasicIA extends BasicIA{
         int posX = usuario.getPosX(), posY= usuario.getPosY();
         int maximaDistancia;
         //maximaDistancia = usuario.getVisibilidad()+usuario.getAlcance();
-        maximaDistancia = Controlador.getInstance().calculaDistancia(usuario.getPosX(), usuario.getPosY(),
-                objX, objY)*2;
+        maximaDistancia = (int)(Controlador.getInstance().calculaDistancia(usuario.getPosX(), usuario.getPosY(),
+                objX, objY)*1.5);
         maximaDistancia = Math.max(maximaDistancia, usuario.getVisibilidad());
         siguienteNodo(posX-1,posY, camino, ruta, objX, objY, maximaDistancia);
         siguienteNodo(posX+1,posY, camino, ruta, objX, objY, maximaDistancia);
@@ -125,7 +125,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
             camino.remove(camino.size()-1);
             return false;
         }
-        if(Math.random()>0.5){
+        if(posX-posY > 0){
             //System.out.println("Arriba");
             siguienteNodo(posX-1,posY, camino, solucion, objX, objY, maximo);
             //System.out.println("Abajo");
