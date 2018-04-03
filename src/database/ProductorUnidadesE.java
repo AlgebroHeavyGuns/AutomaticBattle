@@ -29,7 +29,7 @@ public class ProductorUnidadesE {
         
         public LeonAlado() {
             super("León alado", "felino1.png", "Es un pájaro, es un avión; es un león.", TipoUnidad.Bestia, 
-                    new Atributos(120,120,8,4,4,2,5,5,6));
+                    new Atributos(110,120,9,4,4,2,5,5,6));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(new ProductorEquiposA.DentaduraFuerte());
         }
@@ -37,7 +37,7 @@ public class ProductorUnidadesE {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            int vida = (int)(0.5*(this.getArmadura()+this.getBlindaje()));
+            int vida = (int)(0.35*(this.getArmadura()+this.getBlindaje()));
             Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + vida + " de salud.");
         }
 

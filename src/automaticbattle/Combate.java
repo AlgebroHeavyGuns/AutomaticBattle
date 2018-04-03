@@ -153,7 +153,7 @@ public final class Combate {
                 actor.efectoAtacar(decision.U,tirada,tirada>=probAcierto);
                 decision.U.setAtacada(true);
                 if(tirada>=probAcierto){
-                    int danio = (int)((3*actor.getFuerza()-2*decision.U.getArmadura()));
+                    int danio = (int)((4*actor.getFuerza()-2.5*decision.U.getArmadura()));
                     danio *= actor.getEfectividadAtaque(decision.U) * actor.getEfectividadArmas(decision.U);
                     if(danio > 0){
                         Controlador.getInstance().apHerirUnidad(actor, decision.U, danio);

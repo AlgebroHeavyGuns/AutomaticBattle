@@ -32,7 +32,7 @@ public class ProductorUnidadesA {
     static class JabaliFurioso extends Unidad{
         public JabaliFurioso() {
             super("Jabalí furioso", "WildBoar1.png", "Es muy cerdaco.", TipoUnidad.Bestia, 
-                    new Atributos(120,120,3,3,6,3,5,4,5));          
+                    new Atributos(110,120,3,3,6,3,5,4,5));          
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -40,7 +40,7 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            int cura = (int)(this.getFuerza()*(0.2+tirada*1.2));
+            int cura = (int)(this.getFuerza()*(0.25+tirada*1.25));
             if(this.getVidaInicial()-this.getVida() < cura)
                 cura = this.getVidaInicial()-this.getVida();
             if(cura>0){
@@ -52,7 +52,7 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoUnidadAtacada(Unidad atacante, double prob, int danio) {
-            final double COE = 0.65;
+            final double COE = 0.7;
             if(this.getVida() < 1 && Controlador.getInstance().calculaDistancia(this.getPosX(), this.getPosY(),
                     atacante.getPosX(), atacante.getPosY()) == 1){
                   Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita fuerte y devuelve \n"
@@ -74,7 +74,7 @@ public class ProductorUnidadesA {
         
         public OsoRabioso() {
             super("Oso rabioso", "Beast4.png", "Es hermoso.", TipoUnidad.Bestia, 
-                    new Atributos(340,130,5,4,8,6,4,4,7));             
+                    new Atributos(350,130,4,4,8,6,4,4,7));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -82,10 +82,10 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            if(rabia<30)    
+            if(rabia<35)    
                 rabia+= (int)(tirada*6);
             else
-                rabia=30;
+                rabia=35;
             Controlador.getInstance().apHerirUnidad(this, objetivo, rabia);
             Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " hace " + rabia + " de daño adicional a " + objetivo.getNombre());
         }
@@ -123,7 +123,7 @@ public class ProductorUnidadesA {
         
         public SaurioAstado() {
             super("Saurio astado", "dino3.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(390,100,7,7,9,6,6,4,5));             
+                    new Atributos(370,100,7,7,9,6,6,4,5));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
@@ -141,7 +141,7 @@ public class ProductorUnidadesA {
         
         public SaurioCrestado() {
             super("Saurio crestado", "dino4.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(270,120,8,7,8,6,6,4,6));             
+                    new Atributos(240,120,8,7,8,6,7,4,6));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Glándula venenosa"));
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
@@ -149,9 +149,9 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            int cura = (int)(8*(tirada+0.3));
+            int cura = (int)(10*(tirada+0.3));
             if(this.getVidaInicial()-this.getVida() > cura)
-                cura*=1.6;
+                cura*=1.5;
             if(cura > 0){
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + cura + " de salud.");
                 Controlador.getInstance().apCurarUnidad(this, cura);
@@ -171,7 +171,7 @@ public class ProductorUnidadesA {
         
         public SaurioGigante() {
             super("Saurio gigante", "dino2.png", ".", TipoUnidad.Reptil, 
-                    new Atributos(1300,200,18,10,13,10,8,3,8));             
+                    new Atributos(1250,200,16,10,14,10,8,3,8));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
