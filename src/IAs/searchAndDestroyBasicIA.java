@@ -56,11 +56,16 @@ public class searchAndDestroyBasicIA extends BasicIA{
             System.out.println("No hay enemigos en rango (" + U.getNombre() + ")");
             ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2,
                     Controlador.getInstance().combateActual.getTablero().getTAM_Y()/2);
-            if(ruta.isEmpty())
-                ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2+1,
+            if(ruta.isEmpty()){
+                ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2 +1,
                                     Controlador.getInstance().combateActual.getTablero().getTAM_Y()/2);
-            if(ruta.isEmpty())
-                System.out.println("No se puede ir al centro.");
+                if(ruta.isEmpty()){
+                    ruta = calculaRuta(U, Controlador.getInstance().combateActual.getTablero().getTAM_X()/2,
+                                        Controlador.getInstance().combateActual.getTablero().getTAM_Y()/2 +1);
+                if(ruta.isEmpty())
+                    System.out.println("No se puede ir al centro.");
+                }
+            }
         }else{
             primeroMasCercano.ref = U;
             enemigas.sort(primeroMasCercano);
@@ -97,7 +102,7 @@ public class searchAndDestroyBasicIA extends BasicIA{
         int maximaDistancia;
         //maximaDistancia = usuario.getVisibilidad()+usuario.getAlcance();
         maximaDistancia = (int)(Controlador.getInstance().calculaDistancia(usuario.getPosX(), usuario.getPosY(),
-                objX, objY)*1.5);
+                objX, objY)*2);
         maximaDistancia = Math.max(maximaDistancia, usuario.getVisibilidad());
         siguienteNodo(posX-1,posY, camino, ruta, objX, objY, maximaDistancia);
         siguienteNodo(posX+1,posY, camino, ruta, objX, objY, maximaDistancia);
@@ -112,6 +117,8 @@ public class searchAndDestroyBasicIA extends BasicIA{
         if(!Controlador.getInstance().posicionValidaNoOcupada(posX, posY))
             return false;
         if(camino.size() >= maximo || (!solucion.isEmpty() && camino.size()>=solucion.size()))
+            return false;
+        if(contieneCasilla(camino, posX, posY)) //elimina ciclos
             return false;
         
         camino.add(new Pair<>(posX,posY));
@@ -143,6 +150,14 @@ public class searchAndDestroyBasicIA extends BasicIA{
         
 
         camino.remove(camino.size()-1);
+        return false;
+    }
+    
+    
+    boolean contieneCasilla(ArrayList<Pair<Integer,Integer> > camino, int x, int y){
+        for(Pair<Integer, Integer> par : camino)
+            if(par.getKey()==x && par.getValue()==y)
+                return true;
         return false;
     }
     
