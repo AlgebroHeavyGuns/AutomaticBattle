@@ -71,16 +71,20 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
     public void drawMap(int xpiv,int ypiv){
         Unidad U;
 
-        if(xpiv >= nRows/2)
+        if(xpiv >= nRows/2){
             if(xpiv >= mapa.getTAM_X()-nRows/2)
                 varX = mapa.getTAM_X()-nRows;
             else
                 varX = xpiv-4;
-        if(ypiv >= nColumns/2)
+        }else
+            varX = 0;
+        if(ypiv >= nColumns/2){
             if(ypiv >= mapa.getTAM_Y()-nColumns/2)
                 varY = mapa.getTAM_Y()-nColumns;
             else
-                varY = ypiv-4;        
+                varY = ypiv-4;   
+        }else
+            varY=0;
         for(int i=0;i<nRows;i++)
             for(int j=0;j<nColumns;j++){
                 U = mapa.ocupada(i+varX, j+varY);

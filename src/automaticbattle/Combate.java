@@ -19,6 +19,8 @@ import java.util.Queue;
  */
 public final class Combate {
     private String nombre;
+    public  ArrayList<Unidad> inicialesUno;
+    public ArrayList<Unidad> inicialesDos;
     private ArrayList<Unidad> equipoUno;
     private ArrayList<Unidad> equipoDos;
     private ArrayList<Unidad> colaTurno;
@@ -34,6 +36,8 @@ public final class Combate {
         this.nombre = nombre;
         this.equipoUno = uno;
         this.equipoDos = dos;
+        this.inicialesUno = new ArrayList<>(uno);
+        this.inicialesDos = new ArrayList<>(dos);
         this.tablero = tablero;
     }
     

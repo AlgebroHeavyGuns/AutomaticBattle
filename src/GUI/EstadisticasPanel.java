@@ -146,11 +146,11 @@ public class EstadisticasPanel extends javax.swing.JPanel {
     private String getConsejo(){
         if(E.getDanoEfectuadoUno() < E.getDanoEfectuadoDos())
             return "Equiparte un arma puede aumentar el daño que inflinges.";
-        for(Unidad U : Controlador.getInstance().combateActual.getEquipoUno())
-            if(U.getArmadura() < 6+Controlador.getInstance().indiceCombate && U.getVida() < 150)
+        for(Unidad U : Controlador.getInstance().combateActual.inicialesUno)
+            if(U.getArmadura() < 5+Controlador.getInstance().indiceCombate && U.getVida() < 160)
                 return "Usar equipamiento defensivo dará más aguante a tus unidades.";
         int alcance=1;
-        for(Unidad U : Controlador.getInstance().combateActual.getEquipoUno())
+        for(Unidad U : Controlador.getInstance().combateActual.inicialesUno)
             alcance = Math.max(alcance, U.getAlcance());
         if(alcance < 2)
             return "El uso de armas de largo alcance te permite atacar a distancia.";
