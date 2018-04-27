@@ -28,6 +28,7 @@ public class ProductorEquiposD {
         lista.add(new CorazaDeBatalla());
         lista.add(new CorazaDeGuerra());
         lista.add(new CascoDeBatalla());
+        lista.add(new CascoDeDestruccion());
         lista.add(new GuantesDeBatalla());
         lista.add(new AnilloDeVitalidad());
         return lista;
@@ -100,6 +101,26 @@ public class ProductorEquiposD {
     
     }
     
+    static class CascoDeDestruccion extends Equipable{
+
+        public CascoDeDestruccion() {
+            super("Casco de destrucción", "casco2.png", 400, 0, new Atributos(60,10,2,0,4,2,1,0,1), TipoEquipo.Casco);
+            this.getResistenciaArma().add(new EfectividadArma(TipoArma.Arco, 0.8));
+            this.getResistenciaArma().add(new EfectividadArma(TipoArma.BallestaGrande, 0.85));
+        }
+        
+        @Override
+        public boolean puedeEquiparseA(TipoUnidad TU) {
+            return TU!=TipoUnidad.Bestia && TU!=TipoUnidad.Reptil;
+        }
+        
+        @Override
+        public Equipable getCopia() {
+            return new CascoDeDestruccion();
+        }
+    
+    }
+
     
     static class GuantesDeBatalla extends Equipable{
 
