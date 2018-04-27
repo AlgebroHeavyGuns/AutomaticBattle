@@ -83,6 +83,8 @@ public class SeleccionPanel extends javax.swing.JPanel {
         equipo4 = new javax.swing.JButton();
         menosEquipos1 = new javax.swing.JButton();
         menosPersonajes = new javax.swing.JButton();
+        anterior = new javax.swing.JButton();
+        posterior = new javax.swing.JButton();
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jButton3.setForeground(new java.awt.Color(153, 204, 255));
@@ -429,6 +431,42 @@ public class SeleccionPanel extends javax.swing.JPanel {
             }
         });
 
+        anterior.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        anterior.setForeground(new java.awt.Color(255, 255, 0));
+        anterior.setText("ANTERIOR");
+        anterior.setBorderPainted(false);
+        anterior.setContentAreaFilled(false);
+        anterior.setEnabled(false);
+        anterior.setFocusPainted(false);
+        anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorActionPerformed(evt);
+            }
+        });
+        anterior.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
+
+        posterior.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        posterior.setForeground(new java.awt.Color(255, 255, 0));
+        posterior.setText("POSTERIOR");
+        posterior.setBorderPainted(false);
+        posterior.setContentAreaFilled(false);
+        posterior.setEnabled(false);
+        posterior.setFocusPainted(false);
+        posterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                posteriorActionPerformed(evt);
+            }
+        });
+        posterior.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
+
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
         backgroundPanel1Layout.setHorizontalGroup(
@@ -445,40 +483,47 @@ public class SeleccionPanel extends javax.swing.JPanel {
                     .addComponent(personaje4)
                     .addComponent(menosPersonajes))
                 .addGap(18, 18, 18)
-                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addComponent(equipo1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(coste1))
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addComponent(equipo2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(coste2)))
+                        .addGap(28, 28, 28)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addComponent(equipo1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(coste1))
-                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addComponent(equipo2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(coste2)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(equipo5)
+                                    .addComponent(masEquipos))
                                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addComponent(equipo4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(coste4))
-                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addComponent(equipo5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(coste5)))))
-                        .addGap(0, 23, Short.MAX_VALUE))
+                                        .addComponent(coste5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                                        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addComponent(equipo4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(coste4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addComponent(menosEquipos1)
+                                .addGap(18, 18, 18)
+                                .addComponent(posterior, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addComponent(equipo3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(coste3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(masEquipos)
-                            .addComponent(menosEquipos1))))
-                .addContainerGap())
+                        .addComponent(coste3))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,9 +550,13 @@ public class SeleccionPanel extends javax.swing.JPanel {
                                     .addComponent(coste3)))
                             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(masEquipos)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(menosEquipos1)))
+                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(masEquipos)
+                                    .addComponent(anterior))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(menosEquipos1)
+                                    .addComponent(posterior))))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
@@ -624,6 +673,16 @@ public class SeleccionPanel extends javax.swing.JPanel {
         }
             
     }//GEN-LAST:event_presionada
+
+    private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
+        int n = (aliadas.indexOf(escogido)+ aliadas.size() -1)%aliadas.size();
+        this.escoger(aliadas.get(n));
+    }//GEN-LAST:event_anteriorActionPerformed
+
+    private void posteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posteriorActionPerformed
+        int n = (aliadas.indexOf(escogido)+ 1)%aliadas.size();
+        this.escoger(aliadas.get(n));
+    }//GEN-LAST:event_posteriorActionPerformed
     
     private void seleccionarPersonaje(String S){
         if(aliadas.size() < this.maxPersonajes){
@@ -649,6 +708,8 @@ public class SeleccionPanel extends javax.swing.JPanel {
         escogido = U;
         insertarInfo("Seleccionado " + escogido.getNombre() + 
                 "\nAhora puedes seleccionar su equipamiento.");
+        this.anterior.setEnabled(true);
+        this.posterior.setEnabled(true);
     }
     
     private void equipar(Equipable E){
@@ -727,6 +788,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton anterior;
     private GUI.BackgroundPanel backgroundPanel1;
     private javax.swing.JButton coste1;
     private javax.swing.JButton coste2;
@@ -749,6 +811,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
     private javax.swing.JButton personaje2;
     private javax.swing.JButton personaje3;
     private javax.swing.JButton personaje4;
+    private javax.swing.JButton posterior;
     private javax.swing.JLabel presupuestoRestante;
     // End of variables declaration//GEN-END:variables
 }
