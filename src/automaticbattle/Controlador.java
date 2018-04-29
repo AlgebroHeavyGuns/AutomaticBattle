@@ -100,42 +100,41 @@ public class Controlador {
     }
     
     public ArrayList<Unidad> getAliadasEnVision(Unidad U){
-        ArrayList<Unidad> unidades = new ArrayList<>();
-        
         int vision = U.getVisibilidad();
-        for(Unidad otra: combateActual.getAliadas(U))
-            if(vision >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
-                unidades.add(otra);
-        
-        return unidades;
+
+        return getAliadasADistancia(U,vision);
     }
     
     public ArrayList<Unidad> getEnemigasEnVision(Unidad U){
-        ArrayList<Unidad> unidades = new ArrayList<>();
-        
         int vision = U.getVisibilidad();
-        for(Unidad otra: combateActual.getEnemigas(U))
-            if(vision >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
-                unidades.add(otra);
-        
-        
-        return unidades;
+
+        return getEnemigasADistancia(U,vision);
     }
     
-    public ArrayList<Unidad> getEnemigasEnAlcance(Unidad U){
-        ArrayList<Unidad> unidades = new ArrayList<>();
-        
+    public ArrayList<Unidad> getEnemigasEnAlcance(Unidad U){   
         int alcance = U.getAlcance();
-        if(U.getAlcance() > U.getVisibilidad())
+        if(alcance > U.getVisibilidad())
             alcance = U.getVisibilidad();
+
+        return getEnemigasADistancia(U,alcance);
+    }
+    
+    
+    public ArrayList<Unidad> getEnemigasADistancia(Unidad U, int distancia){
+        ArrayList<Unidad> unidades = new ArrayList<>();
         for(Unidad otra: combateActual.getEnemigas(U))
-            if(alcance >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
+            if(distancia >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
                 unidades.add(otra);
-        
-        
         return unidades;
     }
     
+    public ArrayList<Unidad> getAliadasADistancia(Unidad U, int distancia){
+        ArrayList<Unidad> unidades = new ArrayList<>();
+        for(Unidad otra: combateActual.getAliadas(U))
+            if(distancia >= calculaDistancia(otra.getPosX(),otra.getPosY(), U.getPosX(),U.getPosY()))
+                unidades.add(otra);
+        return unidades;
+    }
     
     public void apHerirUnidad(Unidad actor, Unidad victima, int dano){
         victima.modVidaActual(-dano);
@@ -145,6 +144,11 @@ public class Controlador {
     public void apCurarUnidad(Unidad actor, int cura){
         actor.modVidaActual(cura);
         combateActual.estadisticas.curadoUnidad(actor, cura);
+    }
+    
+    
+    public void apMostrarMensaje(String S){
+        this.combateActual.panel.insertarInfo(S);
     }
     
     public static Controlador getInstance() {
