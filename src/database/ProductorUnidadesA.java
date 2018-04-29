@@ -171,7 +171,7 @@ public class ProductorUnidadesA {
         
         public SaurioGigante() {
             super("Saurio gigante", "dino2.png", ".", TipoUnidad.Reptil, 
-                    new Atributos(1250,200,16,10,14,10,8,3,8));             
+                    new Atributos(1300,200,16,10,13,10,8,3,8));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
