@@ -103,7 +103,7 @@ public class ProductorCombate {
     
     private static class CombateInicial extends CombateInfo{
     
-        static final int PRESUPUESTO= 1200;
+        static final int PRESUPUESTO= 1300;
         static final int MAXPERSONAJES = 2;
         static final int MINPERSONAJES = 2;
         
@@ -131,7 +131,7 @@ public class ProductorCombate {
     
     private static class CombateInicial2 extends CombateInfo{
     
-        static final int PRESUPUESTO= 1000;
+        static final int PRESUPUESTO= 1100;
         static final int MAXPERSONAJES = 2;
         static final int MINPERSONAJES = 2;
         
@@ -190,7 +190,7 @@ public class ProductorCombate {
         
     private static class IncursionSelva2 extends CombateInfo{
     
-        static final int PRESUPUESTO= 2400;
+        static final int PRESUPUESTO= 2500;
         static final int MAXPERSONAJES = 3;
         static final int MINPERSONAJES = 2;
         
@@ -228,7 +228,7 @@ public class ProductorCombate {
     
     private static class IncursionSelva3 extends CombateInfo{
     
-        static final int PRESUPUESTO= 3200;
+        static final int PRESUPUESTO= 3300;
         static final int MAXPERSONAJES = 3;
         static final int MINPERSONAJES = 3;
         
