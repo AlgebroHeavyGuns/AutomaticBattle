@@ -152,12 +152,12 @@ public final class Combate {
                 panel.insertarInfo(actor.getNombre() + " desplazado.");
                 break;
             case Atacar:
-                double probAcierto = 0.075*decision.U.getAgilidad()-0.05;
+                double probAcierto = 0.075*decision.U.getAgilidad()-0.1;
                 double tirada = Math.random();
                 actor.efectoAtacar(decision.U,tirada,tirada>=probAcierto);
                 decision.U.setAtacada(true);
                 if(tirada>=probAcierto){
-                    int danio = (int)((4*actor.getFuerza()-2.5*decision.U.getArmadura()));
+                    int danio = (int)((3.5*actor.getFuerza()-2.25*decision.U.getArmadura()));
                     danio *= actor.getEfectividadAtaque(decision.U) * actor.getEfectividadArmas(decision.U);
                     if(danio > 0){
                         Controlador.getInstance().apHerirUnidad(actor, decision.U, danio);
