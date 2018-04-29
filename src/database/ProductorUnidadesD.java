@@ -24,6 +24,7 @@ public class ProductorUnidadesD {
         lista.add(new MartinPaladin());
         lista.add(new TeodoraCazadora());
         lista.add(new AuroraLuchadora());
+        lista.add(new MarinaAsesina());
         return lista;
     }
     
@@ -39,7 +40,7 @@ public class ProductorUnidadesD {
         
         public JeroGuerrero() {
             super("Jero Guerrero", "CharacterHumanMale.png", "Todo o nada.", TipoUnidad.Humano, 
-                    new Atributos(180,90,8,5,5,5,4,3,6));
+                    new Atributos(195,90,8,5,5,5,4,3,6));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -49,11 +50,11 @@ public class ProductorUnidadesD {
         public void efectoTurnoPropio(){
             int heal = this.getVidaInicial() - this.getVida();
             if(this.getVidaInicial()>this.getVida()*2)
-                heal *= 0.125;
+                heal *= 0.1;
             else
-                heal *= 0.2;
+                heal *= 0.175;
             if(heal > 0){
-                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + heal + " puntos de salud.");
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " se curó " + heal + " puntos de salud.");
                 Controlador.getInstance().apCurarUnidad(this, heal);
             }
         }
@@ -61,10 +62,10 @@ public class ProductorUnidadesD {
         @Override
         public void efectoInicioEnfrentamiento() {
             if(Math.random()>0.4)
-                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " grita : " + "\"¡Todo o nada!\"\n"
-                        + "Y aumentó su fuerza un 25% (" + this.getFuerza() + " a " + this.modFuerza((int)(this.getFuerza()*0.25)) + ")");
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " grita : " + "\"¡Todo o nada!\"\n"
+                        + "Y aumentó su fuerza un 30% (" + this.getFuerza() + " a " + this.modFuerza((int)(this.getFuerza()*0.3)) + ")");
             else
-                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se concentra,y aumenta \n"
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " se concentra,y aumenta \n"
                         + "en 2 su velocidad (" + this.getVelocidad() + " a " + this.modVelocidad(2) + ")");
             
         }
@@ -80,7 +81,7 @@ public class ProductorUnidadesD {
         
         public MartinPaladin() {
             super("Martín Paladín", "CharacterBloodElfMale.png", "No sin mi equipo.", TipoUnidad.Humano, 
-                    new Atributos(170,120,5,6,6,4,5,3,7));
+                    new Atributos(175,120,5,6,6,4,5,3,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -92,7 +93,7 @@ public class ProductorUnidadesD {
                 if(U.getVidaInicial()-U.getVida() < vida)
                     vida = U.getVidaInicial()-U.getVida();
                 if(vida > 0){
-                    Controlador.getInstance().combateActual.panel.insertarInfo(
+                    Controlador.getInstance().apMostrarMensaje(
                             this.getNombre() + " curó  a " + U.getNombre() + " " + vida + " puntos de salud.");
                     Controlador.getInstance().apCurarUnidad(U, vida);
                 }
@@ -109,7 +110,7 @@ public class ProductorUnidadesD {
             if(getVidaInicial()-getVida() > vida)
                 vida *= 1.25;
             if(vida > 0){
-                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + vida + " de salud.");
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " se curó " + vida + " de salud.");
                 Controlador.getInstance().apCurarUnidad(this, vida);
             }
         }
@@ -137,11 +138,11 @@ public class ProductorUnidadesD {
             if(this.getAlcance()>1){
                 int dano = (int)(objetivo.getVida()*0.05 + 0.35*(this.getFuerza()+this.getIntelecto()));
                 if(tirada>0.6){
-                    Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
+                    Controlador.getInstance().apMostrarMensaje(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
                     Controlador.getInstance().apHerirUnidad(this, objetivo, dano);
                 }
             }else if(tirada > 0.55){
-                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " bajó la armadura de " + objetivo.getNombre()
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " bajó la armadura de " + objetivo.getNombre()
                         + "\nen 1 (" + objetivo.getArmadura() + " a " + objetivo.modArmadura(-1) + ")");
             }
         }
@@ -158,7 +159,7 @@ public class ProductorUnidadesD {
         
         public AuroraLuchadora() {
             super("Aurora Luchadora", "CharacterDwarfFemale.png", "Quiero ver al que dijo que la guerra\nes cosa de hombres.", TipoUnidad.Humano, 
-                    new Atributos(220,85,5,4,8,7,4,3,5));
+                    new Atributos(230,85,5,4,8,7,4,3,5));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -167,7 +168,7 @@ public class ProductorUnidadesD {
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             int dano = (int)(this.getArmadura()*0.6);
             if(dano > 0){
-                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
                 Controlador.getInstance().apHerirUnidad(this, objetivo, dano);
             }
         }
@@ -175,6 +176,44 @@ public class ProductorUnidadesD {
         @Override
         public Unidad getCopia() {
             return new AuroraLuchadora();
+        }
+    
+    }
+    
+    static class MarinaAsesina extends Unidad{
+        
+        public MarinaAsesina() {
+            super("Marina Asesina", "CharacterHumanFemale.png", "Para cuando me vean ya será tarde.", TipoUnidad.Humano, 
+                    new Atributos(115,110,11,6,3,2,5,5,5));
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+        }
+
+
+        @Override
+        public void efectoTurnoPropio() {
+            ArrayList<Unidad> enemigas = Controlador.getInstance().getEnemigasADistancia(this, 2);
+            if(!enemigas.isEmpty()){
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " susurra \"Yo me ocupo\"");
+                int dano,sana=0;
+                for(Unidad rival : enemigas){
+                    dano = (int)(getFuerza()*1.5 - 0.75*rival.getArmadura());
+                    sana += dano;
+                    Controlador.getInstance().apMostrarMensaje(this.getNombre() + " realizó " + dano + " a " + rival.getNombre());
+                    Controlador.getInstance().apHerirUnidad(this, rival, dano);
+                }
+                sana *= 0.15;
+                if(this.getVidaInicial() < this.getVida()+sana)
+                    sana = this.getVidaInicial() - this.getVida();
+                if(sana > 0){
+                    Controlador.getInstance().apMostrarMensaje(this.getNombre() + " se sanó " + sana + " de salud");
+                    Controlador.getInstance().apCurarUnidad(this, sana);
+                }
+            }
+        }
+        
+        @Override
+        public Unidad getCopia() {
+            return new MarinaAsesina();
         }
     
     }
