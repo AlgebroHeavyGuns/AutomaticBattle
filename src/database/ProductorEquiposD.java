@@ -30,6 +30,7 @@ public class ProductorEquiposD {
         lista.add(new CascoDeBatalla());
         lista.add(new CascoDeDestruccion());
         lista.add(new GuantesDeBatalla());
+        lista.add(new PantalonesDeBatalla());
         lista.add(new AnilloDeVitalidad());
         return lista;
     }
@@ -38,7 +39,7 @@ public class ProductorEquiposD {
     static class CorazaDeBatalla extends Equipable{
 
         public CorazaDeBatalla() {
-            super("Coraza de batalla", "chest.png", 325, 0, new Atributos(90,0,0,0,5,3,0,0,0), TipoEquipo.Coraza);
+            super("Coraza de batalla", "chest.png", 325, 0, new Atributos(85,0,0,0,5,3,0,0,0), TipoEquipo.Coraza);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaUnaMano, 0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaDosManos, 0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Daga, 0.9));
@@ -60,7 +61,7 @@ public class ProductorEquiposD {
     static class CorazaDeGuerra extends Equipable{
 
         public CorazaDeGuerra() {
-            super("Coraza de guerra", "chest2.png", 550, 1, new Atributos(135,0,1,0,9,5,-1,0,0), TipoEquipo.Coraza);
+            super("Coraza de guerra", "chest2.png", 575, 1, new Atributos(150,0,1,0,9,5,-1,0,0), TipoEquipo.Coraza);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaUnaMano, 0.85));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaDosManos, 0.85));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Daga, 0.85));
@@ -84,7 +85,7 @@ public class ProductorEquiposD {
     static class CascoDeBatalla extends Equipable{
 
         public CascoDeBatalla() {
-            super("Casco de batalla", "casco.png", 200, 0, new Atributos(30,0,0,0,3,2,1,0,1), TipoEquipo.Casco);
+            super("Casco de batalla", "casco.png", 175, 0, new Atributos(25,0,0,0,3,2,1,0,1), TipoEquipo.Casco);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Arco, 0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.BallestaGrande, 0.95));
         }
@@ -104,7 +105,7 @@ public class ProductorEquiposD {
     static class CascoDeDestruccion extends Equipable{
 
         public CascoDeDestruccion() {
-            super("Casco de destrucción", "casco2.png", 400, 0, new Atributos(60,10,2,0,4,2,1,0,1), TipoEquipo.Casco);
+            super("Casco de destrucción", "casco2.png", 400, 0, new Atributos(70,10,2,0,4,2,1,0,1), TipoEquipo.Casco);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Arco, 0.8));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.BallestaGrande, 0.85));
         }
@@ -136,6 +137,24 @@ public class ProductorEquiposD {
         @Override
         public Equipable getCopia() {
             return new GuantesDeBatalla();
+        }
+    
+    }
+    
+    static class PantalonesDeBatalla extends Equipable{
+
+        public PantalonesDeBatalla() {
+            super("Pantalones de batalla", "pants.png", 250, 0, new Atributos(50,10,1,0,4,2,1,0,0), TipoEquipo.Pantalon);
+        }
+
+        @Override
+        public boolean puedeEquiparseA(TipoUnidad TU) {
+            return TU!=TipoUnidad.Bestia;
+        }
+        
+        @Override
+        public Equipable getCopia() {
+            return new PantalonesDeBatalla();
         }
     
     }
