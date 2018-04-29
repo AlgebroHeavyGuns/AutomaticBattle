@@ -123,7 +123,7 @@ public class ProductorUnidadesA {
         
         public SaurioAstado() {
             super("Saurio astado", "dino3.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(370,100,7,7,9,6,6,4,5));             
+                    new Atributos(370,100,9,7,9,6,6,4,5));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }

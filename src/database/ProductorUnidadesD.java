@@ -136,7 +136,7 @@ public class ProductorUnidadesD {
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             if(this.getAlcance()>1){
-                int dano = (int)(objetivo.getVida()*0.05 + 0.35*(this.getFuerza()+this.getIntelecto()));
+                int dano = (int)(objetivo.getVida()*0.06 + 0.5*(this.getFuerza()+this.getIntelecto()));
                 if(tirada>0.6){
                     Controlador.getInstance().apMostrarMensaje(this.getNombre() + " realizó " + dano + " de daño extra al rival!");
                     Controlador.getInstance().apHerirUnidad(this, objetivo, dano);
@@ -196,7 +196,7 @@ public class ProductorUnidadesD {
                 Controlador.getInstance().apMostrarMensaje(this.getNombre() + " susurra \"Yo me ocupo\"");
                 int dano,sana=0;
                 for(Unidad rival : enemigas){
-                    dano = (int)(getFuerza()*1.5 - 0.75*rival.getArmadura());
+                    dano = (int)(getFuerza()*1.25 - 0.75*rival.getArmadura());
                     sana += dano;
                     Controlador.getInstance().apMostrarMensaje(this.getNombre() + " realizó " + dano + " a " + rival.getNombre());
                     Controlador.getInstance().apHerirUnidad(this, rival, dano);
