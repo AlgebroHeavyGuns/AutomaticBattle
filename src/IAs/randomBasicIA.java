@@ -72,4 +72,9 @@ public class randomBasicIA extends BasicIA{
         
     }
 
+    @Override
+    Seleccion calcularHabilidad(Unidad U) {
+        return null;
+    }
+
 }

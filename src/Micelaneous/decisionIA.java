@@ -30,7 +30,8 @@ public interface decisionIA {
 
         @Override
         public String toString() {
-            return "Seleccion{" + "decision=" + decision + ", U=" + U + ", movX=" + movX + ", movY=" + movY + '}';
+            return "Seleccion{" + "decision=" + decision + ", U=" + U + ", "
+                    + "H="  + H + ", movX=" + movX + ", movY=" + movY + '}';
         }
         
         

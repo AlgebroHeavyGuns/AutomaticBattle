@@ -22,7 +22,9 @@ public abstract class BasicIA implements decisionIA{
     
     @Override
     public Seleccion tomarDecision(Unidad U) {
-        Seleccion accion = calcularAtaque(U);
+        Seleccion accion = calcularHabilidad(U);
+        if(accion == null)
+            accion = calcularAtaque(U);
         if(accion == null)
             accion = calcularMovimiento(U);
         if(accion == null){
@@ -35,6 +37,7 @@ public abstract class BasicIA implements decisionIA{
     
     abstract Seleccion calcularAtaque(Unidad U);
     abstract Seleccion calcularMovimiento(Unidad U);
+    abstract Seleccion calcularHabilidad(Unidad U);
     
     
     

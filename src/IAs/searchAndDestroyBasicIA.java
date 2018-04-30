@@ -7,6 +7,7 @@ package IAs;
 
 import Micelaneous.Accion;
 import automaticbattle.Controlador;
+import automaticbattle.Habilidad;
 import automaticbattle.Unidad;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -40,6 +41,46 @@ public class searchAndDestroyBasicIA extends BasicIA{
         else
             return null;
         return eleccion;
+    }
+    
+    @Override
+    Seleccion calcularHabilidad(Unidad U) {
+        Seleccion accion = null;
+        for(Habilidad H : U.getHabilidades()){
+            switch(H.getTipo()){
+                case ALIADO:
+                    primeroMasDebilitado.ref = U;
+                    accion = priorizaCalcularHabilidad(U, primeroMasDebilitado,
+                            Controlador.getInstance().getAliadasADistancia(U, H.getRango()), H);
+                    break;
+                case ENEMIGO:
+                    primeroMasDebilitado.ref = U;
+                    accion = priorizaCalcularHabilidad(U, primeroMasDebilitado,
+                            Controlador.getInstance().getEnemigasADistancia(U, H.getRango()), H);
+                    break;
+            }
+            if(accion != null)
+                return accion;
+        }
+        
+        return accion;
+    }
+
+    Seleccion priorizaCalcularHabilidad(Unidad U, Comparator C, ArrayList<Unidad> objetivos, Habilidad H){
+        Seleccion eleccion = new Seleccion();
+        eleccion.decision = Accion.Habilidad;
+        if(!objetivos.isEmpty()){
+            objetivos.sort(C);
+            for (Unidad objetivo : objetivos)
+                if(H.tieneEfecto(U, objetivo)){
+                    eleccion.H = H;
+                    eleccion.U = objetivo;
+                    return eleccion;
+                }
+        }
+        else
+            return null;
+        return null;
     }
     
     Seleccion calcularMovimiento(Unidad U) {
