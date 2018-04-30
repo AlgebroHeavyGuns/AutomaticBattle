@@ -57,5 +57,8 @@ public abstract class Habilidad {
     public boolean puedeUtilizar(Unidad lanzador){
         return lanzador.getVida()>this.getCosteVida() && lanzador.getEnergia() >= this.getCosteEnergia();
     }
-    public void realizarEfecto(Unidad lanzador, Unidad recibido){}
+    public boolean tieneEfecto(Unidad lanzador, Unidad objetivo){
+        return true;
+    }
+    public abstract void realizarEfecto(Unidad lanzador, Unidad receptor);
 }

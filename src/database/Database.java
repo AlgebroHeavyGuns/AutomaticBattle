@@ -10,6 +10,7 @@ import automaticbattle.Unidad;
 import java.util.ArrayList;
 import Micelaneous.decisionIA;
 import automaticbattle.Escenografia;
+import automaticbattle.Habilidad;
 import java.util.Iterator;
 
 /**
@@ -21,6 +22,7 @@ public final class Database {
     private ArrayList<Unidad> unidadesEnemigas;
     private ArrayList<Unidad> unidadesAliadas;
     private ArrayList<Equipable> equipos;
+    private ArrayList<Habilidad> habilidades;
     private ArrayList<Escenografia> escenografias;
     
     
@@ -29,14 +31,21 @@ public final class Database {
     
     public void inicia(){
         iniciaEscenografias();
+        iniciaHabilidades();
         iniciaEquipos();
         iniciaUnidades();
         
     }
     
+    
     private void iniciaEscenografias(){
         escenografias = new ArrayList<>();
         escenografias.addAll(ProductorEscenografias.getEscenografias());
+    }
+    
+    private void iniciaHabilidades(){
+        habilidades = new ArrayList<>();
+        habilidades.addAll(ProductorHechizosA.getHabilidades());
     }
     
     private void iniciaEquipos(){

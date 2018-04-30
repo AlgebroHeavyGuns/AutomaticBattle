@@ -135,7 +135,7 @@ public final class Combate {
                         U.efectoUnidadAliadaUsaHabilidad(unidad, decision.H);
                 for(Unidad U:enemigas)
                     U.efectoUnidadEnemigaUsaHabilidad(unidad, decision.H);
-                    
+                break;
             case Objeto:
                 throw new UnsupportedOperationException("Not supported yet."); 
             case IDLE:
