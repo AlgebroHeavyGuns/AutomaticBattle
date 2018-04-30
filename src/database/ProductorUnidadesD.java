@@ -83,21 +83,7 @@ public class ProductorUnidadesD {
             super("Martín Paladín", "CharacterBloodElfMale.png", "No sin mi equipo.", TipoUnidad.Humano, 
                     new Atributos(175,120,5,6,6,4,5,3,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
-        }
-
-
-        @Override
-        public void efectoTurnoUnidadAliada(Unidad U) {
-            if(U!=this){
-                int vida = (int)(9+this.getFuerza()*(Math.random()*0.25+0.15));
-                if(U.getVidaInicial()-U.getVida() < vida)
-                    vida = U.getVidaInicial()-U.getVida();
-                if(vida > 0){
-                    Controlador.getInstance().apMostrarMensaje(
-                            this.getNombre() + " curó  a " + U.getNombre() + " " + vida + " puntos de salud.");
-                    Controlador.getInstance().apCurarUnidad(U, vida);
-                }
-            }
+            this.aprender(new ProductorHechizosA.SanacionMenor());
         }
         
         @Override
