@@ -37,7 +37,8 @@ public class ProductorUnidadesA {
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
         
-
+        /*efecto anterior
+        
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             int cura = (int)(this.getFuerza()*(0.25+tirada*1.25));
@@ -48,8 +49,9 @@ public class ProductorUnidadesA {
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + cura + " de salud.");
             }
         }
+        */
         
-
+     
         @Override
         public void efectoUnidadAtacada(Unidad atacante, double prob, int danio) {
             final double COE = 0.7;
@@ -82,12 +84,17 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            if(rabia<35)    
-                rabia+= (int)(tirada*6);
+            if(rabia<60)    
+                rabia+= (int)(tirada*6)+2;
             else
-                rabia=35;
-            Controlador.getInstance().apHerirUnidad(this, objetivo, rabia);
-            Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " hace " + rabia + " de daño adicional a " + objetivo.getNombre());
+                rabia=60;
+            int dano = rabia-objetivo.getArmadura();
+            if(dano > 0){
+                Controlador.getInstance().apHerirUnidad(this, objetivo, dano);
+                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " hace " +
+                       dano + " de daño adicional a " + objetivo.getNombre());
+            }else
+                rabia += 2;
         }
 
         @Override
@@ -123,11 +130,10 @@ public class ProductorUnidadesA {
         
         public SaurioAstado() {
             super("Saurio astado", "dino3.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(370,100,9,7,9,6,6,4,5));             
+                    new Atributos(350,120,9,7,9,6,6,4,5));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }
-        
 
         @Override
         public Unidad getCopia() {
@@ -141,21 +147,11 @@ public class ProductorUnidadesA {
         
         public SaurioCrestado() {
             super("Saurio crestado", "dino4.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(240,120,8,7,8,6,7,4,6));             
+                    new Atributos(235,150,7,7,7,6,7,4,6));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Glándula venenosa"));
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
-        }
-
-        @Override
-        public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
-            int cura = (int)(10*(tirada+0.3));
-            if(this.getVidaInicial()-this.getVida() > cura)
-                cura*=1.5;
-            if(cura > 0){
-                Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " se curó " + cura + " de salud.");
-                Controlador.getInstance().apCurarUnidad(this, cura);
-            }
+            this.aprender(new ProductorHechizosD.DardoVenenoso());
         }
 
         @Override
@@ -171,7 +167,7 @@ public class ProductorUnidadesA {
         
         public SaurioGigante() {
             super("Saurio gigante", "dino2.png", ".", TipoUnidad.Reptil, 
-                    new Atributos(1300,200,16,10,13,10,8,3,8));             
+                    new Atributos(1400,200,16,10,13,10,8,3,8));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
         }

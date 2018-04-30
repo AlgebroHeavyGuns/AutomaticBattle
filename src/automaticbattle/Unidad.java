@@ -25,6 +25,7 @@ public abstract class Unidad {
     private String detalle;
     private TipoUnidad tipo;
     private int vidaInicial;
+    private int energiaInicial;
     private Atributos base;  //atributos por defecto de la unidad (sin equipo)
     private Atributos actual;//atributos que la unidad acumula  durante el combate
     private ArrayList<Equipable> equipo;
@@ -101,6 +102,7 @@ public abstract class Unidad {
     public void fijaActual(){
         actual = sumaAtributosEquipo().suma(base);
         vidaInicial = actual.getVida();
+        energiaInicial = actual.getEnergia();
     }
 
     public String getNombre() {
@@ -158,8 +160,20 @@ public abstract class Unidad {
     public int getVidaInicial() {
         return vidaInicial;
     }
+
+    public int getEnergiaInicial() {
+        return energiaInicial;
+    }
     
     
+    public int recargaEnergia(){
+        int diferencia = this.getEnergiaInicial() - this.getEnergia();
+        int recarga = (int)(this.getEnergiaInicial()*0.1);
+        if(recarga > diferencia)
+            recarga = diferencia;
+        this.modEnergia(recarga);
+        return recarga;
+    }
     
     public int getAlcance(){
         for(Equipable E : this.equipo)

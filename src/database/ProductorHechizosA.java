@@ -19,18 +19,18 @@ import java.util.ArrayList;
 public class ProductorHechizosA {
     static ArrayList<Habilidad> getHabilidades(){
         ArrayList<Habilidad> lista = new ArrayList<>();
-
+        lista.add(new SanacionMenor());
         return lista;
     }
     
     static class SanacionMenor extends Habilidad{
 
         public SanacionMenor() {
-            super("Sanación menor", "Sana", 30, 0, 5, TipoHabilidad.ALIADO);
+            super("Sanación menor", "Sana", 40, 0, 5, TipoHabilidad.ALIADO);
         }
         
         private int getSanacion(Unidad lanzador, Unidad objetivo){
-            return (int) (objetivo.getVidaInicial()*0.1 + lanzador.getIntelecto());
+            return (int) (objetivo.getVidaInicial()*0.125 + lanzador.getIntelecto());
         }
 
         @Override
@@ -50,7 +50,44 @@ public class ProductorHechizosA {
             Controlador.getInstance().apCurarUnidad(receptor, sana);
         }
 
+        @Override
+        public Habilidad getCopia() {
+            return new SanacionMenor();
+        }
 
     }
+    
+    
+    static class DisparoCertero extends Habilidad{
+
+        public DisparoCertero() {
+            super("Disparo certero", "Hace mucho daño", 65, 0, 8, TipoHabilidad.ENEMIGO);
+        }
+        
+        private int getDano(Unidad lanzador, Unidad objetivo){
+            return (int) (50 + objetivo.getVidaInicial()*0.125 + 
+                    lanzador.getFuerza()) - 2*objetivo.getBlindaje();
+        }
+
+        @Override
+        public boolean tieneEfecto(Unidad lanzador, Unidad objetivo) {
+            return getDano(lanzador,objetivo) > 10;
+        }
+        
+        @Override
+        public void realizarEfecto(Unidad lanzador, Unidad receptor) {
+            int dano = this.getDano(lanzador, receptor);
+            Controlador.getInstance().apMostrarMensaje(
+                            lanzador.getNombre() + " hizo a " + receptor.getNombre() + " " + dano + " puntos de daño.");
+            Controlador.getInstance().apHerirUnidad(lanzador, receptor, dano);
+        }
+
+        @Override
+        public Habilidad getCopia() {
+            return new DisparoCertero();
+        }
+
+    }
+    
     
 }

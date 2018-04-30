@@ -61,4 +61,5 @@ public abstract class Habilidad {
         return true;
     }
     public abstract void realizarEfecto(Unidad lanzador, Unidad receptor);
+    public abstract Habilidad getCopia();
 }

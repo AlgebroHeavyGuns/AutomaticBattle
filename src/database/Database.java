@@ -46,6 +46,7 @@ public final class Database {
     private void iniciaHabilidades(){
         habilidades = new ArrayList<>();
         habilidades.addAll(ProductorHechizosA.getHabilidades());
+        habilidades.addAll(ProductorHechizosD.getHabilidades());
     }
     
     private void iniciaEquipos(){

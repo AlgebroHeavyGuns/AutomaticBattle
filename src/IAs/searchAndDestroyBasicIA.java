@@ -47,20 +47,22 @@ public class searchAndDestroyBasicIA extends BasicIA{
     Seleccion calcularHabilidad(Unidad U) {
         Seleccion accion = null;
         for(Habilidad H : U.getHabilidades()){
-            switch(H.getTipo()){
-                case ALIADO:
-                    primeroMasDebilitado.ref = U;
-                    accion = priorizaCalcularHabilidad(U, primeroMasDebilitado,
-                            Controlador.getInstance().getAliadasADistancia(U, H.getRango()), H);
-                    break;
-                case ENEMIGO:
-                    primeroMasDebilitado.ref = U;
-                    accion = priorizaCalcularHabilidad(U, primeroMasDebilitado,
-                            Controlador.getInstance().getEnemigasADistancia(U, H.getRango()), H);
-                    break;
+            if(H.puedeUtilizar(U)){
+                switch(H.getTipo()){
+                    case ALIADO:
+                        primeroMasDebilitado.ref = U;
+                        accion = priorizaCalcularHabilidad(U, primeroMasDebilitado,
+                                Controlador.getInstance().getAliadasADistancia(U, H.getRango()), H);
+                        break;
+                    case ENEMIGO:
+                        primeroMasDebilitado.ref = U;
+                        accion = priorizaCalcularHabilidad(U, primeroMasDebilitado,
+                                Controlador.getInstance().getEnemigasADistancia(U, H.getRango()), H);
+                        break;
+                }
+                if(accion != null)
+                    return accion;
             }
-            if(accion != null)
-                return accion;
         }
         
         return accion;

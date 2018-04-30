@@ -190,7 +190,7 @@ public class ProductorCombate {
         
     private static class IncursionSelva2 extends CombateInfo{
     
-        static final int PRESUPUESTO= 2500;
+        static final int PRESUPUESTO= 2600;
         static final int MAXPERSONAJES = 3;
         static final int MINPERSONAJES = 2;
         
@@ -215,9 +215,9 @@ public class ProductorCombate {
             U = U.getCopia();   T.insertaUnidad(U, 2, 1);
             U = U.getCopia();   T.insertaUnidad(U, 3, 0);
             U = U.getCopia();   T.insertaUnidad(U, 3, 6);
-            U = U.getCopia();   T.insertaUnidad(U, 4, 3);
             U = U.getCopia();   T.insertaUnidad(U, 4, 4);
             U = U.getCopia();   T.insertaUnidad(U, 4, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 5, 3);            
             U = U.getCopia();   T.insertaUnidad(U, 6, 5);
             U = U.getCopia();   T.insertaUnidad(U, 7, 3);
 
@@ -228,7 +228,7 @@ public class ProductorCombate {
     
     private static class IncursionSelva3 extends CombateInfo{
     
-        static final int PRESUPUESTO= 3300;
+        static final int PRESUPUESTO= 3400;
         static final int MAXPERSONAJES = 3;
         static final int MINPERSONAJES = 3;
         

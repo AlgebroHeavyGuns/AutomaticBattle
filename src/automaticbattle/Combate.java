@@ -70,7 +70,6 @@ public final class Combate {
     public void nextTurn(){
         Unidad unidad = colaTurno.remove(0);
 
-
         if(equipoUno.contains(unidad)){
             aliadas=equipoUno;
             enemigas=equipoDos;
@@ -82,6 +81,7 @@ public final class Combate {
         comprobarMuertos();
         if(unidad.getVida() > 0){
             unidad.efectoTurnoPropio();
+            unidad.recargaEnergia();
             for(Unidad U:aliadas)
                 if(U != unidad)
                     U.efectoTurnoUnidadAliada(unidad);
@@ -189,6 +189,8 @@ public final class Combate {
     
     private void realizarHechizo(Unidad actor, decisionIA.Seleccion decision){
         Unidad objetivo = decision.U; //podria ser null para determinados tipos
+        actor.modEnergia(-decision.H.getCosteEnergia());
+        actor.modVidaActual(-decision.H.getCosteVida());
         switch(decision.H.getTipo()){
             case ALIADO:
                 objetivo.efectoUnidadHechizadaAliado(actor, decision.H);
