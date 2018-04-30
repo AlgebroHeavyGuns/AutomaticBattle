@@ -33,6 +33,10 @@ public class ProductorCombate {
                 return new IncursionSelva2();
             case 4:
                 return new IncursionSelva3();
+            case 5:
+                return new TerritorioVikingo1();
+            case 6:
+                return new TerritorioVikingo2();
             case 11:
                 return new CombateDragon();
         
@@ -53,6 +57,10 @@ public class ProductorCombate {
                 return IncursionSelva2.PRESUPUESTO;
             case 4:
                 return IncursionSelva3.PRESUPUESTO;
+            case 5:
+                return TerritorioVikingo1.PRESUPUESTO;
+            case 6:
+                return TerritorioVikingo2.PRESUPUESTO;
             case 11:
                 return CombateDragon.PRESUPUESTO;
         
@@ -73,6 +81,10 @@ public class ProductorCombate {
                 return IncursionSelva2.MAXPERSONAJES;
             case 4:
                 return IncursionSelva3.MAXPERSONAJES;
+            case 5:
+                return TerritorioVikingo1.MAXPERSONAJES;
+            case 6:
+                return TerritorioVikingo2.MAXPERSONAJES;
             case 11:
                 return CombateDragon.MAXPERSONAJES;
         
@@ -92,7 +104,11 @@ public class ProductorCombate {
             case 3:
                 return IncursionSelva2.MINPERSONAJES;
             case 4:
-                return IncursionSelva3.MINPERSONAJES;                
+                return IncursionSelva3.MINPERSONAJES;    
+            case 5:
+                return TerritorioVikingo1.MINPERSONAJES;
+            case 6:
+                return TerritorioVikingo2.MINPERSONAJES;
             case 11:
                 return CombateDragon.MINPERSONAJES;
         
@@ -271,6 +287,74 @@ public class ProductorCombate {
     
     
     }
+    
+    
+    private static class TerritorioVikingo1 extends CombateInfo{
+    
+        static final int PRESUPUESTO= 2000;
+        static final int MAXPERSONAJES = 2;
+        static final int MINPERSONAJES = 2;
+        
+        public TerritorioVikingo1() {
+            super("Territorio Vikingo 1", "molino.png",  9, 9);
+            Unidad U = Database.getInstance().getUnidadEnemiga("Guardián Vikingo");
+            U.apellido("1");
+            enemigos.add(U);
+            T.insertaUnidad(U, 7, 2);
+            U = U.getCopia();
+            U.apellido("2");
+            enemigos.add(U);
+            T.insertaUnidad(U, 6, 6);
+            U = Database.getInstance().getEscenografia("Árbol seco");
+            T.insertaUnidad(U, 5, 3);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 3, 1); 
+            U = U.getCopia();   T.insertaUnidad(U, 4, 4);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 6);
+            U = U.getCopia();   T.insertaUnidad(U, 7, 0);
+            U = Database.getInstance().getEscenografia("Roca mediana");
+            T.insertaUnidad(U, 5, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 0, 1);
+            U = U.getCopia();   T.insertaUnidad(U, 1, 7);
+            U = U.getCopia();   T.insertaUnidad(U, 8, 3);
+            U = U.getCopia();   T.insertaUnidad(U, 7, 4);
+        }
+
+    }
+    
+    
+    private static class TerritorioVikingo2 extends CombateInfo{
+    
+        static final int PRESUPUESTO= 2300;
+        static final int MAXPERSONAJES = 2;
+        static final int MINPERSONAJES = 2;
+        
+        public TerritorioVikingo2() {
+            super("Territorio Vikingo 2", "molino.png",  9, 9);
+            Unidad U = Database.getInstance().getUnidadEnemiga("Guardián Vikingo");
+            enemigos.add(U);
+            T.insertaUnidad(U, 6, 3);
+            U = Database.getInstance().getUnidadEnemiga("Rhyno de combate");
+            enemigos.add(U);
+            T.insertaUnidad(U, 7, 4);
+            U = Database.getInstance().getEscenografia("Árbol seco");
+            T.insertaUnidad(U, 6, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 1, 3);
+            U = U.getCopia();   T.insertaUnidad(U, 2, 6);
+            U = U.getCopia();   T.insertaUnidad(U, 3, 2); 
+            U = U.getCopia();   T.insertaUnidad(U, 4, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 7);
+            U = U.getCopia();   T.insertaUnidad(U, 7, 1);
+            U = Database.getInstance().getEscenografia("Roca mediana");
+            T.insertaUnidad(U, 5, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 0, 1);
+            U = U.getCopia();   T.insertaUnidad(U, 1, 7);
+            U = U.getCopia();   T.insertaUnidad(U, 8, 2);
+            U = U.getCopia();   T.insertaUnidad(U, 7, 5);
+        }
+
+    }
+    
     
     public abstract static class CombateInfo{
         public ArrayList<Unidad> enemigos;

@@ -45,8 +45,12 @@ public class ProductorHechizosA {
             int diferencia = receptor.getVidaInicial() - receptor.getVida();
             if(sana > diferencia)
                 sana = diferencia;
-            Controlador.getInstance().apMostrarMensaje(
+            if(lanzador!=receptor)
+                Controlador.getInstance().apMostrarMensaje(
                             lanzador.getNombre() + " curó a " + receptor.getNombre() + " " + sana + " puntos de salud.");
+            else
+                Controlador.getInstance().apMostrarMensaje(
+                            lanzador.getNombre() + " se curó " + sana + " puntos de salud.");
             Controlador.getInstance().apCurarUnidad(receptor, sana);
         }
 
@@ -65,7 +69,7 @@ public class ProductorHechizosA {
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){
-            return (int) (50 + objetivo.getVidaInicial()*0.125 + 
+            return (int) (40 + objetivo.getVidaInicial()*0.135 + 
                     lanzador.getFuerza()) - 2*objetivo.getBlindaje();
         }
 

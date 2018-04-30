@@ -33,12 +33,14 @@ public class Estadisticas {
     }
     
     public void haHeridoUnidad(Unidad actor, Unidad objetivo, int herida){
-        if(uno.contains(actor)){
+        if(dos.contains(objetivo)){
             danoRecibidoDos +=herida;
-            danoEfectuadoUno += herida;
+            if(actor!=objetivo)
+                danoEfectuadoUno += herida;
         }else{
             danoRecibidoUno +=herida;
-            danoEfectuadoDos += herida;
+            if(actor!=objetivo)
+                danoEfectuadoDos += herida;
         }
     }
     

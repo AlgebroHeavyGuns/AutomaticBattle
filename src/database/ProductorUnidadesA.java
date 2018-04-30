@@ -26,6 +26,8 @@ public class ProductorUnidadesA {
         lista.add(new SaurioCrestado());
         lista.add(new SaurioGigante());
         lista.add(new EspirituDragon());
+        lista.add(new GuardianVikingo());
+        lista.add(new RhynoDeCombate());
         return lista;
     }
     
@@ -78,7 +80,7 @@ public class ProductorUnidadesA {
             super("Oso rabioso", "Beast4.png", "Es hermoso.", TipoUnidad.Bestia, 
                     new Atributos(350,130,4,4,8,6,4,4,7));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
-            this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
+            this.equipar(new ProductorEquiposA.DentaduraFuerte());
         }
         
 
@@ -132,7 +134,7 @@ public class ProductorUnidadesA {
             super("Saurio astado", "dino3.png", "Que no asado...", TipoUnidad.Reptil, 
                     new Atributos(350,120,9,7,9,6,6,4,5));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
-            this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
+            this.equipar(new ProductorEquiposA.DentaduraFuerte());
         }
 
         @Override
@@ -149,8 +151,8 @@ public class ProductorUnidadesA {
             super("Saurio crestado", "dino4.png", "Que no asado...", TipoUnidad.Reptil, 
                     new Atributos(235,150,7,7,7,6,7,4,6));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
-            this.equipar(Database.getInstance().getEquipo("Glándula venenosa"));
-            this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
+            this.equipar(new ProductorEquiposA.GlandulaVenenosa());
+            this.equipar(new ProductorEquiposA.DentaduraFuerte());
             this.aprender(new ProductorHechizosD.DardoVenenoso());
         }
 
@@ -169,7 +171,7 @@ public class ProductorUnidadesA {
             super("Saurio gigante", "dino2.png", ".", TipoUnidad.Reptil, 
                     new Atributos(1400,200,16,10,13,10,8,3,8));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
-            this.equipar(Database.getInstance().getEquipo("Dentadura fuerte"));
+            this.equipar(new ProductorEquiposA.DentaduraFuerte());
         }
 
         @Override
@@ -183,5 +185,42 @@ public class ProductorUnidadesA {
         }
     
     }
+    
+        static class GuardianVikingo extends Unidad{
+
+        
+        public GuardianVikingo() {
+            super("Guardián Vikingo", "Viking.png", "No conoce el miedo", TipoUnidad.Humano,   
+                    new Atributos(110,120,9,5,4,3,7,4,7));
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+            this.equipar(new ProductorEquiposD.CascoDeDestruccion());
+            this.equipar(new ProductorEquiposD.CorazaDeGuerra());
+            this.equipar(new ProductorEquiposG.HachaGranLeñador());
+        }
+
+        @Override
+        public Unidad getCopia() {
+            return new GuardianVikingo();
+        }
+    
+    }
+        
+    static class RhynoDeCombate extends Unidad{
+
+        
+        public RhynoDeCombate() {
+            super("Rhyno de combate", "Beast7.png", "Mejor huir...", TipoUnidad.Bestia, 
+                    new Atributos(600,250,14,5,14,9,4,2,5));  
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+            this.aprender(new ProductorHechizosD.Embiste());
+
+        }
+
+        @Override
+        public Unidad getCopia() {
+            return new RhynoDeCombate();
+        }
+    
+    } 
     
 }

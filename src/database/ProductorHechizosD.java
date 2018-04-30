@@ -30,7 +30,7 @@ public class ProductorHechizosD {
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){
-            return (int) (10 + objetivo.getVidaInicial()*0.07 + 
+            return (int) (10 + objetivo.getVidaInicial()*0.08 + 
                     lanzador.getIntelecto() + lanzador.getFuerza()) - objetivo.getBlindaje();
         }
 
@@ -51,8 +51,44 @@ public class ProductorHechizosD {
         public Habilidad getCopia() {
            return new DardoVenenoso();
         }
+
+    }
+    
+    static class Embiste extends Habilidad{
+
+        public Embiste() {
+            super("Embiste", "Hace daño segun la vida maxima y a si mismo.", 30, 0, 1, TipoHabilidad.ENEMIGO);
+        }
         
+        private int getDano(Unidad lanzador, Unidad objetivo){
+            return (int) (10+lanzador.getVida()*0.2 +
+                    objetivo.getVidaInicial()*0.08) - 2*objetivo.getBlindaje();
+        }
+
+        @Override
+        public boolean tieneEfecto(Unidad lanzador, Unidad objetivo) {
+            return getDano(lanzador,objetivo) > 5;
+        }
         
+        @Override
+        public void realizarEfecto(Unidad lanzador, Unidad receptor) {
+            int dano = this.getDano(lanzador, receptor);
+            
+            Controlador.getInstance().apMostrarMensaje(
+                            lanzador.getNombre() + " hizo a " + receptor.getNombre() + " " + dano + " puntos de daño.");
+            Controlador.getInstance().apHerirUnidad(lanzador, receptor, dano);
+            dano = (int)(dano*0.1);
+            if(dano>0){
+                Controlador.getInstance().apHerirUnidad(lanzador, lanzador, dano);
+                Controlador.getInstance().apMostrarMensaje(
+                            lanzador.getNombre() + " se hizo " + dano + " de daño a sí mismo.");
+            }
+        }
+
+        @Override
+        public Habilidad getCopia() {
+           return new Embiste();
+        }
 
     }
     
