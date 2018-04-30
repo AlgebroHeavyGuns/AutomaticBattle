@@ -26,7 +26,7 @@ public class ProductorHechizosD {
     static class DardoVenenoso extends Habilidad{
 
         public DardoVenenoso() {
-            super("Dardo venenoso", "Hace daño segun la vida maxima", 60, 0, 4, TipoHabilidad.ENEMIGO);
+            super("Dardo venenoso", "Hace daño segun la vida maxima", 65, 0, 4, TipoHabilidad.ENEMIGO);
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){
@@ -57,7 +57,7 @@ public class ProductorHechizosD {
     static class Embiste extends Habilidad{
 
         public Embiste() {
-            super("Embiste", "Hace daño segun la vida maxima y a si mismo.", 30, 0, 1, TipoHabilidad.ENEMIGO);
+            super("Embiste", "Hace daño segun la vida maxima y a si mismo.", 35, 0, 1, TipoHabilidad.ENEMIGO);
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){

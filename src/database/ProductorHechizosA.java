@@ -26,7 +26,7 @@ public class ProductorHechizosA {
     static class SanacionMenor extends Habilidad{
 
         public SanacionMenor() {
-            super("Sanación menor", "Sana", 40, 0, 5, TipoHabilidad.ALIADO);
+            super("Sanación menor", "Sana", 45, 0, 5, TipoHabilidad.ALIADO);
         }
         
         private int getSanacion(Unidad lanzador, Unidad objetivo){
@@ -65,7 +65,7 @@ public class ProductorHechizosA {
     static class DisparoCertero extends Habilidad{
 
         public DisparoCertero() {
-            super("Disparo certero", "Hace mucho daño", 65, 0, 8, TipoHabilidad.ENEMIGO);
+            super("Disparo certero", "Hace mucho daño", 75, 0, 8, TipoHabilidad.ENEMIGO);
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){

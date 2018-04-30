@@ -87,7 +87,7 @@ public class ProductorUnidadesA {
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             if(rabia<60)    
-                rabia+= (int)(tirada*6)+2;
+                rabia+= 1+(int)(tirada*5);
             else
                 rabia=60;
             int dano = rabia-objetivo.getArmadura();
@@ -96,7 +96,7 @@ public class ProductorUnidadesA {
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " hace " +
                        dano + " de daño adicional a " + objetivo.getNombre());
             }else
-                rabia += 2;
+                rabia += 0.5*this.getFuerza();
         }
 
         @Override

@@ -50,9 +50,9 @@ public class ProductorEquiposA {
     static class DentaduraFuerte extends Arma{
 
         public DentaduraFuerte() {
-            super("Dentadura fuerte", "dientes.png", 0, -1, new Atributos(50,10,8,0,0,0,0,0,0), TipoArma.Daga, Elemento.Comun, 1);
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Humano, 1.2));
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Elfo, 1.25));
+            super("Dentadura fuerte", "dientes.png", 0, -1, new Atributos(60,10,7,0,0,0,0,0,0), TipoArma.Daga, Elemento.Comun, 1);
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Humano, 1.25));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Elfo, 1.3));
             this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.2));
         }
 
