@@ -270,9 +270,9 @@ public class CombatePanel extends javax.swing.JPanel {
     private void saludActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saludActionPerformed
         String S = "";
         for(Unidad U: Controlador.getInstance().combateActual.getEquipoUno())
-            S += U.getNombre()+ " (" + U.getVida() + ")\n";
+            S += U.getNombre()+ " (" +  U.getVida() + " | " + U.getEnergia() + ")\n";
         for(Unidad U: Controlador.getInstance().combateActual.getEquipoDos())
-            S += U.getNombre()+ " (" + U.getVida() + ")\n";
+            S += U.getNombre()+ " (" +  U.getVida() + " | " + U.getEnergia() + ")\n";
         this.insertarInfo(S);
     }//GEN-LAST:event_saludActionPerformed
 

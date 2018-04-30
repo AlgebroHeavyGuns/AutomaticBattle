@@ -75,6 +75,17 @@ public class Controlador {
                 }
                 break;
             case Habilidad:
+                if(decision.H==null)
+                    return false;
+                switch(decision.H.getTipo()){
+                    case ALIADO:
+                        can = this.getAliadasADistancia(U, decision.H.getRango()).contains(decision.U);
+                        break;
+                    case ENEMIGO:
+                        can = this.getEnemigasADistancia(U, decision.H.getRango()).contains(decision.U);
+                        break;  
+                }
+                return can;
             case Objeto:
             case IDLE:
         }

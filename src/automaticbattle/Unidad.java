@@ -28,6 +28,7 @@ public abstract class Unidad {
     private Atributos base;  //atributos por defecto de la unidad (sin equipo)
     private Atributos actual;//atributos que la unidad acumula  durante el combate
     private ArrayList<Equipable> equipo;
+    private ArrayList<Habilidad> habilidades;
     private decisionIA IAAsociada;
     private int posX=-1;
     private int posY=-1;
@@ -41,6 +42,7 @@ public abstract class Unidad {
         this.base = base;
         this.equipo = new ArrayList<>();
         this.actual = null;
+        this.habilidades = new ArrayList<>();
     }
     
     
@@ -127,6 +129,14 @@ public abstract class Unidad {
 
     public ArrayList<Equipable> getEquipo() {
         return equipo;
+    }
+    
+    public ArrayList<Habilidad> getHabilidades(){
+        return habilidades;
+    }
+    
+    public void aprender(Habilidad hab){
+        habilidades.add(hab);
     }
 
     public Atributos getBase() {
@@ -356,15 +366,15 @@ public abstract class Unidad {
     public void efectoUnidadEnemigaMueve(Unidad U, int origenX, int origenY, int destinoX, int destinoY){}
     public void efectoUnidadAliadaAtaca(Unidad atacante, Unidad defensor){}
     public void efectoUnidadEnemigaAtaca(Unidad atacante, Unidad defensor){}
-    public void efectoUnidadAliadaUsaHabilidad(Unidad U, int idHabilidad){} //sustituir por Habilidad
-    public void efectoUnidadEnemigaUsaHabilidad(Unidad U, int idHabilidad){}//sustituir por Habilidad
+    public void efectoUnidadAliadaUsaHabilidad(Unidad U, Habilidad habilidad){} 
+    public void efectoUnidadEnemigaUsaHabilidad(Unidad U, Habilidad habilidad){}
     public void efectoUnidadAliadaUsaObjeto(Unidad U, int idObj){}//sustituir por Objeto
     public void efectoUnidadEnemigaUsaObjeto(Unidad U, int idObj){}//sustituir por Objeto
     public void efectoUnidadAliadaNoHaceNada(Unidad U){}
     public void efectoUnidadEnemigaNoHaceNada(Unidad U){}
     public void efectoDesplazarse(){}
     public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto){}
-    public void efectoUsarHabilidad(Unidad objetivo, int idHabilidad){} //sustituir por Habilidad
+    public void efectoUsarHabilidad(Habilidad habilidad){} 
     public void efectoUsarObjeto(Unidad objetivo, int idObj){}//sustituir por Objeto
     public void efectoNoHacerNada(){}
     
@@ -373,6 +383,8 @@ public abstract class Unidad {
     public void efectoUnidadEnemigaMuere(Unidad victima, Unidad asesino){}
     public void efectoMatarUnidad(Unidad victima){}
     public void efectoUnidadAtacada(Unidad atacante, double prob, int danio){}
+    public void efectoUnidadHechizadaAliado(Unidad lanzador, Habilidad H){}
+    public void efectoUnidadHechizadaEnemigo(Unidad lanzador, Habilidad H){}
     
     
     

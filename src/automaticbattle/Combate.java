@@ -125,11 +125,17 @@ public final class Combate {
             case Atacar:
                 for(Unidad U:aliadas)
                     if(U != unidad)
-                    U.efectoUnidadAliadaAtaca(unidad, decision.U);
+                        U.efectoUnidadAliadaAtaca(unidad, decision.U);
                 for(Unidad U:enemigas)
                     U.efectoUnidadEnemigaAtaca(unidad, decision.U);
                 break;
             case Habilidad:
+                for(Unidad U:aliadas)
+                    if(U != unidad)
+                        U.efectoUnidadAliadaUsaHabilidad(unidad, decision.H);
+                for(Unidad U:enemigas)
+                    U.efectoUnidadEnemigaUsaHabilidad(unidad, decision.H);
+                    
             case Objeto:
                 throw new UnsupportedOperationException("Not supported yet."); 
             case IDLE:
@@ -170,6 +176,10 @@ public final class Combate {
                     panel.insertarInfo(actor.getNombre() + " atacó a "  + decision.U.getNombre() + " pero falló");
                 break;     
             case Habilidad:
+                actor.efectoUsarHabilidad(decision.H);
+                panel.insertarInfo(actor.getNombre() + " usó la habilidad "  + decision.H.getNombre() + ".");
+                realizarHechizo(actor, decision);
+                break;
             case Objeto:
                 throw new UnsupportedOperationException("Not supported yet.");
             case IDLE: 
@@ -177,6 +187,20 @@ public final class Combate {
         }
     }
     
+    private void realizarHechizo(Unidad actor, decisionIA.Seleccion decision){
+        Unidad objetivo = decision.U; //podria ser null para determinados tipos
+        switch(decision.H.getTipo()){
+            case ALIADO:
+                objetivo.efectoUnidadHechizadaAliado(actor, decision.H);
+                decision.H.realizarEfecto(actor, objetivo);
+                break;
+            case ENEMIGO:
+                objetivo.efectoUnidadHechizadaEnemigo(actor, decision.H);
+                decision.H.realizarEfecto(actor, objetivo);
+                break;   
+                
+        }
+    }
     void comprobarMuertos(){
         ArrayList<Unidad> copia = new ArrayList<>(aliadas);
         for(Unidad U: copia)

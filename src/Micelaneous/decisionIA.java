@@ -6,6 +6,7 @@
 package Micelaneous;
 
 import Micelaneous.Accion;
+import automaticbattle.Habilidad;
 import automaticbattle.Unidad;
 
 /**
@@ -22,7 +23,7 @@ public interface decisionIA {
     public class Seleccion{
         public Accion decision=Accion.IDLE;
         public Unidad U=null;
-        //public Habilidad H=null;
+        public Habilidad H=null;
         //public Objeto O=null;
         public int movX=0;
         public int movY=0;
