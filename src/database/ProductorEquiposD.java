@@ -32,6 +32,7 @@ public class ProductorEquiposD {
         lista.add(new GuantesDeBatalla());
         lista.add(new PantalonesDeBatalla());
         lista.add(new AnilloDeVitalidad());
+        lista.add(new AnilloDeCoraje());
         return lista;
     }
     
@@ -61,7 +62,7 @@ public class ProductorEquiposD {
     static class CorazaDeGuerra extends Equipable{
 
         public CorazaDeGuerra() {
-            super("Coraza de guerra", "chest2.png", 600, 1, new Atributos(160,0,1,0,9,5,-1,0,0), TipoEquipo.Coraza);
+            super("Coraza de guerra", "chest2.png", 625, 1, new Atributos(180,0,1,0,10,5,-1,0,0), TipoEquipo.Coraza);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaUnaMano, 0.85));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaDosManos, 0.85));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Daga, 0.85));
@@ -85,7 +86,7 @@ public class ProductorEquiposD {
     static class CascoDeBatalla extends Equipable{
 
         public CascoDeBatalla() {
-            super("Casco de batalla", "casco.png", 150, 0, new Atributos(30,0,0,0,2,2,1,0,1), TipoEquipo.Casco);
+            super("Casco de batalla", "casco.png", 175, 0, new Atributos(30,0,0,0,2,2,1,0,1), TipoEquipo.Casco);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Arco, 0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.BallestaGrande, 0.95));
         }
@@ -126,7 +127,7 @@ public class ProductorEquiposD {
     static class GuantesDeBatalla extends Equipable{
 
         public GuantesDeBatalla() {
-            super("Guantes de batalla", "guante.png", 100, 0, new Atributos(20,10,1,0,1,0,0,0,0), TipoEquipo.Guantes);
+            super("Guantes de batalla", "guante.png", 125, 0, new Atributos(20,10,1,0,1,0,0,0,0), TipoEquipo.Guantes);
         }
         
         @Override
@@ -144,7 +145,7 @@ public class ProductorEquiposD {
     static class PantalonesDeBatalla extends Equipable{
 
         public PantalonesDeBatalla() {
-            super("Pantalones de batalla", "pants.png", 225, 0, new Atributos(50,10,0,0,3,2,1,0,0), TipoEquipo.Pantalon);
+            super("Pantalones de batalla", "pants.png", 250, 0, new Atributos(50,10,0,0,3,2,1,0,0), TipoEquipo.Pantalon);
         }
 
         @Override
@@ -162,7 +163,7 @@ public class ProductorEquiposD {
     static class AnilloDeVitalidad extends Equipable{
 
         public AnilloDeVitalidad() {
-            super("AnilloDeVitalidad", "anillo1.png", 75, 0, new Atributos(30,0,0,0,0,0,0,0,0), TipoEquipo.Joyeria);
+            super("Anillo de Vitalidad", "anillo1.png", 75, 0, new Atributos(30,0,0,0,0,0,0,0,0), TipoEquipo.Joyeria);
         }
         
         @Override
@@ -173,6 +174,24 @@ public class ProductorEquiposD {
         @Override
         public Equipable getCopia() {
             return new AnilloDeVitalidad();
+        }
+    
+    }
+    
+    static class AnilloDeCoraje extends Equipable{
+
+        public AnilloDeCoraje() {
+            super("Anillo de Coraje", "anillo2.png", 50, 0, new Atributos(10,0,1,0,0,0,0,0,0), TipoEquipo.Joyeria);
+        }
+        
+        @Override
+        public boolean puedeEquiparseA(TipoUnidad TU) {
+            return TU!=TipoUnidad.Bestia && TU!=TipoUnidad.Reptil;
+        }
+        
+        @Override
+        public Equipable getCopia() {
+            return new AnilloDeCoraje();
         }
     
     }

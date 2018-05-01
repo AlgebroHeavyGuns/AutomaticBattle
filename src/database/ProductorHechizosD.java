@@ -30,13 +30,13 @@ public class ProductorHechizosD {
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){
-            return (int) (10 + objetivo.getVidaInicial()*0.08 + 
+            return (int) (15 + objetivo.getVidaInicial()*0.07 + 
                     lanzador.getIntelecto() + lanzador.getFuerza()) - objetivo.getBlindaje();
         }
 
         @Override
         public boolean tieneEfecto(Unidad lanzador, Unidad objetivo) {
-            return getDano(lanzador,objetivo) > 5;
+            return getDano(lanzador,objetivo) > 10;
         }
         
         @Override
@@ -61,8 +61,8 @@ public class ProductorHechizosD {
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){
-            return (int) (10+lanzador.getVida()*0.2 +
-                    objetivo.getVidaInicial()*0.08) - 2*objetivo.getBlindaje();
+            return (int) (lanzador.getVida()*0.15 +
+                    objetivo.getVidaInicial()*0.1) - 2*objetivo.getBlindaje();
         }
 
         @Override

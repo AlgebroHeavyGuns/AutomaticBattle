@@ -65,12 +65,12 @@ public class ProductorHechizosA {
     static class DisparoCertero extends Habilidad{
 
         public DisparoCertero() {
-            super("Disparo certero", "Hace mucho daño", 75, 0, 8, TipoHabilidad.ENEMIGO);
+            super("Disparo certero", "Hace mucho daño", 70, 0, 8, TipoHabilidad.ENEMIGO);
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){
-            return (int) (40 + objetivo.getVidaInicial()*0.135 + 
-                    lanzador.getFuerza()) - 2*objetivo.getBlindaje();
+            return (int) (30 + objetivo.getVidaInicial()*0.125 + 
+                    lanzador.getFuerza() - 2.25*objetivo.getBlindaje());
         }
 
         @Override

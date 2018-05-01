@@ -78,7 +78,7 @@ public class ProductorUnidadesA {
         
         public OsoRabioso() {
             super("Oso rabioso", "Beast4.png", "Es hermoso.", TipoUnidad.Bestia, 
-                    new Atributos(350,130,4,4,8,6,4,4,7));             
+                    new Atributos(330,130,4,4,8,5,4,4,7));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(new ProductorEquiposA.DentaduraFuerte());
         }
@@ -87,7 +87,7 @@ public class ProductorUnidadesA {
         @Override
         public void efectoAtacar(Unidad objetivo, double tirada, boolean acierto) {
             if(rabia<60)    
-                rabia+= 1+(int)(tirada*5);
+                rabia+= 2+(int)(tirada*5);
             else
                 rabia=60;
             int dano = rabia-objetivo.getArmadura();
@@ -96,7 +96,7 @@ public class ProductorUnidadesA {
                 Controlador.getInstance().combateActual.panel.insertarInfo(this.getNombre() + " hace " +
                        dano + " de daño adicional a " + objetivo.getNombre());
             }else
-                rabia += 0.5*this.getFuerza();
+                rabia += 0.65*this.getFuerza();
         }
 
         @Override
@@ -132,7 +132,7 @@ public class ProductorUnidadesA {
         
         public SaurioAstado() {
             super("Saurio astado", "dino3.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(350,120,9,7,9,6,6,4,5));             
+                    new Atributos(370,120,8,7,9,6,6,4,5));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(new ProductorEquiposA.DentaduraFuerte());
         }
@@ -149,7 +149,7 @@ public class ProductorUnidadesA {
         
         public SaurioCrestado() {
             super("Saurio crestado", "dino4.png", "Que no asado...", TipoUnidad.Reptil, 
-                    new Atributos(235,150,7,7,7,6,7,4,6));             
+                    new Atributos(245,150,7,7,7,6,7,4,6));             
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(new ProductorEquiposA.GlandulaVenenosa());
             this.equipar(new ProductorEquiposA.DentaduraFuerte());
@@ -191,11 +191,11 @@ public class ProductorUnidadesA {
         
         public GuardianVikingo() {
             super("Guardián Vikingo", "Viking.png", "No conoce el miedo", TipoUnidad.Humano,   
-                    new Atributos(110,120,9,5,4,3,7,4,7));
+                    new Atributos(130,120,9,5,4,3,7,4,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(new ProductorEquiposD.CascoDeDestruccion());
             this.equipar(new ProductorEquiposD.CorazaDeGuerra());
-            this.equipar(new ProductorEquiposG.HachaGranLeñador());
+            this.equipar(new ProductorEquiposG.HachaDeLeñador());
         }
 
         @Override
@@ -210,10 +210,25 @@ public class ProductorUnidadesA {
         
         public RhynoDeCombate() {
             super("Rhyno de combate", "Beast7.png", "Mejor huir...", TipoUnidad.Bestia, 
-                    new Atributos(600,250,14,5,14,9,4,2,5));  
+                    new Atributos(550,250,14,5,15,9,4,2,5));  
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.aprender(new ProductorHechizosD.Embiste());
 
+        }
+        
+
+        @Override
+        public void efectoTurnoPropio() {
+            int sana = 15 + (int)(0.06*(this.getVidaInicial()-this.getVida()));
+            if(this.getVidaInicial() < this.getVida()+sana)
+                sana=this.getVidaInicial()-this.getVida();
+            if(sana > 40)
+                sana=40;
+
+            if(sana > 0){
+                Controlador.getInstance().apMostrarMensaje(this.getNombre() + " barritó, sanándose " + sana + " de salud");
+                Controlador.getInstance().apCurarUnidad(this, sana);
+            }
         }
 
         @Override
