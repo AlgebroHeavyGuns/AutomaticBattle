@@ -25,7 +25,7 @@ public class ProductorEquiposG {
     
     static ArrayList<Equipable> getEquipos(){
         ArrayList<Equipable> lista = new ArrayList<>();
-        lista.add(new HachaGranLeñador());
+        lista.add(new HachaDeLeñador());
         lista.add(new EspadaColosal());
         lista.add(new HachaDeBatalla());
         lista.add(new EspadaLigera());
@@ -34,10 +34,10 @@ public class ProductorEquiposG {
     }
     
     
-    static class HachaGranLeñador extends Arma{
+    static class HachaDeLeñador extends Arma{
 
-        public HachaGranLeñador() {
-            super("Hacha de Gran leñador", "axe.png", 425, 1, new Atributos(65,10,9,0,1,0,-1,0,1), TipoArma.HachaDosManos, Elemento.Comun, 1);
+        public HachaDeLeñador() {
+            super("Hacha de Leñador", "axe.png", 425, 1, new Atributos(75,10,9,0,1,0,-1,0,1), TipoArma.HachaDosManos, Elemento.Comun, 1);
         }
         
         @Override
@@ -47,7 +47,7 @@ public class ProductorEquiposG {
         
         @Override
         public Equipable getCopia() {
-            return new HachaGranLeñador();
+            return new HachaDeLeñador();
         }
     
     }
@@ -56,7 +56,7 @@ public class ProductorEquiposG {
     static class EspadaColosal extends Arma{
 
         public EspadaColosal() {
-            super("Espada colosal", "espada.png", 650, 3, new Atributos(60,15,14,0,2,1,-1,0,1), TipoArma.EspadaDosManos, Elemento.Comun, 1);
+            super("Espada colosal", "espada.png", 650, 3, new Atributos(80,25,16,0,0,0,-1,0,1), TipoArma.EspadaDosManos, Elemento.Comun, 1);
         }
         
         @Override
@@ -74,7 +74,7 @@ public class ProductorEquiposG {
     static class HachaDeBatalla extends Arma{
 
         public HachaDeBatalla() {
-            super("Hacha de batalla", "axe2.png", 225, 3, new Atributos(30,10,5,0,0,0,0,0,0), TipoArma.HachaUnaMano, Elemento.Comun, 1);
+            super("Hacha de batalla", "axe2.png", 250, 3, new Atributos(30,10,5,0,0,0,0,0,0), TipoArma.HachaUnaMano, Elemento.Comun, 1);
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.EspadaDosManos,0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.HachaDosManos,0.9));
             this.getResistenciaArma().add(new EfectividadArma(TipoArma.Maza,0.9));
@@ -97,7 +97,7 @@ public class ProductorEquiposG {
     static class EspadaLigera extends Arma{
 
         public EspadaLigera() {
-            super("Espada ligera", "espada2.png", 200, 3, new Atributos(20,10,6,0,0,0,1,0,0), TipoArma.EspadaUnaMano, Elemento.Comun, 1);
+            super("Espada ligera", "espada2.png", 275, 3, new Atributos(20,10,6,0,0,0,1,0,0), TipoArma.EspadaUnaMano, Elemento.Comun, 1);
             this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia,1.1));
         }
 
