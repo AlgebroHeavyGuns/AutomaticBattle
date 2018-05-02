@@ -132,7 +132,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
         infoPanel.setEditable(false);
         infoPanel.setBackground(new java.awt.Color(102, 102, 102));
         infoPanel.setColumns(20);
-        infoPanel.setFont(new java.awt.Font("Monospaced", 3, 11)); // NOI18N
+        infoPanel.setFont(new java.awt.Font("Monospaced", 3, 12)); // NOI18N
         infoPanel.setForeground(new java.awt.Color(153, 255, 204));
         infoPanel.setRows(5);
         infoPanel.setBorder(null);
@@ -485,12 +485,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                .addComponent(equipo3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(coste3))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,33 +497,34 @@ public class SeleccionPanel extends javax.swing.JPanel {
                                 .addComponent(equipo2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(coste2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(menosEquipos1)
-                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(masEquipos)))
-                                .addGap(10, 10, 10)
-                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(posterior)
-                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())
+                                .addComponent(equipo5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(coste5))
                             .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addComponent(equipo5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(coste5))
-                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addComponent(equipo4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(coste4)))
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addComponent(equipo4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(coste4)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addComponent(equipo3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(coste3)
+                        .addGap(18, 18, 18)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(posterior)
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(menosEquipos1)
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(masEquipos)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,7 +552,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel1Layout.createSequentialGroup()
+                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
                                         .addComponent(masEquipos)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(menosEquipos1))
@@ -730,7 +726,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 if(otro==null){
                     this.insertarInfo(escogido.getNombre() + " equipado con " + E.getNombre());
                     gastoActual+=E.getCoste();
-                    this.presupuestoRestante.setText("Presupuesto restante : "+(maxPresupuesto-gastoActual));
+                    this.presupuestoRestante.setText("Presupuesto restante  : "+(maxPresupuesto-gastoActual));
                 }else
                     this.insertarInfo("No puede equipar, ya tiene " + otro.getNombre());
             }
@@ -791,7 +787,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 equipo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/equipos/" + equipos.get(indiceEquipo).getImagen())));              
         }
 
-        this.presupuestoRestante.setText("Presupuesto restante   :  "+(maxPresupuesto-gastoActual));
+        this.presupuestoRestante.setText("Presupuesto restante  : "+(maxPresupuesto-gastoActual));
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

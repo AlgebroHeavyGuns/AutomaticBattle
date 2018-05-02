@@ -128,11 +128,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jugarButtonActionPerformed
 
     private void jugarButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jugarButtonKeyPressed
-        char c = evt.getKeyChar();
-        if(c >= '0' && c <= '9')
-            Controlador.getInstance().setIndiceCombate(c-'0');
-        else if(c=='k' ||c=='K')
-            Controlador.getInstance().setIndiceCombate(Controlador.getInstance().indiceCombate+10);
+        
     }//GEN-LAST:event_jugarButtonKeyPressed
 
     
@@ -145,7 +141,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
     
     private String getConsejo(){
         if(E.getDanoEfectuadoUno() < E.getDanoEfectuadoDos())
-            return "Equiparte un arma puede aumentar el daño que inflinges.";
+            return "Equiparte un buen arma puede aumentar el daño que inflinges.";
         for(Unidad U : Controlador.getInstance().combateActual.inicialesUno)
             if(U.getArmadura() < 5+Controlador.getInstance().indiceCombate && U.getVida() < 160)
                 return "Usar equipamiento defensivo dará más aguante a tus unidades.";
@@ -155,7 +151,7 @@ public class EstadisticasPanel extends javax.swing.JPanel {
         if(alcance < 2)
             return "El uso de armas de largo alcance te permite atacar a distancia.";
         if(E.getCuracionUno() < 1)
-            return "Personajes como el paladín, aportan curación a tus unidades.";
+            return "Personajes como el Paladín, aportan curación a tus unidades.";
         return "Intenta equilibrar a tus personajes para obtener un mejor resultado.";
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
