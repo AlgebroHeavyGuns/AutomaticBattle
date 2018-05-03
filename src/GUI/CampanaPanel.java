@@ -59,6 +59,7 @@ public class CampanaPanel extends javax.swing.JPanel {
         mision1.setText("MISION");
         mision1.setBorderPainted(false);
         mision1.setContentAreaFilled(false);
+        mision1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         mision1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mision1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +73,7 @@ public class CampanaPanel extends javax.swing.JPanel {
         mision2.setText("MISION");
         mision2.setBorderPainted(false);
         mision2.setContentAreaFilled(false);
+        mision2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         mision2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mision2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +87,7 @@ public class CampanaPanel extends javax.swing.JPanel {
         mision3.setText("MISION");
         mision3.setBorderPainted(false);
         mision3.setContentAreaFilled(false);
+        mision3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         mision3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mision3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +101,7 @@ public class CampanaPanel extends javax.swing.JPanel {
         mision4.setText("MISION");
         mision4.setBorderPainted(false);
         mision4.setContentAreaFilled(false);
+        mision4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         mision4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mision4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +115,7 @@ public class CampanaPanel extends javax.swing.JPanel {
         mision5.setText("MISION");
         mision5.setBorderPainted(false);
         mision5.setContentAreaFilled(false);
+        mision5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         mision5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mision5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,34 +148,34 @@ public class CampanaPanel extends javax.swing.JPanel {
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mision1)
+                .addComponent(mision1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mision3)
-                .addGap(254, 254, 254))
+                .addComponent(mision3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(161, 161, 161))
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(136, 136, 136)
-                .addComponent(mision4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
-                .addComponent(mision5)
-                .addGap(131, 131, 131))
+                .addComponent(mision4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addComponent(mision5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(mision2))
-                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(343, 343, 343)
                         .addComponent(goleft)
                         .addGap(18, 18, 18)
-                        .addComponent(goright)))
+                        .addComponent(goright))
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addGap(331, 331, 331)
+                        .addComponent(mision2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(39, 39, 39)
                 .addComponent(mision2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mision1)
                     .addComponent(mision3))
@@ -178,22 +183,22 @@ public class CampanaPanel extends javax.swing.JPanel {
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mision5)
                     .addComponent(mision4))
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(goleft)
                     .addComponent(goright))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGap(109, 109, 109))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

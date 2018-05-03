@@ -59,6 +59,10 @@ public class CombatePanel extends javax.swing.JPanel {
         estadisticas = new javax.swing.JButton();
         time = new javax.swing.JTextField();
         salud = new javax.swing.JButton();
+        nextUnit1 = new javax.swing.JLabel();
+        nextUnit2 = new javax.swing.JLabel();
+        nextUnit3 = new javax.swing.JLabel();
+        nextUnit4 = new javax.swing.JLabel();
 
         region1.setPreferredSize(new java.awt.Dimension(560, 560));
 
@@ -134,6 +138,14 @@ public class CombatePanel extends javax.swing.JPanel {
             }
         });
 
+        nextUnit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/Beast1.png"))); // NOI18N
+
+        nextUnit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/Beast1.png"))); // NOI18N
+
+        nextUnit3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/Beast1.png"))); // NOI18N
+
+        nextUnit4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/Beast1.png"))); // NOI18N
+
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
         backgroundPanel1Layout.setHorizontalGroup(
@@ -141,27 +153,33 @@ public class CombatePanel extends javax.swing.JPanel {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nextTurnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nextUnit1)
+                            .addComponent(nextUnit4)
+                            .addComponent(nextUnit3)
+                            .addComponent(nextUnit2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel1Layout.createSequentialGroup()
                                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(salud, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(turn25Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nextUnidadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(automaticButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(turn10Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(estadisticas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 42, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(turn10Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(automaticButton, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(turn25Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nextUnidadButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nextTurnButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(estadisticas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         backgroundPanel1Layout.setVerticalGroup(
@@ -171,24 +189,36 @@ public class CombatePanel extends javax.swing.JPanel {
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(estadisticas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(automaticButton)
-                            .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(turn10Button)
-                            .addComponent(salud, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(turn25Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nextUnidadButton)
-                        .addGap(11, 11, 11)
-                        .addComponent(nextTurnButton))
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(automaticButton)
+                                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7)
+                                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(salud, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                        .addComponent(turn10Button)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(turn25Button)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nextUnidadButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nextTurnButton)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(estadisticas))
+                            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nextUnit1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nextUnit2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nextUnit3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nextUnit4))))
                     .addComponent(region1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -309,6 +339,23 @@ public class CombatePanel extends javax.swing.JPanel {
     public void drawMap(){
         region1.drawMap(Controlador.getInstance().combateActual.getColaTurno().get(0).getPosX(),
                 Controlador.getInstance().combateActual.getColaTurno().get(0).getPosY());
+        this.nextUnit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/" +
+                Controlador.getInstance().combateActual.getColaTurno().get(0).getImagen())));
+        if(Controlador.getInstance().combateActual.getColaTurno().size() > 1)
+            this.nextUnit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/" +
+                Controlador.getInstance().combateActual.getColaTurno().get(1).getImagen())));
+        else
+            this.nextUnit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons/libro.png")));
+        if(Controlador.getInstance().combateActual.getColaTurno().size() > 2)
+            this.nextUnit3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/" +
+                Controlador.getInstance().combateActual.getColaTurno().get(2).getImagen())));
+        else
+            this.nextUnit3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons/libro.png")));
+        if(Controlador.getInstance().combateActual.getColaTurno().size() > 3)
+            this.nextUnit4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/units/" +
+                Controlador.getInstance().combateActual.getColaTurno().get(3).getImagen())));
+        else
+            this.nextUnit4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons/libro.png")));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -319,6 +366,10 @@ public class CombatePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton nextTurnButton;
     private javax.swing.JButton nextUnidadButton;
+    private javax.swing.JLabel nextUnit1;
+    private javax.swing.JLabel nextUnit2;
+    private javax.swing.JLabel nextUnit3;
+    private javax.swing.JLabel nextUnit4;
     private GUI.Region region1;
     private javax.swing.JButton salud;
     private javax.swing.JTextField time;

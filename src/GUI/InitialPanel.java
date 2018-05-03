@@ -60,12 +60,12 @@ public class InitialPanel extends javax.swing.JPanel {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(305, 305, 305)
                 .addComponent(jugarButton)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel1Layout.createSequentialGroup()
-                .addContainerGap(301, Short.MAX_VALUE)
+                .addContainerGap(351, Short.MAX_VALUE)
                 .addComponent(jugarButton)
                 .addGap(162, 162, 162))
         );
