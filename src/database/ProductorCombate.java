@@ -119,9 +119,9 @@ public class ProductorCombate {
     
     private static class CombateInicial extends CombateInfo{
     
-        static final int PRESUPUESTO= 1300;
+        static final int PRESUPUESTO= 1400;
         static final int MAXPERSONAJES = 2;
-        static final int MINPERSONAJES = 2;
+        static final int MINPERSONAJES = 1;
         
         public CombateInicial() {
             super("Primera toma de contacto", "mapa.png",  9, 9);
@@ -147,9 +147,9 @@ public class ProductorCombate {
     
     private static class CombateInicial2 extends CombateInfo{
     
-        static final int PRESUPUESTO= 1100;
+        static final int PRESUPUESTO= 1300;
         static final int MAXPERSONAJES = 2;
-        static final int MINPERSONAJES = 2;
+        static final int MINPERSONAJES = 1;
         
         public CombateInicial2() {
             super("Segunda toma de contacto", "mapa.png",  9, 9);
@@ -244,7 +244,7 @@ public class ProductorCombate {
     
     private static class IncursionSelva3 extends CombateInfo{
     
-        static final int PRESUPUESTO= 3400;
+        static final int PRESUPUESTO= 3500;
         static final int MAXPERSONAJES = 3;
         static final int MINPERSONAJES = 3;
         
