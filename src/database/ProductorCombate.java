@@ -342,7 +342,7 @@ public class ProductorCombate {
             U = U.getCopia();   T.insertaUnidad(U, 1, 3);
             U = U.getCopia();   T.insertaUnidad(U, 2, 6);
             U = U.getCopia();   T.insertaUnidad(U, 3, 2); 
-            U = U.getCopia();   T.insertaUnidad(U, 4, 5);
+            U = U.getCopia();   T.insertaUnidad(U, 4, 6);
             U = U.getCopia();   T.insertaUnidad(U, 4, 7);
             U = U.getCopia();   T.insertaUnidad(U, 7, 1);
             U = Database.getInstance().getEscenografia("Roca mediana");
