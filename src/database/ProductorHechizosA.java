@@ -5,6 +5,7 @@
  */
 package database;
 
+import Micelaneous.Elemento;
 import Micelaneous.TipoHabilidad;
 import automaticbattle.Controlador;
 import automaticbattle.Escenografia;
@@ -93,5 +94,36 @@ public class ProductorHechizosA {
 
     }
     
+    
+    static class BolaDeFuego extends Habilidad{
+
+        public BolaDeFuego() {
+            super("Bola de fuego", "Hace mucho daño, de fuego", 20, 0, 6, TipoHabilidad.ENEMIGO);
+        }
+        
+        private int getDano(Unidad lanzador, Unidad objetivo){
+            return (int) ((20 + 2*lanzador.getIntelecto() - objetivo.getBlindaje())
+                    * objetivo.getResistenciaelemento(Elemento.Fuego));
+        }
+
+        @Override
+        public boolean tieneEfecto(Unidad lanzador, Unidad objetivo) {
+            return getDano(lanzador,objetivo) > 5;
+        }
+        
+        @Override
+        public void realizarEfecto(Unidad lanzador, Unidad receptor) {
+            int dano = this.getDano(lanzador, receptor);
+            Controlador.getInstance().apMostrarMensaje(
+                            lanzador.getNombre() + " hizo a " + receptor.getNombre() + " " + dano + " puntos de daño.");
+            Controlador.getInstance().apHerirUnidad(lanzador, receptor, dano);
+        }
+
+        @Override
+        public Habilidad getCopia() {
+            return new BolaDeFuego();
+        }
+
+    }
     
 }
