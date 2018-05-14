@@ -743,7 +743,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
     
     private void setBotones(){
         ArrayList<Unidad> personajes = Database.getInstance().getUnidadesAliadas();
-        if(indicePersonaje > personajes.size()-3)
+        if(indicePersonaje > personajes.size()-4)
             indicePersonaje=personajes.size()-4;
         if(indicePersonaje < 0)
             indicePersonaje=0;
