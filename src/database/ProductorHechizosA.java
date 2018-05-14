@@ -102,7 +102,7 @@ public class ProductorHechizosA {
         }
         
         private int getDano(Unidad lanzador, Unidad objetivo){
-            return (int) ((20 + 2*lanzador.getIntelecto() - objetivo.getBlindaje())
+            return (int) ((25 + 2*lanzador.getIntelecto() - objetivo.getBlindaje())
                     * objetivo.getResistenciaelemento(Elemento.Fuego));
         }
 

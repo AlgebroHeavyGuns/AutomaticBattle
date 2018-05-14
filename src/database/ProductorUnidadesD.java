@@ -25,6 +25,7 @@ public class ProductorUnidadesD {
         lista.add(new TeodoraCazadora());
         lista.add(new AuroraLuchadora());
         lista.add(new MarinaAsesina());
+        lista.add(new AnaMariaBruja());
         return lista;
     }
     
@@ -208,6 +209,22 @@ public class ProductorUnidadesD {
         @Override
         public Unidad getCopia() {
             return new MarinaAsesina();
+        }
+    
+    }
+    
+    static class AnaMariaBruja extends Unidad{
+        
+        public AnaMariaBruja() {
+            super("Ana María Bruja", "CharacterTrollFemale.png", "No hay tiempo para poesías", TipoUnidad.Elfo, 
+                    new Atributos(140,140,3,6,3,3,5,4,8));
+            this.setIAAsociada(new searchAndDestroyBasicIA());
+            this.aprender(new ProductorHechizosA.BolaDeFuego());
+        }
+        
+        @Override
+        public Unidad getCopia() {
+            return new AnaMariaBruja();
         }
     
     }
