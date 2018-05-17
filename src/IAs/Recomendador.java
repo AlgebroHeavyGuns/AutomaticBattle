@@ -19,7 +19,7 @@ public class Recomendador {
     ArrayList<Equipable> equipos;
     
     private Recomendador() {
-        equipos = Database.getInstance().getEquipos(99);
+        equipos = Database.getInstance().getEquipos(999);
     }
     
     public static Recomendador getInstance() {
@@ -34,6 +34,12 @@ public class Recomendador {
         switch(U.getNombre()){
             case "Teodora Cazadora":
                 E = getEquipoCazadora(U,costeMaximo);
+                break;
+            case "Marina Asesina":
+                E = getEquipoAsesina(U, costeMaximo);
+                break;
+            default:
+                E = getEquipoGenerico(U, costeMaximo);
         }
             
         if(E==null)
@@ -74,6 +80,66 @@ public class Recomendador {
             return E;
         return null;
     }
+    
+    private Equipable getEquipoAsesina(Unidad U, int coste){
+        Equipable E = Database.getInstance().getEquipo("Espada ligera");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Guantes de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Casco de destrucción");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Casco de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Coraza de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Pantalones de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Anillo de Coraje");
+        if(factible(U,E,coste))
+            return E;
+        return null;
+    }
+    
+    private Equipable getEquipoGenerico(Unidad U, int coste){
+        Equipable E = Database.getInstance().getEquipo("Espada colosal");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Hacha de Leñador");
+        if(factible(U,E,coste))
+            return E;
+        E = U.puedeEquipar(E);  //Si tiene un arma de una mano
+        if(E != null && factible(U,E,coste) && equipos.contains(E))
+            return E;
+        E = Database.getInstance().getEquipo("Casco de destrucción");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Guantes de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Coraza de guerra");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Coraza de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Casco de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Pantalones de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Anillo de Vitalidad");
+        if(factible(U,E,coste))
+            return E;
+        return null;
+    }
+    
     
     private static class RecomendadorHolder {
 
