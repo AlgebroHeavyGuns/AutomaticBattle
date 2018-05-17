@@ -222,6 +222,15 @@ public class ProductorUnidadesD {
             this.aprender(new ProductorHechizosA.BolaDeFuego());
         }
         
+
+        @Override
+        public int getAlcance() {
+            int alcance = super.getAlcance();
+            if(alcance < 1)
+                return 2;
+            return alcance;
+        }
+        
         @Override
         public Unidad getCopia() {
             return new AnaMariaBruja();
