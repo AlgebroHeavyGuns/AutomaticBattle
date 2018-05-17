@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import IAs.Recomendador;
 import automaticbattle.Controlador;
 import automaticbattle.Equipable;
 import automaticbattle.Unidad;
@@ -85,6 +86,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
         menosPersonajes = new javax.swing.JButton();
         anterior = new javax.swing.JButton();
         posterior = new javax.swing.JButton();
+        consejo = new javax.swing.JButton();
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jButton3.setForeground(new java.awt.Color(153, 204, 255));
@@ -467,6 +469,23 @@ public class SeleccionPanel extends javax.swing.JPanel {
             }
         });
 
+        consejo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        consejo.setForeground(new java.awt.Color(255, 255, 0));
+        consejo.setText("CONSEJO");
+        consejo.setBorderPainted(false);
+        consejo.setContentAreaFilled(false);
+        consejo.setFocusPainted(false);
+        consejo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consejoActionPerformed(evt);
+            }
+        });
+        consejo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                presionada(evt);
+            }
+        });
+
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
         backgroundPanel1Layout.setHorizontalGroup(
@@ -491,11 +510,14 @@ public class SeleccionPanel extends javax.swing.JPanel {
                                 .addComponent(equipo3)
                                 .addGap(18, 18, 18)
                                 .addComponent(coste3)
-                                .addGap(110, 110, 110)
                                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(posterior)
                                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
+                                        .addGap(110, 110, 110)
+                                        .addComponent(posterior))
+                                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addComponent(consejo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,7 +574,9 @@ public class SeleccionPanel extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(menosEquipos1))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel1Layout.createSequentialGroup()
-                                        .addComponent(anterior)
+                                        .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(anterior)
+                                            .addComponent(consejo))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(posterior))))
                             .addGroup(backgroundPanel1Layout.createSequentialGroup()
@@ -673,8 +697,8 @@ public class SeleccionPanel extends javax.swing.JPanel {
                 this.escoger(aliadas.get(n));
             else
                 insertarInfo("No dispones de " + (n+1) + " personajes.");
-        }
-            
+        }else if(c=='c' || c=='C')
+            this.aconsejar();
     }//GEN-LAST:event_presionada
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
@@ -686,6 +710,21 @@ public class SeleccionPanel extends javax.swing.JPanel {
         int n = (aliadas.indexOf(escogido)+ 1)%aliadas.size();
         this.escoger(aliadas.get(n));
     }//GEN-LAST:event_posteriorActionPerformed
+
+    private void consejoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consejoActionPerformed
+        this.aconsejar();
+    }//GEN-LAST:event_consejoActionPerformed
+    
+    private void aconsejar(){
+        if(escogido==null)
+            consejoPersonaje();
+        else
+            insertarInfo(recomendarObjeto(escogido));
+    }
+    
+    private void consejoPersonaje(){
+        insertarInfo("Podrias escoger a Teodora o a Martín");
+    }
     
     private void seleccionarPersonaje(String S){
         if(aliadas.size() < this.maxPersonajes){
@@ -711,6 +750,7 @@ public class SeleccionPanel extends javax.swing.JPanel {
         escogido = U;
         insertarInfo("Seleccionado " + escogido.getNombre() + 
                 "\nAhora puedes seleccionar su equipamiento.");
+        this.aconsejar();
         this.anterior.setEnabled(true);
         this.posterior.setEnabled(true);
     }
@@ -790,9 +830,19 @@ public class SeleccionPanel extends javax.swing.JPanel {
         this.presupuestoRestante.setText("Presupuesto restante  : "+(maxPresupuesto-gastoActual));
         
     }
+    
+    
+    private String recomendarObjeto(Unidad U) {
+        Equipable E = Recomendador.getInstance().recomendarEquipo(U, maxPresupuesto-gastoActual);
+        if(E == null)
+            return "No puedes equipar más objetos a ésta unidad.";
+        return "Objeto recomendado : " + E.getNombre();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anterior;
     private GUI.BackgroundPanel backgroundPanel1;
+    private javax.swing.JButton consejo;
     private javax.swing.JButton coste1;
     private javax.swing.JButton coste2;
     private javax.swing.JButton coste3;
@@ -817,4 +867,5 @@ public class SeleccionPanel extends javax.swing.JPanel {
     private javax.swing.JButton posterior;
     private javax.swing.JLabel presupuestoRestante;
     // End of variables declaration//GEN-END:variables
+
 }
