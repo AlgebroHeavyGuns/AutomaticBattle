@@ -210,7 +210,7 @@ public class ProductorUnidadesA {
         
         public RhynoDeCombate() {
             super("Rhyno de combate", "Beast7.png", "Mejor huir...", TipoUnidad.Bestia, 
-                    new Atributos(550,250,14,5,15,9,4,2,5));  
+                    new Atributos(540,250,13,5,16,8,4,2,5));  
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.aprender(new ProductorHechizosD.Embiste());
 
@@ -219,11 +219,12 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoTurnoPropio() {
-            int sana = 15 + (int)(0.06*(this.getVidaInicial()-this.getVida()));
+            int sana = 20 + (int)(0.05*(this.getVidaInicial()-this.getVida()));
             if(this.getVidaInicial() < this.getVida()+sana)
                 sana=this.getVidaInicial()-this.getVida();
-            if(sana > 40)
-                sana=40;
+            int maxSana = 10 + 15*Controlador.getInstance().combateActual.getEnemigas(this).size();
+            if(sana > maxSana)
+                sana= maxSana;
 
             if(sana > 0){
                 Controlador.getInstance().apMostrarMensaje(this.getNombre() + " barritó, sanándose " + sana + " de salud");
