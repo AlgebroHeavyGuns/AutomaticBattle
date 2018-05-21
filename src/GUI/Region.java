@@ -126,10 +126,13 @@ public class Region extends javax.swing.JPanel implements ComponentListener, Act
             if(U instanceof Escenografia)
                 Controlador.getInstance().combateActual.panel.insertarInfo("Obstáculo " + U.getNombre());
             else
-                Controlador.getInstance().combateActual.panel.insertarInfo(U.getNombre()+ " (" + 
+                /*Controlador.getInstance().combateActual.panel.insertarInfo(U.getNombre()+ " (" + 
                         U.getVida() + " | " + U.getEnergia() + "  | " +
                         U.getFuerza() + " | " + U.getIntelecto() + "  | " +
                         U.getArmadura() + " | " + U.getBlindaje() + " )");
+                */
+                Controlador.getInstance().combateActual.panel.insertarInfo(U.getNombre() + " ( " +
+                        U.getVida() + "/" + U.getVidaInicial() + " )");
         }else
             Controlador.getInstance().combateActual.panel.insertarInfo("Casilla vacía.");
         /*
