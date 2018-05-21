@@ -69,7 +69,10 @@ public class Recomendador {
     }
     
     private Equipable getEquipoCazadora(Unidad U, int coste){
-        Equipable E = Database.getInstance().getEquipo("Arco mediano");
+        Equipable E = Database.getInstance().getEquipo("Arco pulido");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Arco mediano");
         if(factible(U,E,coste))
             return E;
         E = Database.getInstance().getEquipo("Casco de batalla");

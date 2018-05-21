@@ -30,6 +30,7 @@ public class ProductorEquiposG {
         lista.add(new HachaDeBatalla());
         lista.add(new EspadaLigera());
         lista.add(new ArcoMediano());
+        lista.add(new ArcoPulido());
         lista.add(new VaraDePoder());
         return lista;
     }
@@ -119,11 +120,11 @@ public class ProductorEquiposG {
     static class ArcoMediano extends Arma{
 
         public ArcoMediano() {
-            super("Arco mediano", "arco2.png", 450, 1, new Atributos(30,20,7,1,1,0,2,0,1), TipoArma.Arco, Elemento.Comun, 6);
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.15));
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Aberracion, 1.25));
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Gigante, 1.4));
-            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Dragon, 0.9));
+            super("Arco mediano", "arco2.png", 425, 1, new Atributos(25,15,6,1,1,0,2,0,1), TipoArma.Arco, Elemento.Comun, 6);
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.1));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Aberracion, 1.2));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Gigante, 1.35));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Dragon, 0.85));
             this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Maquina, 0.8));
         }
         
@@ -139,10 +140,33 @@ public class ProductorEquiposG {
     
     }
     
+    static class ArcoPulido extends Arma{
+
+        public ArcoPulido() {
+            super("Arco pulido", "arco.png", 600, 1, new Atributos(45,20,11,1,0,0,3,0,1), TipoArma.Arco, Elemento.Comun, 6);
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Bestia, 1.15));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Aberracion, 1.25));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Gigante, 1.4));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Dragon, 0.9));
+            this.getEfectividades().add(new EfectividadTipo(TipoUnidad.Maquina, 0.8));
+        }
+        
+        @Override
+        public boolean puedeEquiparseA(TipoUnidad TU) {
+            return TU==TipoUnidad.Elfo;
+        }
+
+        @Override
+        public Equipable getCopia() {
+            return new ArcoPulido();
+        }
+    
+    }
+    
     static class VaraDePoder extends Arma{
 
         public VaraDePoder() {
-            super("Vara de poder", "vara.png", 400, 2, new Atributos(20,30,2,8,0,1,1,0,1), TipoArma.Baston, Elemento.Comun, 4);
+            super("Vara de poder", "vara.png", 425, 2, new Atributos(20,30,2,8,0,1,1,0,1), TipoArma.Baston, Elemento.Comun, 4);
         }
         
         @Override
