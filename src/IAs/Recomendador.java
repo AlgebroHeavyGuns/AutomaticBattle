@@ -38,6 +38,9 @@ public class Recomendador {
             case "Marina Asesina":
                 E = getEquipoAsesina(U, costeMaximo);
                 break;
+            case "Ana María Bruja":
+                E = getEquipoMagia(U, costeMaximo);
+                break;
             default:
                 E = getEquipoGenerico(U, costeMaximo);
         }
@@ -105,6 +108,30 @@ public class Recomendador {
             return E;
         return null;
     }
+    
+    
+    private Equipable getEquipoMagia(Unidad U, int coste){
+        Equipable E = Database.getInstance().getEquipo("Vara de poder");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Casco de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Coraza de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Pantalones de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Guantes de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Anillo de Vitalidad");
+        if(factible(U,E,coste))
+            return E;
+        return null;
+    }
+    
     
     private Equipable getEquipoGenerico(Unidad U, int coste){
         Equipable E = Database.getInstance().getEquipo("Espada colosal");

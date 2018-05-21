@@ -41,7 +41,7 @@ public class ProductorUnidadesD {
         
         public JeroGuerrero() {
             super("Jero Guerrero", "CharacterHumanMale.png", "Todo o nada.", TipoUnidad.Humano, 
-                    new Atributos(220,90,7,5,6,5,4,3,6));
+                    new Atributos(240,90,7,5,6,5,4,3,6));
             this.setIAAsociada(new searchAndDestroyBasicIA());
         }
 
@@ -81,7 +81,7 @@ public class ProductorUnidadesD {
         
         public MartinPaladin() {
             super("Martín Paladín", "CharacterBloodElfMale.png", "No sin mi equipo.", TipoUnidad.Humano, 
-                    new Atributos(175,130,5,6,6,4,5,3,7));
+                    new Atributos(190,130,5,6,6,4,5,3,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.aprender(new ProductorHechizosA.SanacionMenor());
         }
@@ -110,7 +110,7 @@ public class ProductorUnidadesD {
         
         public TeodoraCazadora() {
             super("Teodora Cazadora", "CharacterNightElfFemale.png", "Un susurro, una lágrima, un cadaver.", TipoUnidad.Elfo, 
-                    new Atributos(130,120,9,5,3,3,7,4,7));
+                    new Atributos(140,120,9,5,3,3,7,4,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.aprender(new ProductorHechizosA.DisparoCertero());
         }
@@ -162,7 +162,7 @@ public class ProductorUnidadesD {
         
         public MarinaAsesina() {
             super("Marina Asesina", "CharacterHumanFemale.png", "Para cuando me vean ya será tarde.", TipoUnidad.Humano, 
-                    new Atributos(120,110,11,6,3,2,5,5,5));
+                    new Atributos(130,110,11,6,3,2,5,5,5));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.aprender(new ProductorHechizosD.DardoVenenoso());
         }
@@ -217,7 +217,7 @@ public class ProductorUnidadesD {
         
         public AnaMariaBruja() {
             super("Ana María Bruja", "CharacterTrollFemale.png", "No hay tiempo para poesías", TipoUnidad.Elfo, 
-                    new Atributos(140,140,3,6,3,3,5,4,8));
+                    new Atributos(155,140,3,6,3,3,5,4,8));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.aprender(new ProductorHechizosA.BolaDeFuego());
         }

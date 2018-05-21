@@ -191,7 +191,7 @@ public class ProductorUnidadesA {
         
         public GuardianVikingo() {
             super("Guardián Vikingo", "Viking.png", "No conoce el miedo", TipoUnidad.Humano,   
-                    new Atributos(130,120,9,5,4,3,7,4,7));
+                    new Atributos(140,120,8,5,3,3,7,4,7));
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.equipar(new ProductorEquiposD.CascoDeDestruccion());
             this.equipar(new ProductorEquiposD.CorazaDeGuerra());
@@ -210,7 +210,7 @@ public class ProductorUnidadesA {
         
         public RhynoDeCombate() {
             super("Rhyno de combate", "Beast7.png", "Mejor huir...", TipoUnidad.Bestia, 
-                    new Atributos(540,250,13,5,16,8,4,2,5));  
+                    new Atributos(520,250,13,5,16,8,4,2,5));  
             this.setIAAsociada(new searchAndDestroyBasicIA());
             this.aprender(new ProductorHechizosD.Embiste());
 
@@ -219,10 +219,10 @@ public class ProductorUnidadesA {
 
         @Override
         public void efectoTurnoPropio() {
-            int sana = 20 + (int)(0.05*(this.getVidaInicial()-this.getVida()));
+            int sana = 15 + (int)(0.025*(this.getVidaInicial()-this.getVida()));
             if(this.getVidaInicial() < this.getVida()+sana)
                 sana=this.getVidaInicial()-this.getVida();
-            int maxSana = 10 + 15*Controlador.getInstance().combateActual.getEnemigas(this).size();
+            int maxSana = 15 + 15*Controlador.getInstance().combateActual.getEnemigas(this).size();
             if(sana > maxSana)
                 sana= maxSana;
 

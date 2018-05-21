@@ -30,6 +30,7 @@ public class ProductorEquiposG {
         lista.add(new HachaDeBatalla());
         lista.add(new EspadaLigera());
         lista.add(new ArcoMediano());
+        lista.add(new VaraDePoder());
         return lista;
     }
     
@@ -134,6 +135,25 @@ public class ProductorEquiposG {
         @Override
         public Equipable getCopia() {
             return new ArcoMediano();
+        }
+    
+    }
+    
+    static class VaraDePoder extends Arma{
+
+        public VaraDePoder() {
+            super("Vara de poder", "vara.png", 400, 2, new Atributos(20,30,2,8,0,1,1,0,1), TipoArma.Baston, Elemento.Comun, 4);
+        }
+        
+        @Override
+        public boolean puedeEquiparseA(TipoUnidad TU) {
+            return TU==TipoUnidad.Elfo || TU==TipoUnidad.NoMuerto;
+        }
+        
+
+        @Override
+        public Equipable getCopia() {
+            return new VaraDePoder();
         }
     
     }
