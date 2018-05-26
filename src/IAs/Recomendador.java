@@ -97,6 +97,9 @@ public class Recomendador {
         E = Database.getInstance().getEquipo("Casco de destrucción");
         if(factible(U,E,coste))
             return E;
+        E = Database.getInstance().getEquipo("Escudo blindado");
+        if(factible(U,E,coste))
+            return E;
         E = Database.getInstance().getEquipo("Casco de batalla");
         if(factible(U,E,coste))
             return E;
@@ -143,13 +146,16 @@ public class Recomendador {
         E = Database.getInstance().getEquipo("Hacha de Leñador");
         if(factible(U,E,coste))
             return E;
+        E = Database.getInstance().getEquipo("Guantes de batalla");
+        if(factible(U,E,coste))
+            return E;
+        E = Database.getInstance().getEquipo("Escudo blindado");
+        if(factible(U,E,coste))
+            return E;
         E = U.puedeEquipar(E);  //Si tiene un arma de una mano
         if(E != null && factible(U,E,coste) && equipos.contains(E))
             return E;
         E = Database.getInstance().getEquipo("Casco de destrucción");
-        if(factible(U,E,coste))
-            return E;
-        E = Database.getInstance().getEquipo("Guantes de batalla");
         if(factible(U,E,coste))
             return E;
         E = Database.getInstance().getEquipo("Coraza de guerra");
