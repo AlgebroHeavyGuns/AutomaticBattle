@@ -324,6 +324,10 @@ public abstract class Unidad {
                             }
                         }
                         return ret;
+                    default:
+                        ret = tieneEquipado(TE);
+                        if(ret == null)
+                            return tieneEquipado(TipoEquipo.Escudo);
                 }
             default:
                 return tieneEquipado(TE);
