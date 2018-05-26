@@ -31,6 +31,7 @@ public class ProductorEquiposD {
         lista.add(new CascoDeDestruccion());
         lista.add(new GuantesDeBatalla());
         lista.add(new PantalonesDeBatalla());
+        lista.add(new EscudoBlindado());
         lista.add(new AnilloDeVitalidad());
         lista.add(new AnilloDeCoraje());
         return lista;
@@ -158,6 +159,23 @@ public class ProductorEquiposD {
             return new PantalonesDeBatalla();
         }
     
+    }
+    
+    static class EscudoBlindado extends Equipable{
+        
+        public EscudoBlindado() {
+            super("Escudo blindado", "escudo2.png", 225, 0, new Atributos(35,0,0,0,7,2,0,0,0), TipoEquipo.Escudo);
+        }
+
+        @Override
+        public boolean puedeEquiparseA(TipoUnidad TU) {
+            return TU!=TipoUnidad.Bestia && TU!=TipoUnidad.Reptil;
+        }
+        
+        @Override
+        public Equipable getCopia() {
+            return new EscudoBlindado();
+        }
     }
     
     static class AnilloDeVitalidad extends Equipable{
