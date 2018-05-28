@@ -18,7 +18,7 @@ Al finalizar el combate, lo que significa que algún equipo se quedó sin person
 Todos los iconos han sido descargados de http://wowwiki.wikia.com/wiki/WoWWiki:WoW_Icons/Icon_List/Images
 
 
-#Tutorial
+# Tutorial
 
 Al ser un simulador, no se requiere de conocimientos especiales para el correcto desarrollo de los enfrentamientos.
 A modo de introducción al juego se dispone de dos escenarios de dificultad baja donde comenzar a familiarizarse con el juego.
