@@ -127,7 +127,7 @@ public class CombatePanel extends javax.swing.JPanel {
         time.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         time.setForeground(new java.awt.Color(51, 255, 204));
         time.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        time.setText("1500");
+        time.setText("1");
 
         salud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons/corazon (2).png"))); // NOI18N
         salud.setBorderPainted(false);
@@ -261,15 +261,15 @@ public class CombatePanel extends javax.swing.JPanel {
             T.cancel();
         }else{  
             T = new Timer();
-            int clock;
+            double clock;
             try{
-                clock = Integer.parseInt(time.getText());
-                if(clock < 10)
-                    clock=10;
-                else if(clock > 5000)
-                    clock=5000;
+                clock = Double.parseDouble(time.getText());
+                if(clock < 0.01)
+                    clock=0.01;
+                else if(clock > 5)
+                    clock=5;
             }catch(NumberFormatException E){
-                clock=1000;
+                clock=1;
             }
             time.setText("" + clock);
             T.scheduleAtFixedRate(new TimerTask(){
@@ -279,7 +279,7 @@ public class CombatePanel extends javax.swing.JPanel {
                     drawMap();
                 }
             }
-                    , 0, clock);
+                    , 0, (long)(1000*clock));
         }
         automatic=!automatic;
         setAllButtons(!automatic, true);
